@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Users, MessageSquare, Mic, Video, UserPlus } from "lucide-react";
+import { KordiAvatar } from "@/components/KordiAvatar";
 
 const Team = () => {
   return (
@@ -29,6 +30,14 @@ const Team = () => {
               <Card className="lg:col-span-2 p-6 bg-card border-border/50">
                 <h2 className="text-xl font-semibold mb-6">Team Members</h2>
                 <div className="space-y-3">
+                  <TeamMember
+                    name="KORDI"
+                    role="AI Teammate"
+                    status="online"
+                    activity="Auto-committing changes to main branch"
+                    commits={127}
+                    isKordi
+                  />
                   <TeamMember
                     name="Sarah Johnson"
                     role="Lead Developer"
@@ -164,32 +173,44 @@ const Team = () => {
   );
 };
 
-const TeamMember = ({ name, role, status, activity, commits }: any) => {
+const TeamMember = ({ name, role, status, activity, commits, isKordi }: any) => {
   const initials = name.split(' ').map((n: string) => n[0]).join('');
   
   return (
-    <div className="p-4 bg-secondary/30 rounded-lg border border-border/50 hover:border-primary/50 transition-colors">
+    <div className={`p-4 rounded-lg border transition-colors ${
+      isKordi 
+        ? 'bg-gradient-to-r from-primary/10 to-accent/10 border-primary/30 hover:border-primary/50' 
+        : 'bg-secondary/30 border-border/50 hover:border-primary/50'
+    }`}>
       <div className="flex items-center gap-4">
         <div className="relative">
-          <Avatar className="w-12 h-12">
-            <AvatarFallback className="bg-gradient-primary text-primary-foreground">
-              {initials}
-            </AvatarFallback>
-          </Avatar>
-          <div className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-card ${
-            status === 'online' ? 'bg-success' : 
-            status === 'away' ? 'bg-warning' : 
-            'bg-muted-foreground'
-          }`} />
+          {isKordi ? (
+            <KordiAvatar size="md" />
+          ) : (
+            <>
+              <Avatar className="w-12 h-12">
+                <AvatarFallback className="bg-gradient-primary text-primary-foreground">
+                  {initials}
+                </AvatarFallback>
+              </Avatar>
+              <div className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-card ${
+                status === 'online' ? 'bg-success' : 
+                status === 'away' ? 'bg-warning' : 
+                'bg-muted-foreground'
+              }`} />
+            </>
+          )}
         </div>
         
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             <h3 className="font-semibold">{name}</h3>
-            <Badge variant="outline" className="text-xs">{role}</Badge>
+            <Badge variant={isKordi ? "default" : "outline"} className={isKordi ? "bg-primary/20 text-primary text-xs" : "text-xs"}>
+              {role}
+            </Badge>
           </div>
           <p className="text-sm text-muted-foreground mb-1">{activity}</p>
-          <p className="text-xs text-muted-foreground">{commits} commits this week</p>
+          <p className="text-xs text-muted-foreground">{commits} {isKordi ? 'autonomous commits' : 'commits'} this week</p>
         </div>
       </div>
     </div>

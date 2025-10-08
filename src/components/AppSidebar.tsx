@@ -3,11 +3,13 @@ import {
   Code2, 
   Rocket, 
   Users, 
-  Settings, 
-  Sparkles,
+  Settings,
   Activity,
-  FileCode
+  FileCode,
+  AlertTriangle,
+  Package
 } from "lucide-react";
+import { KordiAvatar } from "./KordiAvatar";
 import { NavLink } from "react-router-dom";
 import {
   Sidebar,
@@ -25,9 +27,11 @@ import {
 const navigation = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "Projects", url: "/dashboard/projects", icon: FileCode },
-  { title: "VS Code Panel", url: "/dashboard/vscode", icon: Code2 },
+  { title: "IDE Integration", url: "/dashboard/vscode", icon: Code2 },
   { title: "Deployments", url: "/dashboard/deployments", icon: Rocket },
   { title: "Team", url: "/dashboard/team", icon: Users },
+  { title: "Bug Radar", url: "/dashboard/bug-radar", icon: AlertTriangle },
+  { title: "Dependencies", url: "/dashboard/dependencies", icon: Package },
   { title: "Activity", url: "/dashboard/activity", icon: Activity },
   { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ];
@@ -40,17 +44,16 @@ export function AppSidebar() {
       <div className="p-4 border-b border-sidebar-border flex items-center gap-3">
         {open ? (
           <>
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
+            <KordiAvatar size="sm" className="flex-shrink-0" />
+            <div>
+              <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent block">
+                Kordra
+              </span>
+              <span className="text-[10px] text-muted-foreground">Powered by KORDI</span>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Kordra
-            </span>
           </>
         ) : (
-          <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto">
-            <Sparkles className="w-5 h-5 text-primary-foreground" />
-          </div>
+          <KordiAvatar size="sm" className="mx-auto" />
         )}
       </div>
 

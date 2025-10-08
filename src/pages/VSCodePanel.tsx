@@ -4,27 +4,49 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 import { 
   FileCode, 
   GitCommit, 
   FolderTree, 
   Send,
-  Sparkles,
   Clock,
-  CheckCircle2
+  CheckCircle2,
+  Code2
 } from "lucide-react";
+import { KordiAvatar } from "@/components/KordiAvatar";
+import { VoiceIndicator } from "@/components/VoiceIndicator";
+import { IDESelector } from "@/components/IDESelector";
+import { useState } from "react";
 
 const VSCodePanel = () => {
+  const [selectedIDE, setSelectedIDE] = useState("VS Code");
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
         <AppSidebar />
         <main className="flex-1 p-8">
           <div className="max-w-7xl mx-auto space-y-6">
-            <div>
-              <h1 className="text-3xl font-bold mb-2">VS Code Extension Panel</h1>
-              <p className="text-muted-foreground">Manage your code directly from the IDE</p>
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <h1 className="text-3xl font-bold">Multi-IDE Integration</h1>
+                  <VoiceIndicator active={false} />
+                </div>
+                <p className="text-muted-foreground">KORDI works seamlessly across all your favorite IDEs</p>
+              </div>
+              <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                <Code2 className="w-3 h-3 mr-1" />
+                {selectedIDE}
+              </Badge>
             </div>
+
+            {/* IDE Selection */}
+            <Card className="p-6 bg-card border-border/50">
+              <h2 className="text-xl font-semibold mb-4">Select IDE Environment</h2>
+              <IDESelector selected={selectedIDE} onSelect={setSelectedIDE} />
+            </Card>
 
             <div className="grid lg:grid-cols-3 gap-6">
               {/* File Explorer */}
@@ -118,13 +140,14 @@ const VSCodePanel = () => {
                 </Tabs>
               </Card>
 
-              {/* AI Chat Sidebar */}
+              {/* KORDI Chat Sidebar */}
               <Card className="p-6 bg-card border-border/50 flex flex-col h-[600px]">
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-primary-foreground" />
+                <div className="flex items-center gap-3 mb-6">
+                  <KordiAvatar size="md" />
+                  <div>
+                    <h2 className="text-lg font-semibold">KORDI</h2>
+                    <p className="text-xs text-muted-foreground">Your autonomous AI teammate</p>
                   </div>
-                  <h2 className="text-lg font-semibold">AI Assistant</h2>
                 </div>
 
                 <div className="flex-1 space-y-4 mb-4 overflow-auto">
@@ -215,9 +238,7 @@ const DeploymentItem = ({ env, status, time, build }: any) => (
 const AIChatMessage = ({ type, message }: any) => (
   <div className={`flex gap-3 ${type === 'user' ? 'justify-end' : ''}`}>
     {type === 'assistant' && (
-      <div className="w-6 h-6 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-        <Sparkles className="w-3 h-3 text-primary-foreground" />
-      </div>
+      <KordiAvatar size="sm" showPulse={false} className="flex-shrink-0" />
     )}
     <div className={`rounded-2xl px-4 py-3 max-w-[85%] ${
       type === 'user' 

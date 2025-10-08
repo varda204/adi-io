@@ -8,8 +8,13 @@ import {
   Package,
   TrendingUp,
   Send,
-  Sparkles
+  Shield,
+  Zap
 } from "lucide-react";
+import { KordiAvatar } from "./KordiAvatar";
+import { LiveDraftCard } from "./LiveDraftCard";
+import { ProactiveSuggestion } from "./ProactiveSuggestion";
+import { VoiceIndicator } from "./VoiceIndicator";
 
 export const DashboardContent = () => {
   return (
@@ -17,13 +22,30 @@ export const DashboardContent = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Welcome back, Developer</h1>
-          <p className="text-muted-foreground">Here's what's happening with your projects</p>
+          <div className="flex items-center gap-3 mb-2">
+            <h1 className="text-3xl font-bold">Welcome back, Developer</h1>
+            <VoiceIndicator active={false} />
+          </div>
+          <p className="text-muted-foreground">KORDI is actively working on your projects</p>
         </div>
         <Button className="bg-gradient-primary hover:opacity-90 shadow-primary">
-          <Sparkles className="w-4 h-4 mr-2" />
+          <Zap className="w-4 h-4 mr-2" />
           New Project
         </Button>
+      </div>
+
+      {/* Proactive Suggestions */}
+      <div className="space-y-3">
+        <ProactiveSuggestion
+          message="Hey! I optimized your database queries - 40% faster! Want to review the changes?"
+          actionLabel="Review Changes"
+          onAction={() => console.log("Review")}
+        />
+        <ProactiveSuggestion
+          message="Production deployment ready - Approve rollout to main?"
+          actionLabel="Approve Deployment"
+          onAction={() => console.log("Approve")}
+        />
       </div>
 
       {/* Stats Grid */}
@@ -59,9 +81,33 @@ export const DashboardContent = () => {
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
-        {/* Recent Activity */}
+        {/* Live Autonomous Actions */}
         <Card className="lg:col-span-2 p-6 bg-card border-border/50">
-          <h2 className="text-xl font-semibold mb-6">Recent Activity</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold">Live Autonomous Actions</h2>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
+              <span className="text-sm text-muted-foreground">KORDI Active</span>
+            </div>
+          </div>
+          <div className="space-y-3 mb-6">
+            <LiveDraftCard
+              status="draft"
+              title="Auto-committing auth changes"
+              action="Review"
+            />
+            <LiveDraftCard
+              status="live"
+              title="Deploying to staging"
+              progress={75}
+            />
+            <LiveDraftCard
+              status="alert"
+              title="Security vulnerability detected"
+              action="Fix Now"
+            />
+          </div>
+          <h3 className="text-lg font-semibold mb-4 mt-6">Recent Activity</h3>
           <div className="space-y-4">
             <ActivityItem
               type="commit"
@@ -94,25 +140,31 @@ export const DashboardContent = () => {
           </div>
         </Card>
 
-        {/* AI Chat */}
+        {/* KORDI Chat */}
         <Card className="p-6 bg-card border-border/50 flex flex-col">
-          <h2 className="text-xl font-semibold mb-6">AI Assistant</h2>
+          <div className="flex items-center gap-3 mb-6">
+            <KordiAvatar size="md" />
+            <div>
+              <h2 className="text-lg font-semibold">KORDI</h2>
+              <p className="text-xs text-muted-foreground">Your autonomous AI teammate</p>
+            </div>
+          </div>
           <div className="flex-1 space-y-4 mb-4 overflow-auto max-h-96">
             <ChatMessage
               type="assistant"
-              message="Hi! I'm here to help. I noticed your test coverage dropped to 67%. Would you like me to generate tests for the new components?"
+              message="Hi! I'm KORDI, your autonomous AI teammate. I noticed your test coverage dropped to 67%. I've already started generating tests for the new components!"
             />
             <ChatMessage
               type="user"
-              message="Yes, please focus on the authentication components"
+              message="Great! Focus on the authentication components first"
             />
             <ChatMessage
               type="assistant"
-              message="Perfect! I've generated 12 new test cases for the auth flow. The tests are ready to review in your IDE."
+              message="Done! I've generated 12 test cases for auth and they're already committed. Your coverage is now at 89%. Want me to deploy to staging?"
             />
           </div>
           <div className="flex gap-2">
-            <Input placeholder="Ask Kordra anything..." className="flex-1" />
+            <Input placeholder="Ask KORDI anything..." className="flex-1" />
             <Button size="icon" className="bg-gradient-primary hover:opacity-90 flex-shrink-0">
               <Send className="w-4 h-4" />
             </Button>
@@ -182,9 +234,7 @@ const ActivityItem = ({ icon, title, description, time }: any) => (
 const ChatMessage = ({ type, message }: any) => (
   <div className={`flex gap-3 ${type === 'user' ? 'justify-end' : ''}`}>
     {type === 'assistant' && (
-      <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-        <Sparkles className="w-4 h-4 text-primary-foreground" />
-      </div>
+      <KordiAvatar size="sm" showPulse={false} className="flex-shrink-0" />
     )}
     <div className={`rounded-2xl px-4 py-3 max-w-[80%] ${
       type === 'user' 

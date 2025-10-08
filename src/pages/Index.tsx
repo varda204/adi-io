@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Code, Zap, Shield } from "lucide-react";
+import { ArrowRight, Code, Zap, Shield, Mic } from "lucide-react";
 import { Link } from "react-router-dom";
+import { KordiAvatar } from "@/components/KordiAvatar";
 
 const Index = () => {
   return (
@@ -12,13 +13,14 @@ const Index = () => {
         
         <div className="relative container mx-auto px-4 py-20">
           <nav className="flex items-center justify-between mb-20">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-primary-foreground" />
+            <div className="flex items-center gap-3">
+              <KordiAvatar size="md" showPulse={false} />
+              <div>
+                <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent block">
+                  Kordra
+                </span>
+                <span className="text-xs text-muted-foreground">Powered by KORDI</span>
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Kordra
-              </span>
             </div>
             <div className="flex items-center gap-4">
               <Link to="/auth">
@@ -34,8 +36,8 @@ const Index = () => {
 
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm mb-4">
-              <Zap className="w-4 h-4 text-accent" />
-              <span className="text-foreground">Your autonomous AI development teammate</span>
+              <Mic className="w-4 h-4 text-accent animate-pulse" />
+              <span className="text-foreground">Meet KORDI - Your autonomous AI teammate</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
@@ -46,8 +48,8 @@ const Index = () => {
             </h1>
             
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Kordra is your always-on AI development teammate that handles commits, deployments, 
-              bug fixes, and code reviews while you focus on building great products.
+              KORDI is your always-on autonomous AI teammate that proactively handles commits, deployments, 
+              bug fixes, and code reviews. Works with VS Code, Cursor, JetBrains, and more. Voice-enabled and ready to collaborate.
             </p>
 
             <div className="flex items-center justify-center gap-4 pt-4">
@@ -69,18 +71,18 @@ const Index = () => {
         <div className="grid md:grid-cols-3 gap-8">
           <FeatureCard
             icon={<Code className="w-8 h-8" />}
-            title="Autonomous Commits"
-            description="AI-powered auto-commits that understand context and maintain clean git history"
+            title="Multi-IDE Support"
+            description="KORDI works seamlessly with VS Code, Cursor, JetBrains, Neovim, Zed, and more"
           />
           <FeatureCard
-            icon={<Zap className="w-8 h-8" />}
-            title="Smart Deployments"
-            description="One-click deployments with intelligent environment configuration and rollback"
+            icon={<Mic className="w-8 h-8" />}
+            title="Voice-First Control"
+            description="Command KORDI with your voice - 'Deploy to production' or 'Fix that bug'"
           />
           <FeatureCard
             icon={<Shield className="w-8 h-8" />}
-            title="Bug Detection"
-            description="Proactive monitoring and auto-fix suggestions before bugs reach production"
+            title="Proactive Security"
+            description="KORDI detects vulnerabilities and suggests fixes before you even ask"
           />
         </div>
       </div>

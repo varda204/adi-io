@@ -3,11 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-import { Sparkles, FolderGit2, Code2, Check } from "lucide-react";
+import { Sparkles, FolderGit2, Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { IDESelector } from "@/components/IDESelector";
+import { KordiAvatar } from "@/components/KordiAvatar";
 
 const Onboarding = () => {
   const [step, setStep] = useState(1);
+  const [selectedIDE, setSelectedIDE] = useState("VS Code");
   const navigate = useNavigate();
 
   const handleComplete = () => {
@@ -77,48 +80,37 @@ const Onboarding = () => {
           {step === 2 && (
             <div className="space-y-6">
               <div className="text-center space-y-2">
-                <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Code2 className="w-8 h-8 text-primary-foreground" />
-                </div>
-                <h2 className="text-3xl font-bold">Install IDE Extension</h2>
-                <p className="text-muted-foreground">Connect Kordra to your development environment</p>
+                <KordiAvatar size="lg" className="mx-auto mb-4" />
+                <h2 className="text-3xl font-bold">Choose Your IDE</h2>
+                <p className="text-muted-foreground">KORDI works with your favorite development environment</p>
               </div>
 
-              <div className="space-y-4">
-                <Card className="p-6 bg-secondary/50 border-border/50">
+              <IDESelector selected={selectedIDE} onSelect={setSelectedIDE} />
+
+              {selectedIDE && (
+                <Card className="p-6 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Code2 className="w-6 h-6 text-primary" />
+                    <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Sparkles className="w-6 h-6 text-primary" />
                     </div>
-                    <div className="space-y-2">
-                      <h3 className="font-semibold">VS Code Extension</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Install the Kordra extension from the VS Code marketplace
+                    <div className="space-y-2 flex-1">
+                      <h3 className="font-semibold">{selectedIDE} Installation</h3>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Install KORDI extension for {selectedIDE}
                       </p>
-                      <code className="block p-3 bg-background rounded-lg text-sm font-mono mt-2">
-                        ext install kordra.kordra-ai
+                      <code className="block p-3 bg-background rounded-lg text-sm font-mono">
+                        ext install kordra.kordi-ai
                       </code>
+                      <div className="mt-4">
+                        <Label className="text-sm font-medium">Authentication Token</Label>
+                        <code className="block p-3 bg-background rounded-lg text-sm font-mono mt-2 select-all">
+                          kda_live_a1b2c3d4e5f6g7h8i9j0
+                        </code>
+                      </div>
                     </div>
                   </div>
                 </Card>
-
-                <Card className="p-6 bg-secondary/50 border-border/50">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="w-6 h-6 text-accent" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="font-semibold">Authentication Token</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Copy this token to authenticate your IDE
-                      </p>
-                      <code className="block p-3 bg-background rounded-lg text-sm font-mono mt-2 select-all">
-                        kda_live_a1b2c3d4e5f6g7h8i9j0
-                      </code>
-                    </div>
-                  </div>
-                </Card>
-              </div>
+              )}
 
               <div className="flex gap-4">
                 <Button onClick={() => setStep(1)} variant="outline" className="flex-1">
@@ -134,11 +126,9 @@ const Onboarding = () => {
           {step === 3 && (
             <div className="space-y-6">
               <div className="text-center space-y-2">
-                <div className="w-16 h-16 bg-gradient-success rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Check className="w-8 h-8 text-success-foreground" />
-                </div>
-                <h2 className="text-3xl font-bold">All Set!</h2>
-                <p className="text-muted-foreground">Configure your autonomy preferences</p>
+                <KordiAvatar size="lg" className="mx-auto mb-4" />
+                <h2 className="text-3xl font-bold">Meet KORDI!</h2>
+                <p className="text-muted-foreground">Configure how autonomous you want your AI teammate to be</p>
               </div>
 
               <div className="space-y-4">
