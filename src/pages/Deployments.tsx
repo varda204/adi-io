@@ -4,6 +4,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Rocket, CheckCircle2, Clock, XCircle, GitBranch } from "lucide-react";
+import { VoiceCommandInterface } from "@/components/VoiceCommandInterface";
+import { DeploymentPipeline } from "@/components/DeploymentPipeline";
+import { VoiceIndicator } from "@/components/VoiceIndicator";
 
 const Deployments = () => {
   return (
@@ -14,14 +17,23 @@ const Deployments = () => {
           <div className="max-w-7xl mx-auto space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold mb-2">Deployments</h1>
-                <p className="text-muted-foreground">Manage and monitor your deployments</p>
+                <div className="flex items-center gap-3 mb-2">
+                  <h1 className="text-3xl font-bold">Autonomous Deployments</h1>
+                  <VoiceIndicator active={true} />
+                </div>
+                <p className="text-muted-foreground">One-command deployment with KORDI</p>
               </div>
               <Button className="bg-gradient-primary hover:opacity-90 shadow-primary">
                 <Rocket className="w-4 h-4 mr-2" />
-                New Deployment
+                Quick Deploy
               </Button>
             </div>
+
+            {/* Voice Command Interface */}
+            <VoiceCommandInterface />
+
+            {/* Active Deployment Pipeline */}
+            <DeploymentPipeline />
 
             {/* Environment Cards */}
             <div className="grid md:grid-cols-3 gap-4">
