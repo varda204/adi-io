@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code, Zap, Shield, Mic } from "lucide-react";
+import { ArrowRight, Code, Zap, Shield, Mic, FileText, Users, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
 import { KordiAvatar } from "@/components/KordiAvatar";
 import { DemoModal } from "@/components/DemoModal";
@@ -11,23 +11,37 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
+        {/* Animated coding background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-accent/10 opacity-50" />
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30" />
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30 animate-pulse" />
+        </div>
         
-        <div className="relative container mx-auto px-4 py-20">
+        <div className="relative container mx-auto px-4 py-6">
+          {/* Professional Navigation */}
           <nav className="flex items-center justify-between mb-20">
-            <div className="flex items-center gap-3">
-              <KordiAvatar size="md" showPulse={false} />
-              <div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent block">
-                  Kordra
-                </span>
-                <span className="text-xs text-muted-foreground">Powered by KORDI</span>
+            <div className="flex items-center gap-12">
+              <Link to="/" className="flex items-center gap-3 group">
+                <KordiAvatar size="md" showPulse={false} />
+                <div>
+                  <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent block group-hover:opacity-80 transition-opacity">
+                    Kordra
+                  </span>
+                  <span className="text-xs text-muted-foreground">Powered by KORDI</span>
+                </div>
+              </Link>
+              
+              <div className="hidden md:flex items-center gap-8 text-sm">
+                <a href="#about" className="text-foreground/80 hover:text-primary transition-colors">About</a>
+                <a href="#features" className="text-foreground/80 hover:text-primary transition-colors">Features</a>
+                <a href="#resources" className="text-foreground/80 hover:text-primary transition-colors">Resources</a>
+                <a href="#contact" className="text-foreground/80 hover:text-primary transition-colors">Contact</a>
               </div>
             </div>
+            
             <div className="flex items-center gap-4">
               <Link to="/auth">
-                <Button variant="ghost">Sign In</Button>
+                <Button variant="ghost" className="hover:bg-secondary">Sign In</Button>
               </Link>
               <Link to="/auth">
                 <Button className="bg-gradient-primary hover:opacity-90 shadow-primary">
@@ -37,10 +51,10 @@ const Index = () => {
             </div>
           </nav>
 
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm mb-4">
-              <Mic className="w-4 h-4 text-accent animate-pulse" />
-              <span className="text-foreground">Meet KORDI - Your autonomous AI teammate</span>
+          <div className="max-w-4xl mx-auto text-center space-y-8" id="about">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm mb-4 animate-pulse">
+              <Mic className="w-4 h-4 text-accent" />
+              <span className="text-foreground">Say "Hey Kordi" to activate voice control</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
@@ -79,7 +93,11 @@ const Index = () => {
       </div>
 
       {/* Features Section */}
-      <div className="container mx-auto px-4 py-20">
+      <div className="container mx-auto px-4 py-20" id="features">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-3">Built for Modern Development</h2>
+          <p className="text-muted-foreground">Everything you need in one intelligent workspace</p>
+        </div>
         <div className="grid md:grid-cols-3 gap-8">
           <FeatureCard
             icon={<Code className="w-8 h-8" />}

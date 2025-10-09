@@ -8,15 +8,10 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
-import VSCodePanel from "./pages/VSCodePanel";
-import Deployments from "./pages/Deployments";
+import Workspace from "./pages/Workspace";
+import SystemHealth from "./pages/SystemHealth";
 import Team from "./pages/Team";
 import Settings from "./pages/Settings";
-import BugRadar from "./pages/BugRadar";
-import DependencyGuardian from "./pages/DependencyGuardian";
-import Projects from "./pages/Projects";
-import Activity from "./pages/Activity";
-import CodeArchaeology from "./pages/CodeArchaeology";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,14 +28,9 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/vscode" element={<VSCodePanel />} />
-          <Route path="/dashboard/deployments" element={<Deployments />} />
+          <Route path="/dashboard/workspace" element={<Workspace />} />
+          <Route path="/dashboard/system-health" element={<SystemHealth />} />
           <Route path="/dashboard/team" element={<Team />} />
-          <Route path="/dashboard/bug-radar" element={<BugRadar />} />
-          <Route path="/dashboard/dependencies" element={<DependencyGuardian />} />
-          <Route path="/dashboard/projects" element={<Projects />} />
-          <Route path="/dashboard/activity" element={<Activity />} />
-          <Route path="/dashboard/code-archaeology" element={<CodeArchaeology />} />
           <Route path="/dashboard/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

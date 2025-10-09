@@ -27,14 +27,9 @@ import {
 
 const navigation = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
-  { title: "Projects", url: "/dashboard/projects", icon: FileCode },
-  { title: "IDE Integration", url: "/dashboard/vscode", icon: Code2 },
-  { title: "Deployments", url: "/dashboard/deployments", icon: Rocket },
+  { title: "Workspace", url: "/dashboard/workspace", icon: Code2 },
+  { title: "System Health", url: "/dashboard/system-health", icon: Activity },
   { title: "Team", url: "/dashboard/team", icon: Users },
-  { title: "Bug Radar", url: "/dashboard/bug-radar", icon: AlertTriangle },
-  { title: "Dependencies", url: "/dashboard/dependencies", icon: Package },
-  { title: "Activity", url: "/dashboard/activity", icon: Activity },
-  { title: "Code Archaeology", url: "/dashboard/code-archaeology", icon: History },
   { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ];
 

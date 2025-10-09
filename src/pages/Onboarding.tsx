@@ -1,31 +1,38 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-import { Sparkles, FolderGit2, Check } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { IDESelector } from "@/components/IDESelector";
 import { KordiAvatar } from "@/components/KordiAvatar";
-import { OneCommandSetup } from "@/components/OneCommandSetup";
 
 const Onboarding = () => {
   const [step, setStep] = useState(1);
   const [selectedIDE, setSelectedIDE] = useState("VS Code");
+  const [autonomyLevel, setAutonomyLevel] = useState(50);
   const navigate = useNavigate();
 
   const handleComplete = () => {
     navigate("/dashboard");
   };
 
+  const getAutonomyLabel = (value: number) => {
+    if (value <= 33) return { label: "Manual", desc: "You approve every change" };
+    if (value <= 66) return { label: "Assisted", desc: "Kordi suggests, you decide" };
+    return { label: "Autonomous", desc: "Kordi handles everything" };
+  };
+
+  const currentLevel = getAutonomyLabel(autonomyLevel);
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10 opacity-50" />
       
       <div className="w-full max-w-2xl relative">
-        {/* Progress */}
+        {/* Progress - Only 2 steps now */}
         <div className="flex items-center justify-center gap-2 mb-12">
-          {[1, 2, 3, 4].map((s) => (
+          {[1, 2].map((s) => (
             <div key={s} className="flex items-center">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${
                 step >= s ? 'bg-primary border-primary' : 'border-border'
@@ -36,7 +43,7 @@ const Onboarding = () => {
                   <span className={step >= s ? 'text-primary-foreground' : 'text-muted-foreground'}>{s}</span>
                 )}
               </div>
-              {s < 4 && <div className={`w-20 h-0.5 ${step > s ? 'bg-primary' : 'bg-border'}`} />}
+              {s < 2 && <div className={`w-20 h-0.5 ${step > s ? 'bg-primary' : 'bg-border'}`} />}
             </div>
           ))}
         </div>
@@ -45,34 +52,14 @@ const Onboarding = () => {
           {step === 1 && (
             <div className="space-y-6">
               <div className="text-center space-y-2">
-                <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <FolderGit2 className="w-8 h-8 text-primary-foreground" />
-                </div>
-                <h2 className="text-3xl font-bold">Create Your First Project</h2>
-                <p className="text-muted-foreground">Set up your project to get started with Kordra</p>
+                <KordiAvatar size="lg" className="mx-auto mb-4" />
+                <h2 className="text-3xl font-bold">Connect Your IDE</h2>
+                <p className="text-muted-foreground">KORDI works seamlessly with your favorite development environment</p>
               </div>
 
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="project-name">Project Name</Label>
-                  <Input id="project-name" placeholder="my-awesome-app" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="repo-url">Repository URL (optional)</Label>
-                  <Input id="repo-url" placeholder="https://github.com/username/repo" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="framework">Framework</Label>
-                  <select id="framework" className="w-full h-10 px-3 rounded-lg bg-background border border-input">
-                    <option>Next.js</option>
-                    <option>React</option>
-                    <option>Vue</option>
-                    <option>Svelte</option>
-                  </select>
-                </div>
-              </div>
+              <IDESelector selected={selectedIDE} onSelect={setSelectedIDE} />
 
-              <Button onClick={() => setStep(2)} className="w-full bg-gradient-primary hover:opacity-90">
+              <Button onClick={() => setStep(2)} className="w-full bg-gradient-primary hover:opacity-90 shadow-primary">
                 Continue
               </Button>
             </div>
@@ -81,107 +68,77 @@ const Onboarding = () => {
           {step === 2 && (
             <div className="space-y-6">
               <div className="text-center space-y-2">
-                <KordiAvatar size="lg" className="mx-auto mb-4" />
-                <h2 className="text-3xl font-bold">Choose Your IDE</h2>
-                <p className="text-muted-foreground">KORDI works with your favorite development environment</p>
+                <KordiAvatar size="lg" className="mx-auto mb-4" state="idle" />
+                <h2 className="text-3xl font-bold">Choose Autonomy Level</h2>
+                <p className="text-muted-foreground">How autonomous do you want Kordi to be?</p>
               </div>
 
-              <IDESelector selected={selectedIDE} onSelect={setSelectedIDE} />
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <div className="text-center p-6 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-lg">
+                    <h3 className="text-2xl font-bold mb-2">{currentLevel.label}</h3>
+                    <p className="text-muted-foreground">{currentLevel.desc}</p>
+                  </div>
 
-              {selectedIDE && (
-                <Card className="p-6 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="space-y-2 flex-1">
-                      <h3 className="font-semibold">{selectedIDE} Installation</h3>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Install KORDI extension for {selectedIDE}
-                      </p>
-                      <code className="block p-3 bg-background rounded-lg text-sm font-mono">
-                        ext install kordra.kordi-ai
-                      </code>
-                      <div className="mt-4">
-                        <Label className="text-sm font-medium">Authentication Token</Label>
-                        <code className="block p-3 bg-background rounded-lg text-sm font-mono mt-2 select-all">
-                          kda_live_a1b2c3d4e5f6g7h8i9j0
-                        </code>
-                      </div>
+                  <div className="space-y-2 px-4">
+                    <Slider
+                      value={[autonomyLevel]}
+                      onValueChange={(value) => setAutonomyLevel(value[0])}
+                      min={0}
+                      max={100}
+                      step={1}
+                      className="w-full"
+                    />
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>Manual</span>
+                      <span>Assisted</span>
+                      <span>Autonomous</span>
                     </div>
                   </div>
-                </Card>
-              )}
+                </div>
+
+                <div className="space-y-3 p-4 bg-secondary/30 border border-border/50 rounded-lg">
+                  <h4 className="font-semibold text-sm">What Kordi will do:</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-success" />
+                      <span className={autonomyLevel >= 33 ? "" : "text-muted-foreground"}>
+                        {autonomyLevel >= 66 ? "Auto-commit changes" : "Suggest commits"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-success" />
+                      <span className={autonomyLevel >= 50 ? "" : "text-muted-foreground"}>
+                        {autonomyLevel >= 66 ? "Auto-deploy to staging" : "Recommend deployments"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-success" />
+                      <span>Proactive bug detection</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-success" />
+                      <span className={autonomyLevel >= 66 ? "" : "text-muted-foreground"}>
+                        {autonomyLevel >= 66 ? "Auto-update dependencies" : "Monitor dependencies"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div className="flex gap-4">
                 <Button onClick={() => setStep(1)} variant="outline" className="flex-1">
                   Back
                 </Button>
-                <Button onClick={() => setStep(3)} className="flex-1 bg-gradient-primary hover:opacity-90">
-                  Continue
+                <Button onClick={handleComplete} className="flex-1 bg-gradient-primary hover:opacity-90 shadow-primary">
+                  Complete Setup →
                 </Button>
               </div>
+
+              <p className="text-center text-sm text-muted-foreground">
+                Kordi Connected - Ready to start your first project
+              </p>
             </div>
-          )}
-
-          {step === 3 && (
-            <div className="space-y-6">
-              <div className="text-center space-y-2">
-                <KordiAvatar size="lg" className="mx-auto mb-4" />
-                <h2 className="text-3xl font-bold">Meet KORDI!</h2>
-                <p className="text-muted-foreground">Configure how autonomous you want your AI teammate to be</p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg border border-border/50">
-                  <div>
-                    <h4 className="font-medium">Auto-commit changes</h4>
-                    <p className="text-sm text-muted-foreground">Automatically commit your changes</p>
-                  </div>
-                  <input type="checkbox" defaultChecked className="w-5 h-5 rounded" />
-                </div>
-
-                <div className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg border border-border/50">
-                  <div>
-                    <h4 className="font-medium">Auto-deploy to staging</h4>
-                    <p className="text-sm text-muted-foreground">Deploy changes to staging environment</p>
-                  </div>
-                  <input type="checkbox" defaultChecked className="w-5 h-5 rounded" />
-                </div>
-
-                <div className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg border border-border/50">
-                  <div>
-                    <h4 className="font-medium">Bug detection alerts</h4>
-                    <p className="text-sm text-muted-foreground">Get notified of potential issues</p>
-                  </div>
-                  <input type="checkbox" defaultChecked className="w-5 h-5 rounded" />
-                </div>
-
-                <div className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg border border-border/50">
-                  <div>
-                    <h4 className="font-medium">Dependency monitoring</h4>
-                    <p className="text-sm text-muted-foreground">Monitor and update dependencies</p>
-                  </div>
-                  <input type="checkbox" className="w-5 h-5 rounded" />
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <Button onClick={() => setStep(2)} variant="outline" className="flex-1">
-                  Back
-                </Button>
-                <Button onClick={() => setStep(4)} className="flex-1 bg-gradient-primary hover:opacity-90">
-                  Continue
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {step === 4 && (
-            <OneCommandSetup 
-              onComplete={handleComplete}
-              onBack={() => setStep(3)}
-            />
           )}
         </Card>
       </div>

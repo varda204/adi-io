@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Users, MessageSquare, Mic, Video, UserPlus } from "lucide-react";
+import { Users, MessageSquare, Mic, Video, UserPlus, Check } from "lucide-react";
 import { KordiAvatar } from "@/components/KordiAvatar";
 
 const Team = () => {
@@ -136,34 +136,71 @@ const Team = () => {
               </div>
             </Card>
 
-            {/* Team Activity */}
+            {/* Manager Dashboard */}
             <Card className="p-6 bg-card border-border/50">
-              <h2 className="text-xl font-semibold mb-6">Team Activity Feed</h2>
-              <div className="space-y-3">
-                <ActivityFeedItem
-                  user="Sarah Johnson"
-                  action="opened pull request"
-                  target="#234"
-                  time="5 minutes ago"
-                />
-                <ActivityFeedItem
-                  user="Michael Chen"
-                  action="pushed commits to"
-                  target="main"
-                  time="15 minutes ago"
-                />
-                <ActivityFeedItem
-                  user="Emily Davis"
-                  action="commented on"
-                  target="#233"
-                  time="1 hour ago"
-                />
-                <ActivityFeedItem
-                  user="David Wilson"
-                  action="deployed to"
-                  target="staging"
-                  time="2 hours ago"
-                />
+              <h2 className="text-xl font-semibold mb-6">Manager Dashboard</h2>
+              
+              <div className="space-y-4 mb-6">
+                <div className="p-4 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 rounded-lg">
+                  <div className="flex items-start gap-3 mb-3">
+                    <KordiAvatar size="sm" showPulse={false} />
+                    <div className="flex-1">
+                      <h3 className="font-semibold mb-1">AI-Generated PR Summary</h3>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        <strong>PR #234:</strong> Improved login flow with JWT authentication. 
+                        Added 6 new tests, no regressions detected. Security scan passed. 
+                        Ready for production deployment.
+                      </p>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline">
+                          <MessageSquare className="w-3 h-3 mr-1" />
+                          Share to Slack
+                        </Button>
+                        <Button size="sm" variant="outline">Email Summary</Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div className="p-4 bg-secondary/30 border border-border/50 rounded-lg">
+                    <p className="text-sm text-muted-foreground mb-1">Team Velocity</p>
+                    <p className="text-2xl font-bold">47 <span className="text-sm text-success">commits/week</span></p>
+                  </div>
+                  <div className="p-4 bg-secondary/30 border border-border/50 rounded-lg">
+                    <p className="text-sm text-muted-foreground mb-1">Bugs Fixed</p>
+                    <p className="text-2xl font-bold">23 <span className="text-sm text-muted-foreground">this week</span></p>
+                  </div>
+                  <div className="p-4 bg-secondary/30 border border-border/50 rounded-lg">
+                    <p className="text-sm text-muted-foreground mb-1">Test Coverage</p>
+                    <p className="text-2xl font-bold text-success">+8%</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-border/50 pt-6">
+                <h3 className="font-semibold mb-4">Automated Onboarding</h3>
+                <div className="p-4 bg-accent/5 border border-accent/20 rounded-lg">
+                  <h4 className="font-medium mb-2">Welcome Alex! 👋</h4>
+                  <p className="text-sm text-muted-foreground mb-3">Your personalized onboarding guide is ready</p>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-success" />
+                      <span>Key files: auth.ts, api.ts, utils.ts</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-success" />
+                      <span>Project experts: Sarah (auth), Michael (backend)</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-success" />
+                      <span>Recent changes: 12 commits in last 24h</span>
+                    </li>
+                  </ul>
+                  <Button size="sm" className="mt-3 bg-accent hover:bg-accent/90 text-accent-foreground">
+                    Start Interactive Tour with Kordi
+                  </Button>
+                </div>
               </div>
             </Card>
           </div>
