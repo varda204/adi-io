@@ -21,20 +21,23 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export const DashboardContent = () => {
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-8 space-y-8 animate-fade-in">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-3xl font-bold">Welcome back, Developer</h1>
-            <VoiceIndicator active={false} />
-          </div>
-          <p className="text-muted-foreground">KORDI is actively working on your projects</p>
+          <h1 className="text-4xl font-bold mb-2">Welcome back, Developer</h1>
+          <p className="text-muted-foreground">Here's what Kordi handled today</p>
         </div>
-        <Button className="bg-gradient-primary hover:opacity-90 shadow-primary">
-          <Zap className="w-4 h-4 mr-2" />
-          New Project
-        </Button>
+        <div className="flex gap-3">
+          <Button className="bg-gradient-primary hover:opacity-90 shadow-primary transition-all hover:scale-105">
+            <Zap className="w-4 h-4 mr-2" />
+            New Project
+          </Button>
+          <Button variant="outline" className="transition-all hover:scale-105">
+            <Rocket className="w-4 h-4 mr-2" />
+            Deploy Now
+          </Button>
+        </div>
       </div>
 
       {/* Proactive Suggestions */}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { KordiAvatar } from "@/components/KordiAvatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -24,15 +24,17 @@ export const GlobalKordiAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isVoiceMode, setIsVoiceMode] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [voiceActivated, setVoiceActivated] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hey! I'm Kordi, your autonomous AI teammate. I can help with deployments, code reviews, bug fixes, and more. What would you like me to do?",
+      content: "Hey! I'm Kordi, your autonomous AI teammate. Say 'Hey Kordi' to activate voice control, or type to chat. What would you like me to do?",
       timestamp: new Date(),
     },
   ]);
   const [inputValue, setInputValue] = useState("");
   const [currentTask, setCurrentTask] = useState("Ready to assist");
+  const recognitionRef = useRef<any>(null);
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
@@ -61,6 +63,36 @@ export const GlobalKordiAssistant = () => {
     setInputValue(command);
   };
 
+  // Voice activation with "Hey Kordi"
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = true;
+      recognitionRef.current.interimResults = true;
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = Array.from(event.results)
+          .map((result: any) => result[0].transcript)
+          .join('');
+
+        if (transcript.toLowerCase().includes('hey kordi') || transcript.toLowerCase().includes('hey kodi')) {
+          setVoiceActivated(true);
+          setIsListening(true);
+          setIsOpen(true);
+        }
+      };
+
+      recognitionRef.current.start();
+    }
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
+
   const toggleVoice = () => {
     setIsVoiceMode(!isVoiceMode);
     if (!isVoiceMode) {
@@ -68,6 +100,7 @@ export const GlobalKordiAssistant = () => {
       setTimeout(() => setIsListening(false), 3000);
     } else {
       setIsListening(false);
+      setVoiceActivated(false);
     }
   };
 
@@ -109,17 +142,20 @@ export const GlobalKordiAssistant = () => {
           {/* Avatar Button */}
           <button
             onClick={() => setIsOpen(true)}
-            className="relative hover:scale-110 transition-transform cursor-pointer"
+            className="relative hover:scale-110 transition-all duration-300 cursor-pointer group"
             aria-label="Open Kordi Assistant"
           >
             <KordiAvatar
               size="lg"
-              state={isListening ? "monitoring" : "idle"}
+              state={isListening ? "monitoring" : voiceActivated ? "coding" : "idle"}
               showPulse={true}
               activity={currentTask}
             />
-            {isListening && (
-              <div className="absolute inset-0 animate-ping rounded-full bg-accent/30" />
+            {(isListening || voiceActivated) && (
+              <>
+                <div className="absolute inset-0 animate-ping rounded-full bg-accent/30" />
+                <div className="absolute -inset-2 bg-accent/10 rounded-full blur-md animate-pulse" />
+              </>
             )}
           </button>
         </div>
@@ -127,19 +163,19 @@ export const GlobalKordiAssistant = () => {
 
       {/* Chat Modal */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-2xl h-[600px] flex flex-col p-0 bg-card border-border/50">
+        <DialogContent className="max-w-2xl h-[600px] flex flex-col p-0 bg-card border-border/50 animate-scale-in">
           <DialogHeader className="p-6 pb-4 border-b border-border/50">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <KordiAvatar
                   size="md"
-                  state={isListening ? "monitoring" : "idle"}
+                  state={isListening ? "monitoring" : voiceActivated ? "coding" : "idle"}
                   showPulse={false}
                 />
                 <div>
                   <DialogTitle>Kordi - AI Teammate</DialogTitle>
                   <p className="text-sm text-muted-foreground">
-                    {isListening ? "Listening..." : "How can I help?"}
+                    {isListening ? "🎤 Listening..." : voiceActivated ? "Voice activated!" : "How can I help?"}
                   </p>
                 </div>
               </div>

@@ -4,9 +4,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
+import { GuardrailsMarketplace } from "@/components/GuardrailsMarketplace";
 
 const Settings = () => {
   return (
@@ -22,111 +24,72 @@ const Settings = () => {
 
             <Tabs defaultValue="autonomy" className="w-full">
               <TabsList className="mb-6">
-                <TabsTrigger value="autonomy">Autonomy</TabsTrigger>
+                <TabsTrigger value="autonomy">Autonomy Control</TabsTrigger>
+                <TabsTrigger value="guardrails">Guardrails</TabsTrigger>
                 <TabsTrigger value="integrations">Integrations</TabsTrigger>
                 <TabsTrigger value="notifications">Notifications</TabsTrigger>
-                <TabsTrigger value="account">Account</TabsTrigger>
+                <TabsTrigger value="security">Security</TabsTrigger>
               </TabsList>
 
               <TabsContent value="autonomy" className="space-y-6">
-                <Card className="p-6 bg-card border-border/50">
+                <Card className="p-6 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
                   <h2 className="text-xl font-semibold mb-6">Autonomy Control Center</h2>
                   <div className="space-y-8">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between mb-2">
-                        <Label className="text-lg font-semibold">Main Autonomy Level</Label>
-                        <span className="text-sm font-bold bg-primary/10 text-primary px-3 py-1 rounded-full">Autonomous</span>
+                        <Label className="text-lg font-semibold">AI Confidence Threshold</Label>
+                        <span className="text-sm font-bold bg-primary/10 text-primary px-3 py-1 rounded-full">85% Confident</span>
                       </div>
-                      <Slider defaultValue={[80]} max={100} step={1} className="py-4" />
-                      <div className="flex items-center justify-between text-sm text-muted-foreground">
-                        <span>Manual</span>
-                        <span>Assisted</span>
-                        <span>Autonomous</span>
-                      </div>
+                      <Slider defaultValue={[85]} max={100} step={1} className="py-4" />
                       <p className="text-sm text-muted-foreground mt-2">
-                        Controls KORDI's overall decision-making authority across all features
+                        Kordi will only act autonomously when confidence exceeds this threshold
                       </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <CapabilityControl
+                        label="Auto-commits"
+                        description="Commit changes autonomously"
+                        confidence={92}
+                        enabled={true}
+                      />
+                      <CapabilityControl
+                        label="Auto-deploy staging"
+                        description="Deploy to staging environment"
+                        confidence={88}
+                        enabled={true}
+                      />
+                      <CapabilityControl
+                        label="Bug auto-fix"
+                        description="Fix detected bugs automatically"
+                        confidence={95}
+                        enabled={true}
+                      />
+                      <CapabilityControl
+                        label="Dependency updates"
+                        description="Update packages automatically"
+                        confidence={90}
+                        enabled={true}
+                      />
+                      <CapabilityControl
+                        label="PR reviews"
+                        description="Review and comment on PRs"
+                        confidence={87}
+                        enabled={true}
+                      />
+                      <CapabilityControl
+                        label="Voice commands"
+                        description="Respond to voice activation"
+                        confidence={93}
+                        enabled={true}
+                      />
                     </div>
                   </div>
                 </Card>
+              </TabsContent>
 
-                <Card className="p-6 bg-card border-border/50">
-                  <h2 className="text-xl font-semibold mb-6">Capability Control Grid</h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <CapabilityControl
-                      label="Auto-commits"
-                      description="Commit changes autonomously"
-                      confidence={92}
-                      enabled={true}
-                    />
-                    <CapabilityControl
-                      label="Bug detection"
-                      description="Identify and flag issues"
-                      confidence={88}
-                      enabled={true}
-                    />
-                    <CapabilityControl
-                      label="Dependency monitoring"
-                      description="Track and update packages"
-                      confidence={95}
-                      enabled={true}
-                    />
-                    <CapabilityControl
-                      label="Deployment handling"
-                      description="Manage deployments"
-                      confidence={85}
-                      enabled={true}
-                    />
-                    <CapabilityControl
-                      label="PR collaboration"
-                      description="Review and comment on PRs"
-                      confidence={90}
-                      enabled={true}
-                    />
-                    <CapabilityControl
-                      label="Voice processing"
-                      description="Handle voice commands"
-                      confidence={87}
-                      enabled={false}
-                    />
-                    <CapabilityControl
-                      label="File optimization"
-                      description="Optimize code structure"
-                      confidence={93}
-                      enabled={true}
-                    />
-                    <CapabilityControl
-                      label="Test generation"
-                      description="Create unit tests"
-                      confidence={89}
-                      enabled={true}
-                    />
-                    <CapabilityControl
-                      label="Security scanning"
-                      description="Detect vulnerabilities"
-                      confidence={91}
-                      enabled={true}
-                    />
-                    <CapabilityControl
-                      label="Performance optimization"
-                      description="Improve code performance"
-                      confidence={86}
-                      enabled={true}
-                    />
-                    <CapabilityControl
-                      label="Code refactoring"
-                      description="Restructure codebase"
-                      confidence={84}
-                      enabled={false}
-                    />
-                    <CapabilityControl
-                      label="Documentation sync"
-                      description="Keep docs up to date"
-                      confidence={88}
-                      enabled={true}
-                    />
-                  </div>
-                </Card>
+              <TabsContent value="guardrails" className="space-y-6">
+                <GuardrailsMarketplace />
               </TabsContent>
 
               <TabsContent value="integrations" className="space-y-6">
@@ -256,58 +219,57 @@ const Settings = () => {
                 </Card>
               </TabsContent>
 
-              <TabsContent value="account" className="space-y-6">
+              <TabsContent value="security" className="space-y-6">
                 <Card className="p-6 bg-card border-border/50">
-                  <h2 className="text-xl font-semibold mb-6">Profile Information</h2>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Full Name</Label>
-                      <Input id="name" defaultValue="John Developer" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" defaultValue="john@example.com" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="company">Company</Label>
-                      <Input id="company" defaultValue="Tech Startup Inc." />
-                    </div>
-                    <Button className="bg-gradient-primary hover:opacity-90">
-                      Save Changes
-                    </Button>
-                  </div>
-                </Card>
-
-                <Card className="p-6 bg-card border-border/50">
-                  <h2 className="text-xl font-semibold mb-6">Security</h2>
+                  <h2 className="text-xl font-semibold mb-6">Security Settings</h2>
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label>Two-Factor Authentication</Label>
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm text-muted-foreground">
-                          Add an extra layer of security to your account
-                        </p>
+                      <div className="flex items-center justify-between p-4 bg-secondary/30 border border-border/50 rounded-lg">
+                        <div>
+                          <p className="font-medium">Authenticator App</p>
+                          <p className="text-sm text-muted-foreground">Use an app to generate codes</p>
+                        </div>
                         <Button variant="outline">Enable</Button>
                       </div>
                     </div>
+
                     <div className="space-y-2">
-                      <Label>Change Password</Label>
-                      <Button variant="outline" className="w-full">
-                        Update Password
-                      </Button>
+                      <Label htmlFor="current-password">Change Password</Label>
+                      <Input id="current-password" type="password" placeholder="Current password" />
+                      <Input id="new-password" type="password" placeholder="New password" />
+                      <Input id="confirm-password" type="password" placeholder="Confirm new password" />
+                      <Button className="bg-gradient-primary hover:opacity-90">Update Password</Button>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Active Sessions</Label>
+                      <div className="space-y-2">
+                        <div className="p-4 bg-secondary/30 border border-border/50 rounded-lg">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="font-medium">MacBook Pro • Chrome</p>
+                              <p className="text-sm text-muted-foreground">San Francisco, CA • Current session</p>
+                            </div>
+                            <Badge variant="outline" className="bg-success/10 text-success border-success/20">
+                              Active
+                            </Badge>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </Card>
 
-                <Card className="p-6 bg-card border-border/50 border-destructive/50">
-                  <h2 className="text-xl font-semibold mb-6 text-destructive">Danger Zone</h2>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label>Delete Account</Label>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        Permanently delete your account and all associated data
-                      </p>
-                      <Button variant="destructive">Delete Account</Button>
+                <Card className="p-6 bg-destructive/5 border-destructive/30">
+                  <h2 className="text-xl font-semibold mb-4 text-destructive">Danger Zone</h2>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-4 bg-background rounded-lg border border-destructive/20">
+                      <div>
+                        <p className="font-medium">Delete Account</p>
+                        <p className="text-sm text-muted-foreground">Permanently delete your account and all data</p>
+                      </div>
+                      <Button variant="destructive">Delete</Button>
                     </div>
                   </div>
                 </Card>
