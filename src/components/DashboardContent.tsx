@@ -15,6 +15,9 @@ import { KordiAvatar } from "./KordiAvatar";
 import { LiveDraftCard } from "./LiveDraftCard";
 import { ProactiveSuggestion } from "./ProactiveSuggestion";
 import { VoiceIndicator } from "./VoiceIndicator";
+import { LiveRepoSync } from "./LiveRepoSync";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export const DashboardContent = () => {
   return (
@@ -79,6 +82,36 @@ export const DashboardContent = () => {
           trend="neutral"
         />
       </div>
+
+      {/* Live Repo Sync */}
+      <LiveRepoSync />
+
+      {/* Team Activity Preview */}
+      <Card className="p-6 bg-card border-border/50">
+        <h2 className="text-xl font-semibold mb-6">Team Activity Preview</h2>
+        <div className="space-y-3">
+          <TeamActivityItem
+            isKordi
+            action="deployed build #132 to production"
+            time="5 minutes ago"
+          />
+          <TeamActivityItem
+            name="Mike Johnson"
+            action="reviewed PR #234"
+            time="12 minutes ago"
+          />
+          <TeamActivityItem
+            isKordi
+            action="fixed security vulnerability in auth module"
+            time="35 minutes ago"
+          />
+          <TeamActivityItem
+            name="Sarah Chen"
+            action="pushed 3 commits to feature/payment"
+            time="1 hour ago"
+          />
+        </div>
+      </Card>
 
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Live Autonomous Actions */}
@@ -226,6 +259,28 @@ const ActivityItem = ({ icon, title, description, time }: any) => (
     <div className="flex-1 min-w-0">
       <p className="font-medium mb-1">{title}</p>
       <p className="text-sm text-muted-foreground truncate">{description}</p>
+      <p className="text-xs text-muted-foreground mt-1">{time}</p>
+    </div>
+  </div>
+);
+
+const TeamActivityItem = ({ isKordi, name, action, time }: any) => (
+  <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-secondary/30 transition-colors">
+    {isKordi ? (
+      <KordiAvatar size="sm" state="idle" />
+    ) : (
+      <Avatar className="w-10 h-10">
+        <AvatarFallback className="bg-gradient-primary text-primary-foreground text-xs">
+          {name?.split(' ').map((n: string) => n[0]).join('')}
+        </AvatarFallback>
+      </Avatar>
+    )}
+    <div className="flex-1 min-w-0">
+      <p className="text-sm">
+        <span className="font-semibold">{isKordi ? 'KORDI' : name}</span>
+        {' '}
+        <span className="text-muted-foreground">{action}</span>
+      </p>
       <p className="text-xs text-muted-foreground mt-1">{time}</p>
     </div>
   </div>
