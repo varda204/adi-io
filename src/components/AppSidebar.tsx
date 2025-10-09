@@ -7,7 +7,8 @@ import {
   Activity,
   FileCode,
   AlertTriangle,
-  Package
+  Package,
+  History
 } from "lucide-react";
 import { KordiAvatar } from "./KordiAvatar";
 import { NavLink } from "react-router-dom";
@@ -33,6 +34,7 @@ const navigation = [
   { title: "Bug Radar", url: "/dashboard/bug-radar", icon: AlertTriangle },
   { title: "Dependencies", url: "/dashboard/dependencies", icon: Package },
   { title: "Activity", url: "/dashboard/activity", icon: Activity },
+  { title: "Code Archaeology", url: "/dashboard/code-archaeology", icon: History },
   { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ];
 

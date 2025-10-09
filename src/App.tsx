@@ -15,6 +15,7 @@ import BugRadar from "./pages/BugRadar";
 import DependencyGuardian from "./pages/DependencyGuardian";
 import Projects from "./pages/Projects";
 import Activity from "./pages/Activity";
+import CodeArchaeology from "./pages/CodeArchaeology";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/dashboard/dependencies" element={<DependencyGuardian />} />
           <Route path="/dashboard/projects" element={<Projects />} />
           <Route path="/dashboard/activity" element={<Activity />} />
+          <Route path="/dashboard/code-archaeology" element={<CodeArchaeology />} />
           <Route path="/dashboard/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
