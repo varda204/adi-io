@@ -7,6 +7,7 @@ import { Sparkles, FolderGit2, Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { IDESelector } from "@/components/IDESelector";
 import { KordiAvatar } from "@/components/KordiAvatar";
+import { OneCommandSetup } from "@/components/OneCommandSetup";
 
 const Onboarding = () => {
   const [step, setStep] = useState(1);
@@ -24,7 +25,7 @@ const Onboarding = () => {
       <div className="w-full max-w-2xl relative">
         {/* Progress */}
         <div className="flex items-center justify-center gap-2 mb-12">
-          {[1, 2, 3].map((s) => (
+          {[1, 2, 3, 4].map((s) => (
             <div key={s} className="flex items-center">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${
                 step >= s ? 'bg-primary border-primary' : 'border-border'
@@ -35,7 +36,7 @@ const Onboarding = () => {
                   <span className={step >= s ? 'text-primary-foreground' : 'text-muted-foreground'}>{s}</span>
                 )}
               </div>
-              {s < 3 && <div className={`w-20 h-0.5 ${step > s ? 'bg-primary' : 'bg-border'}`} />}
+              {s < 4 && <div className={`w-20 h-0.5 ${step > s ? 'bg-primary' : 'bg-border'}`} />}
             </div>
           ))}
         </div>
@@ -165,10 +166,22 @@ const Onboarding = () => {
                 </div>
               </div>
 
-              <Button onClick={handleComplete} className="w-full bg-gradient-primary hover:opacity-90 shadow-primary">
-                Go to Dashboard
-              </Button>
+              <div className="flex gap-4">
+                <Button onClick={() => setStep(2)} variant="outline" className="flex-1">
+                  Back
+                </Button>
+                <Button onClick={() => setStep(4)} className="flex-1 bg-gradient-primary hover:opacity-90">
+                  Continue
+                </Button>
+              </div>
             </div>
+          )}
+
+          {step === 4 && (
+            <OneCommandSetup 
+              onComplete={handleComplete}
+              onBack={() => setStep(3)}
+            />
           )}
         </Card>
       </div>

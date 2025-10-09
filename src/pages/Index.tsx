@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code, Zap, Shield, Mic } from "lucide-react";
 import { Link } from "react-router-dom";
 import { KordiAvatar } from "@/components/KordiAvatar";
+import { DemoModal } from "@/components/DemoModal";
 
 const Index = () => {
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -58,10 +61,19 @@ const Index = () => {
                   Start Building Free <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="text-lg px-8 border-border/50">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-lg px-8 border-border/50"
+                onClick={() => setIsDemoOpen(true)}
+              >
                 Watch Demo
               </Button>
             </div>
+            
+            <p className="text-sm text-accent/80 mt-4 italic">
+              See Kordra in action — autonomous DevOps meets intelligent coding
+            </p>
           </div>
         </div>
       </div>
@@ -104,6 +116,8 @@ const Index = () => {
           </div>
         </div>
       </div>
+      
+      <DemoModal open={isDemoOpen} onOpenChange={setIsDemoOpen} />
     </div>
   );
 };
