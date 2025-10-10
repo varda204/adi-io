@@ -1,5 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import { TopNav } from "@/components/TopNav";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,9 +14,11 @@ import { GuardrailsMarketplace } from "@/components/GuardrailsMarketplace";
 const Settings = () => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
-        <AppSidebar />
-        <main className="flex-1 p-8">
+      <div className="min-h-screen flex flex-col w-full bg-background">
+        <TopNav />
+        <div className="flex flex-1">
+          <AppSidebar />
+          <main className="flex-1 p-8">
           <div className="max-w-4xl mx-auto space-y-6">
             <div>
               <h1 className="text-3xl font-bold mb-2">Settings</h1>
@@ -277,6 +280,7 @@ const Settings = () => {
             </Tabs>
           </div>
         </main>
+        </div>
       </div>
     </SidebarProvider>
   );

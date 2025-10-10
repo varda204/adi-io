@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import { TopNav } from "@/components/TopNav";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -17,9 +18,11 @@ const Workspace = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
-        <AppSidebar />
-        <div className="flex-1 flex">
+      <div className="min-h-screen flex flex-col w-full bg-background">
+        <TopNav />
+        <div className="flex flex-1">
+          <AppSidebar />
+          <div className="flex-1 flex">
           {/* LEFT SIDEBAR - File Tree + Live Commits */}
           <div className="w-72 border-r border-border/50 bg-card/30 flex flex-col">
             <div className="p-4 border-b border-border/50">
@@ -147,6 +150,7 @@ const Workspace = () => {
               </TabsContent>
             </Tabs>
           </div>
+        </div>
         </div>
       </div>
     </SidebarProvider>

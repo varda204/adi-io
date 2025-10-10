@@ -1,5 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import { TopNav } from "@/components/TopNav";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -10,9 +11,11 @@ import { KordiAvatar } from "@/components/KordiAvatar";
 const Team = () => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
-        <AppSidebar />
-        <main className="flex-1 p-8">
+      <div className="min-h-screen flex flex-col w-full bg-background">
+        <TopNav />
+        <div className="flex flex-1">
+          <AppSidebar />
+          <main className="flex-1 p-8">
           <div className="max-w-7xl mx-auto space-y-6">
             <div className="flex items-center justify-between">
               <div>
@@ -205,6 +208,7 @@ const Team = () => {
             </Card>
           </div>
         </main>
+        </div>
       </div>
     </SidebarProvider>
   );

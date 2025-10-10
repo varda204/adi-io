@@ -1,5 +1,7 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import { TopNav } from "@/components/TopNav";
+import { DeploymentPipeline } from "@/components/DeploymentPipeline";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,9 +14,11 @@ import {
 const SystemHealth = () => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
-        <AppSidebar />
-        <main className="flex-1 p-8">
+      <div className="min-h-screen flex flex-col w-full bg-background">
+        <TopNav />
+        <div className="flex flex-1">
+          <AppSidebar />
+          <main className="flex-1 p-8">
           <div className="max-w-7xl mx-auto space-y-6">
             <div className="flex items-center justify-between">
               <div>
@@ -118,10 +122,7 @@ const SystemHealth = () => {
                 </Card>
 
                 {/* Pipeline Visualization */}
-                <Card className="p-6 bg-card border-border/50">
-                  <h3 className="font-semibold mb-4">Deployment Pipeline</h3>
-                  <PipelineBar />
-                </Card>
+                <DeploymentPipeline />
 
                 {/* Deployment History */}
                 <Card className="p-6 bg-card border-border/50">
@@ -185,6 +186,7 @@ const SystemHealth = () => {
             </Tabs>
           </div>
         </main>
+        </div>
       </div>
     </SidebarProvider>
   );
