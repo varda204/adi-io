@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +10,9 @@ import {
   TrendingUp,
   Send,
   Shield,
-  Zap
+  Zap,
+  Activity,
+  Users
 } from "lucide-react";
 import { KordiAvatar } from "./KordiAvatar";
 import { LiveDraftCard } from "./LiveDraftCard";
@@ -18,10 +21,36 @@ import { VoiceIndicator } from "./VoiceIndicator";
 import { LiveRepoSync } from "./LiveRepoSync";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { NewProjectModal } from "./NewProjectModal";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+
+const uptimeData = [
+  { time: '00:00', uptime: 99.2 },
+  { time: '04:00', uptime: 99.8 },
+  { time: '08:00', uptime: 99.9 },
+  { time: '12:00', uptime: 99.7 },
+  { time: '16:00', uptime: 100 },
+  { time: '20:00', uptime: 99.9 },
+  { time: '24:00', uptime: 99.8 },
+];
+
+const activityData = [
+  { day: 'Mon', commits: 12 },
+  { day: 'Tue', commits: 19 },
+  { day: 'Wed', commits: 15 },
+  { day: 'Thu', commits: 25 },
+  { day: 'Fri', commits: 22 },
+  { day: 'Sat', commits: 8 },
+  { day: 'Sun', commits: 5 },
+];
 
 export const DashboardContent = () => {
+  const [showNewProject, setShowNewProject] = useState(false);
+
   return (
     <div className="p-8 space-y-8 animate-fade-in">
+      <NewProjectModal open={showNewProject} onOpenChange={setShowNewProject} />
+      
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -29,7 +58,10 @@ export const DashboardContent = () => {
           <p className="text-muted-foreground">Here's what Kordi handled today</p>
         </div>
         <div className="flex gap-3">
-          <Button className="bg-gradient-primary hover:opacity-90 shadow-primary transition-all hover:scale-105">
+          <Button 
+            onClick={() => setShowNewProject(true)}
+            className="bg-gradient-primary hover:opacity-90 shadow-primary transition-all hover:scale-105"
+          >
             <Zap className="w-4 h-4 mr-2" />
             New Project
           </Button>
@@ -84,6 +116,69 @@ export const DashboardContent = () => {
           change="+3"
           trend="neutral"
         />
+      </div>
+
+      {/* Live Widgets */}
+      <div className="grid md:grid-cols-3 gap-4">
+        <Card className="p-6 bg-card border-border/50">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold">System Uptime</h3>
+            <Activity className="w-4 h-4 text-success" />
+          </div>
+          <ResponsiveContainer width="100%" height={120}>
+            <LineChart data={uptimeData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis dataKey="time" stroke="hsl(var(--muted-foreground))" fontSize={10} />
+              <YAxis domain={[98, 100]} stroke="hsl(var(--muted-foreground))" fontSize={10} />
+              <Tooltip />
+              <Line type="monotone" dataKey="uptime" stroke="hsl(var(--success))" strokeWidth={2} dot={false} />
+            </LineChart>
+          </ResponsiveContainer>
+          <p className="text-2xl font-bold mt-2">99.8%</p>
+        </Card>
+
+        <Card className="p-6 bg-card border-border/50">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold">Project Activity</h3>
+            <GitCommit className="w-4 h-4 text-primary" />
+          </div>
+          <ResponsiveContainer width="100%" height={120}>
+            <LineChart data={activityData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis dataKey="day" stroke="hsl(var(--muted-foreground))" fontSize={10} />
+              <YAxis stroke="hsl(var(--muted-foreground))" fontSize={10} />
+              <Tooltip />
+              <Line type="monotone" dataKey="commits" stroke="hsl(var(--primary))" strokeWidth={2} />
+            </LineChart>
+          </ResponsiveContainer>
+          <p className="text-sm text-muted-foreground mt-2">106 commits this week</p>
+        </Card>
+
+        <Card className="p-6 bg-card border-border/50">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold">Team Velocity</h3>
+            <Users className="w-4 h-4 text-accent" />
+          </div>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">Sprint Progress</span>
+              <span className="text-sm font-medium">78%</span>
+            </div>
+            <div className="w-full bg-secondary rounded-full h-2">
+              <div className="bg-gradient-primary h-2 rounded-full" style={{ width: '78%' }} />
+            </div>
+            <div className="grid grid-cols-2 gap-2 mt-4">
+              <div>
+                <p className="text-xs text-muted-foreground">Stories Done</p>
+                <p className="text-lg font-bold">24/31</p>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">Avg Velocity</p>
+                <p className="text-lg font-bold">8.2</p>
+              </div>
+            </div>
+          </div>
+        </Card>
       </div>
 
       {/* Live Repo Sync */}

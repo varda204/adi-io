@@ -5,7 +5,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Users, MessageSquare, Mic, Video, UserPlus, Check } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Users, MessageSquare, Mic, Video, UserPlus, Check, Code, GitCommit, Clock } from "lucide-react";
 import { KordiAvatar } from "@/components/KordiAvatar";
 
 const Team = () => {
@@ -104,6 +105,172 @@ const Team = () => {
                 </div>
               </Card>
             </div>
+
+            {/* Live Team Activity Feed */}
+            <Card className="p-6 bg-card border-border/50">
+              <h2 className="text-xl font-semibold mb-6">Live Team Activity</h2>
+              <div className="space-y-3">
+                <ActivityFeedItem
+                  member="KORDI"
+                  action="deployed build #142 to staging"
+                  time="Just now"
+                  isKordi
+                />
+                <ActivityFeedItem
+                  member="Sarah Johnson"
+                  action="approved PR #234"
+                  time="3m ago"
+                />
+                <ActivityFeedItem
+                  member="Michael Chen"
+                  action="pushed 5 commits to feature/payments"
+                  time="12m ago"
+                />
+                <ActivityFeedItem
+                  member="KORDI"
+                  action="fixed security vulnerability in auth.ts"
+                  time="25m ago"
+                  isKordi
+                />
+                <ActivityFeedItem
+                  member="Emily Davis"
+                  action="started code review on PR #233"
+                  time="1h ago"
+                />
+              </div>
+            </Card>
+
+            {/* Ownership Map */}
+            <Card className="p-6 bg-card border-border/50">
+              <h2 className="text-xl font-semibold mb-6">Code Ownership Map</h2>
+              <div className="space-y-4">
+                <OwnershipMapItem
+                  module="Authentication"
+                  owner="Sarah Johnson"
+                  contributors={["Michael C.", "KORDI"]}
+                  files={12}
+                />
+                <OwnershipMapItem
+                  module="API Endpoints"
+                  owner="Michael Chen"
+                  contributors={["David W.", "KORDI"]}
+                  files={24}
+                />
+                <OwnershipMapItem
+                  module="UI Components"
+                  owner="Emily Davis"
+                  contributors={["Sarah J.", "KORDI"]}
+                  files={38}
+                />
+                <OwnershipMapItem
+                  module="Deployment Pipeline"
+                  owner="David Wilson"
+                  contributors={["KORDI"]}
+                  files={8}
+                />
+              </div>
+            </Card>
+
+            {/* Refactor Preview */}
+            <Card className="p-6 bg-card border-border/50">
+              <h2 className="text-xl font-semibold mb-6">Recent Refactors</h2>
+              <div className="space-y-4">
+                <RefactorPreviewCard
+                  title="Query Optimization"
+                  before="87 lines"
+                  after="42 lines"
+                  improvement="-52% code, +40% performance"
+                  author="KORDI"
+                />
+                <RefactorPreviewCard
+                  title="Component Restructure"
+                  before="156 lines"
+                  after="98 lines"
+                  improvement="-37% code, better reusability"
+                  author="Sarah Johnson"
+                />
+              </div>
+            </Card>
+
+            {/* Code Archaeology */}
+            <Card className="p-6 bg-card border-border/50">
+              <h2 className="text-xl font-semibold mb-6">Code Archaeology</h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                Understand codebase history and context for onboarding and non-technical members
+              </p>
+              
+              <Tabs defaultValue="timeline" className="w-full">
+                <TabsList className="grid w-full grid-cols-4">
+                  <TabsTrigger value="timeline">Timeline</TabsTrigger>
+                  <TabsTrigger value="context">Context</TabsTrigger>
+                  <TabsTrigger value="discussions">Talks</TabsTrigger>
+                  <TabsTrigger value="uml">UML</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="timeline" className="space-y-3 mt-4">
+                  <TimelineItem
+                    date="Today"
+                    event="Authentication refactor completed"
+                    author="KORDI & Sarah J."
+                  />
+                  <TimelineItem
+                    date="Yesterday"
+                    event="Payment integration added"
+                    author="Michael C."
+                  />
+                  <TimelineItem
+                    date="3 days ago"
+                    event="Initial project setup"
+                    author="Sarah J."
+                  />
+                </TabsContent>
+
+                <TabsContent value="context" className="mt-4">
+                  <div className="space-y-3">
+                    <div className="p-3 bg-secondary/30 rounded-lg">
+                      <p className="text-sm font-medium mb-1">Why this module exists</p>
+                      <p className="text-xs text-muted-foreground">
+                        Authentication module handles user login, JWT tokens, and session management. 
+                        Critical for security and user experience.
+                      </p>
+                    </div>
+                    <div className="p-3 bg-secondary/30 rounded-lg">
+                      <p className="text-sm font-medium mb-1">Key dependencies</p>
+                      <p className="text-xs text-muted-foreground">
+                        bcrypt, jsonwebtoken, express-session
+                      </p>
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="discussions" className="mt-4">
+                  <div className="space-y-3">
+                    <DiscussionItem
+                      topic="Should we use JWT or sessions?"
+                      participants={["Sarah J.", "Michael C."]}
+                      conclusion="JWT for better scalability"
+                    />
+                    <DiscussionItem
+                      topic="Token expiration time?"
+                      participants={["Team"]}
+                      conclusion="15 minutes with refresh token"
+                    />
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="uml" className="mt-4">
+                  <div className="p-6 bg-secondary/30 rounded-lg text-center">
+                    <Code className="w-12 h-12 mx-auto mb-2 text-muted-foreground" />
+                    <p className="text-sm text-muted-foreground">
+                      UML diagram for authentication flow
+                    </p>
+                    <Button size="sm" className="mt-3" variant="outline">
+                      Generate Diagram
+                    </Button>
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </Card>
 
             {/* Pull Requests */}
             <Card className="p-6 bg-card border-border/50">
@@ -318,6 +485,31 @@ const ActivityFeedItem = ({ user, action, target, time }: any) => (
       <p className="text-xs text-muted-foreground mt-1">{time}</p>
     </div>
   </div>
+);
+
+const ActivityFeedItem = ({ member, action, time, isKordi }: any) => (
+  <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-secondary/30 transition-colors">
+    {isKordi ? <KordiAvatar size="sm" showPulse={false} /> : (
+      <Avatar className="w-8 h-8"><AvatarFallback className="bg-gradient-primary text-primary-foreground text-xs">{member.split(' ').map((n: string) => n[0]).join('')}</AvatarFallback></Avatar>
+    )}
+    <div className="flex-1"><p className="text-sm"><span className="font-semibold">{member}</span> <span className="text-muted-foreground">{action}</span></p><p className="text-xs text-muted-foreground mt-1">{time}</p></div>
+  </div>
+);
+
+const OwnershipMapItem = ({ module, owner, contributors, files }: any) => (
+  <div className="p-4 bg-secondary/30 rounded-lg border border-border/50"><div className="flex items-center justify-between mb-2"><h3 className="font-semibold">{module}</h3><Badge variant="outline" className="text-xs">{files} files</Badge></div><p className="text-sm text-muted-foreground mb-2">Owner: <span className="font-medium text-foreground">{owner}</span></p><p className="text-xs text-muted-foreground">Contributors: {contributors.join(', ')}</p></div>
+);
+
+const RefactorPreviewCard = ({ title, before, after, improvement, author }: any) => (
+  <div className="p-4 bg-secondary/30 rounded-lg border border-border/50"><div className="flex items-center justify-between mb-2"><h3 className="font-semibold text-sm">{title}</h3><Badge variant="outline" className="text-xs bg-success/10 text-success border-success/20">{improvement}</Badge></div><div className="flex items-center gap-3 text-xs text-muted-foreground mb-2"><span className="text-destructive">{before}</span><span>→</span><span className="text-success">{after}</span></div><p className="text-xs text-muted-foreground">By {author}</p></div>
+);
+
+const TimelineItem = ({ date, event, author }: any) => (
+  <div className="flex items-start gap-3 p-3 bg-secondary/30 rounded-lg"><Clock className="w-4 h-4 text-accent mt-0.5" /><div className="flex-1"><p className="text-sm font-medium">{event}</p><p className="text-xs text-muted-foreground">{date} • {author}</p></div></div>
+);
+
+const DiscussionItem = ({ topic, participants, conclusion }: any) => (
+  <div className="p-3 bg-secondary/30 rounded-lg"><p className="text-sm font-medium mb-1">{topic}</p><p className="text-xs text-muted-foreground mb-2">Participants: {participants.join(', ')}</p><p className="text-xs"><span className="text-success font-medium">Conclusion:</span> {conclusion}</p></div>
 );
 
 export default Team;

@@ -16,7 +16,7 @@ const Auth = () => {
     // Simulate auth
     setTimeout(() => {
       setIsLoading(false);
-      navigate("/onboarding");
+      navigate("/dashboard");
     }, 1500);
   };
 

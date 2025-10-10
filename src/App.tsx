@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GlobalKordiAssistant } from "@/components/GlobalKordiAssistant";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
-import Onboarding from "./pages/Onboarding";
+
 import Dashboard from "./pages/Dashboard";
 import Workspace from "./pages/Workspace";
 import SystemHealth from "./pages/SystemHealth";
@@ -26,7 +26,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/onboarding" element={<Onboarding />} />
+          
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/workspace" element={<Workspace />} />
           <Route path="/dashboard/system-health" element={<SystemHealth />} />

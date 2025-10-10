@@ -7,14 +7,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Switch } from "@/components/ui/switch";
 import { 
   File, Folder, GitCommit, MessageSquare, Clock, 
-  Code, AlertCircle, CheckCircle2, Play, History, User
+  Code, AlertCircle, CheckCircle2, Play, History, User,
+  GitBranch, Lightbulb, Sparkles, Zap, MessageCircle
 } from "lucide-react";
 import { KordiAvatar } from "@/components/KordiAvatar";
 
 const Workspace = () => {
   const [selectedFile, setSelectedFile] = useState("auth.ts");
+  const [kordiMode, setKordiMode] = useState("assisted");
 
   return (
     <SidebarProvider>
@@ -23,18 +26,61 @@ const Workspace = () => {
         <div className="flex flex-1">
           <AppSidebar />
           <div className="flex-1 flex">
-          {/* LEFT SIDEBAR - File Tree + Live Commits */}
+          {/* LEFT SIDEBAR - File Tree + Intelligent Suggestions */}
           <div className="w-72 border-r border-border/50 bg-card/30 flex flex-col">
             <div className="p-4 border-b border-border/50">
-              <h3 className="font-semibold mb-2">Files</h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold">Files</h3>
+                <div className="flex items-center gap-1">
+                  <Badge variant="outline" className="text-xs bg-success/10 text-success border-success/20 animate-pulse">
+                    Live
+                  </Badge>
+                </div>
+              </div>
               <FileTree />
+            </div>
+
+            {/* Intelligent File Suggestions */}
+            <div className="p-4 border-b border-border/50 bg-primary/5">
+              <div className="flex items-center gap-2 mb-3">
+                <Lightbulb className="w-4 h-4 text-primary" />
+                <h3 className="font-semibold text-sm">Suggestions</h3>
+              </div>
+              <div className="space-y-2">
+                <Button variant="outline" size="sm" className="w-full justify-start text-xs">
+                  <File className="w-3 h-3 mr-2" />
+                  Generate auth tests
+                </Button>
+                <Button variant="outline" size="sm" className="w-full justify-start text-xs">
+                  <Folder className="w-3 h-3 mr-2" />
+                  Create API routes
+                </Button>
+              </div>
+            </div>
+
+            {/* Branch Management */}
+            <div className="p-4 border-b border-border/50">
+              <div className="flex items-center gap-2 mb-3">
+                <GitBranch className="w-4 h-4 text-accent" />
+                <h3 className="font-semibold text-sm">Branches</h3>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-2 bg-primary/10 rounded">
+                  <span className="text-xs font-medium">main</span>
+                  <CheckCircle2 className="w-3 h-3 text-success" />
+                </div>
+                <Button variant="ghost" size="sm" className="w-full justify-start text-xs">
+                  <Sparkles className="w-3 h-3 mr-2 text-accent" />
+                  Create feature/payments
+                </Button>
+              </div>
             </div>
             
             <div className="flex-1 overflow-hidden">
               <div className="p-4 border-b border-border/50">
-                <h3 className="font-semibold">Live Commits</h3>
+                <h3 className="font-semibold text-sm">Live Commits</h3>
               </div>
-              <ScrollArea className="h-[calc(100vh-320px)]">
+              <ScrollArea className="h-[calc(100vh-550px)]">
                 <div className="p-4 space-y-3">
                   <CommitItem
                     message="feat: add user auth"
@@ -68,8 +114,36 @@ const Workspace = () => {
                 <Badge variant="outline" className="text-xs bg-warning/10 text-warning border-warning/20">
                   Modified
                 </Badge>
+                <span className="text-xs text-muted-foreground animate-pulse">• AI typing...</span>
               </div>
               <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 px-3 py-1 bg-secondary rounded-lg">
+                  <span className="text-xs text-muted-foreground">Kordi Mode:</span>
+                  <Button 
+                    variant={kordiMode === "manual" ? "default" : "ghost"} 
+                    size="sm" 
+                    className="h-6 px-2 text-xs"
+                    onClick={() => setKordiMode("manual")}
+                  >
+                    Manual
+                  </Button>
+                  <Button 
+                    variant={kordiMode === "assisted" ? "default" : "ghost"} 
+                    size="sm" 
+                    className="h-6 px-2 text-xs"
+                    onClick={() => setKordiMode("assisted")}
+                  >
+                    Assisted
+                  </Button>
+                  <Button 
+                    variant={kordiMode === "autonomous" ? "default" : "ghost"} 
+                    size="sm" 
+                    className="h-6 px-2 text-xs"
+                    onClick={() => setKordiMode("autonomous")}
+                  >
+                    Autonomous
+                  </Button>
+                </div>
                 <Button size="sm" variant="outline">
                   <History className="w-3 h-3 mr-1" />
                   Explain History
@@ -81,34 +155,93 @@ const Workspace = () => {
               </div>
             </div>
 
-            <div className="flex-1 p-6 overflow-auto font-mono text-sm">
+            <div className="flex-1 p-6 overflow-auto font-mono text-sm relative">
               <CodeEditor />
+              {/* AI Micro-comment */}
+              <div className="absolute top-20 right-8 bg-accent/10 border border-accent/30 rounded-lg p-2 text-xs flex items-start gap-2 animate-fade-in">
+                <Sparkles className="w-3 h-3 text-accent mt-0.5" />
+                <span className="text-accent">Optimized this loop! -33% execution time</span>
+              </div>
             </div>
 
-            {/* Bottom Panel - Guardrails */}
-            <div className="h-40 border-t border-border/50 bg-card/30 p-4">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-sm">Smart Push Guardrails</h3>
-                <Button size="sm" className="bg-success hover:bg-success/90 text-success-foreground">
-                  <CheckCircle2 className="w-3 h-3 mr-1" />
-                  Push to GitHub
-                </Button>
-              </div>
-              <div className="grid grid-cols-4 gap-3">
-                <GuardrailCheck label="Tests" status="passed" />
-                <GuardrailCheck label="Lint" status="passed" />
-                <GuardrailCheck label="Security" status="passed" />
-                <GuardrailCheck label="Type Check" status="passed" />
-              </div>
+            {/* Bottom Panel - Guardrails + Refactor Preview */}
+            <div className="border-t border-border/50 bg-card/30">
+              <Tabs defaultValue="guardrails" className="w-full">
+                <TabsList className="w-full grid grid-cols-3 rounded-none border-b border-border/50">
+                  <TabsTrigger value="guardrails">Smart Push Guardrails</TabsTrigger>
+                  <TabsTrigger value="refactor">Refactor Preview</TabsTrigger>
+                  <TabsTrigger value="pr">Auto-PR</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="guardrails" className="m-0 p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="font-semibold text-sm">All Checks Passed</h3>
+                    <Button size="sm" className="bg-success hover:bg-success/90 text-success-foreground">
+                      <CheckCircle2 className="w-3 h-3 mr-1" />
+                      Push to GitHub
+                    </Button>
+                  </div>
+                  <div className="grid grid-cols-4 gap-3">
+                    <GuardrailCheck label="Tests" status="passed" count="147/147" />
+                    <GuardrailCheck label="Lint" status="passed" count="0 issues" />
+                    <GuardrailCheck label="Security" status="passed" count="Safe" />
+                    <GuardrailCheck label="Performance" status="passed" count="+12%" />
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="refactor" className="m-0 p-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <h4 className="text-xs font-semibold mb-2 text-destructive">Before (42 lines)</h4>
+                      <div className="p-3 bg-destructive/5 border border-destructive/20 rounded text-xs font-mono">
+                        <pre className="text-muted-foreground">function getUserData(id) {"{"}<br/>  const user = db.query(...);<br/>  const posts = db.query(...);<br/>  // ... complex logic<br/>{"}"}</pre>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-semibold mb-2 text-success">After (18 lines, -57%)</h4>
+                      <div className="p-3 bg-success/5 border border-success/20 rounded text-xs font-mono">
+                        <pre className="text-muted-foreground">async function getUserData(id) {"{"}<br/>  return await userService<br/>    .getUserWithPosts(id);<br/>{"}"}</pre>
+                      </div>
+                    </div>
+                  </div>
+                  <Button className="w-full mt-3 bg-gradient-primary hover:opacity-90">
+                    <Zap className="w-3 h-3 mr-1" />
+                    Apply Refactor
+                  </Button>
+                </TabsContent>
+
+                <TabsContent value="pr" className="m-0 p-4">
+                  <Card className="p-4 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-semibold text-sm">Ready to create PR</h4>
+                      <Badge variant="outline" className="bg-success/10 text-success border-success/20">
+                        94% confident
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      feat: Add JWT authentication system
+                    </p>
+                    <div className="flex gap-2">
+                      <Button className="flex-1 bg-gradient-primary hover:opacity-90">
+                        Create PR #234
+                      </Button>
+                      <Button variant="outline">Edit</Button>
+                    </div>
+                  </Card>
+                </TabsContent>
+              </Tabs>
             </div>
           </div>
 
-          {/* RIGHT SIDEBAR - PR Review + Auto Docs */}
+          {/* RIGHT SIDEBAR - PR Review + Auto Docs + Notifications */}
           <div className="w-96 border-l border-border/50 bg-card/30">
             <Tabs defaultValue="pr" className="h-full flex flex-col">
-              <TabsList className="w-full grid grid-cols-2 rounded-none border-b border-border/50">
-                <TabsTrigger value="pr">PR Reviews</TabsTrigger>
-                <TabsTrigger value="docs">Auto Docs</TabsTrigger>
+              <TabsList className="w-full grid grid-cols-3 rounded-none border-b border-border/50">
+                <TabsTrigger value="pr">PRs</TabsTrigger>
+                <TabsTrigger value="docs">Docs</TabsTrigger>
+                <TabsTrigger value="notifications">
+                  <MessageCircle className="w-3 h-3" />
+                </TabsTrigger>
               </TabsList>
               
               <TabsContent value="pr" className="flex-1 m-0 overflow-auto">
@@ -144,6 +277,33 @@ const Workspace = () => {
                       file="CHANGELOG.md"
                       status="syncing"
                       content="### v2.3.0\n\n- feat: Add user authentication\n- fix: Resolve memory leak..."
+                    />
+                    <AutoDocPreview
+                      file="README.md"
+                      status="updated"
+                      content="# Project Setup\n\nUpdated with new auth instructions..."
+                    />
+                  </div>
+                </ScrollArea>
+              </TabsContent>
+
+              <TabsContent value="notifications" className="flex-1 m-0 overflow-auto">
+                <ScrollArea className="h-full">
+                  <div className="p-4 space-y-3">
+                    <NotificationCard
+                      platform="Slack"
+                      message="Mike: PR #234 ready for merge"
+                      time="2m ago"
+                    />
+                    <NotificationCard
+                      platform="Linear"
+                      message="New issue: KOR-142 assigned to you"
+                      time="15m ago"
+                    />
+                    <NotificationCard
+                      platform="GitHub"
+                      message="Deployment to staging completed"
+                      time="1h ago"
                     />
                   </div>
                 </ScrollArea>
@@ -224,14 +384,29 @@ const CodeEditor = () => (
   </div>
 );
 
-const GuardrailCheck = ({ label, status }: any) => (
+const GuardrailCheck = ({ label, status, count }: any) => (
   <div className="p-3 bg-card border border-success/30 rounded-lg">
     <div className="flex items-center gap-2 mb-1">
       <CheckCircle2 className="w-4 h-4 text-success" />
       <span className="text-sm font-medium">{label}</span>
     </div>
-    <p className="text-xs text-success capitalize">{status}</p>
+    <p className="text-xs text-success">{count}</p>
   </div>
+);
+
+const NotificationCard = ({ platform, message, time }: any) => (
+  <Card className="p-3 bg-card border-border/50 hover:border-primary/30 transition-colors">
+    <div className="flex items-start gap-3">
+      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+        <MessageCircle className="w-4 h-4 text-primary" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-xs font-semibold text-accent mb-1">{platform}</p>
+        <p className="text-sm">{message}</p>
+        <p className="text-xs text-muted-foreground mt-1">{time}</p>
+      </div>
+    </div>
+  </Card>
 );
 
 const PRReviewCard = ({ number, title, author, status, aiSummary }: any) => (

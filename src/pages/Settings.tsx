@@ -26,67 +26,30 @@ const Settings = () => {
             </div>
 
             <Tabs defaultValue="autonomy" className="w-full">
-              <TabsList className="mb-6">
+                <TabsList className="mb-6">
                 <TabsTrigger value="autonomy">Autonomy Control</TabsTrigger>
                 <TabsTrigger value="guardrails">Guardrails</TabsTrigger>
                 <TabsTrigger value="integrations">Integrations</TabsTrigger>
                 <TabsTrigger value="notifications">Notifications</TabsTrigger>
-                <TabsTrigger value="security">Security</TabsTrigger>
+                <TabsTrigger value="account">Account</TabsTrigger>
               </TabsList>
 
               <TabsContent value="autonomy" className="space-y-6">
                 <Card className="p-6 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
-                  <h2 className="text-xl font-semibold mb-6">Autonomy Control Center</h2>
-                  <div className="space-y-8">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <Label className="text-lg font-semibold">AI Confidence Threshold</Label>
-                        <span className="text-sm font-bold bg-primary/10 text-primary px-3 py-1 rounded-full">85% Confident</span>
-                      </div>
-                      <Slider defaultValue={[85]} max={100} step={1} className="py-4" />
-                      <p className="text-sm text-muted-foreground mt-2">
-                        Kordi will only act autonomously when confidence exceeds this threshold
-                      </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <CapabilityControl
-                        label="Auto-commits"
-                        description="Commit changes autonomously"
-                        confidence={92}
-                        enabled={true}
-                      />
-                      <CapabilityControl
-                        label="Auto-deploy staging"
-                        description="Deploy to staging environment"
-                        confidence={88}
-                        enabled={true}
-                      />
-                      <CapabilityControl
-                        label="Bug auto-fix"
-                        description="Fix detected bugs automatically"
-                        confidence={95}
-                        enabled={true}
-                      />
-                      <CapabilityControl
-                        label="Dependency updates"
-                        description="Update packages automatically"
-                        confidence={90}
-                        enabled={true}
-                      />
-                      <CapabilityControl
-                        label="PR reviews"
-                        description="Review and comment on PRs"
-                        confidence={87}
-                        enabled={true}
-                      />
-                      <CapabilityControl
-                        label="Voice commands"
-                        description="Respond to voice activation"
-                        confidence={93}
-                        enabled={true}
-                      />
-                    </div>
+                  <h2 className="text-xl font-semibold mb-6">Capability Control Grid</h2>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <CapabilityControl label="Auto-commits" description="Commit changes autonomously" confidence={92} enabled={true} />
+                    <CapabilityControl label="Bug detection" description="Detect bugs automatically" confidence={95} enabled={true} />
+                    <CapabilityControl label="Dependency monitoring" description="Monitor package updates" confidence={90} enabled={true} />
+                    <CapabilityControl label="Deployment handling" description="Deploy to environments" confidence={88} enabled={true} />
+                    <CapabilityControl label="PR collaboration" description="Review and comment on PRs" confidence={87} enabled={true} />
+                    <CapabilityControl label="Voice processing" description="Voice activation" confidence={93} enabled={true} />
+                    <CapabilityControl label="File optimization" description="Optimize files automatically" confidence={89} enabled={true} />
+                    <CapabilityControl label="Test generation" description="Generate tests automatically" confidence={91} enabled={true} />
+                    <CapabilityControl label="Security scanning" description="Scan for vulnerabilities" confidence={96} enabled={true} />
+                    <CapabilityControl label="Performance optimization" description="Optimize performance" confidence={88} enabled={true} />
+                    <CapabilityControl label="Code refactoring" description="Refactor code automatically" confidence={85} enabled={true} />
+                    <CapabilityControl label="Documentation sync" description="Auto-update documentation" confidence={94} enabled={true} />
                   </div>
                 </Card>
               </TabsContent>
@@ -222,7 +185,22 @@ const Settings = () => {
                 </Card>
               </TabsContent>
 
-              <TabsContent value="security" className="space-y-6">
+              <TabsContent value="account" className="space-y-6">
+                <Card className="p-6 bg-card border-border/50">
+                  <h2 className="text-xl font-semibold mb-6">Profile</h2>
+                  <div className="space-y-4">
+                    <div className="space-y-2"><Label>Full Name</Label><Input defaultValue="John Developer" /></div>
+                    <div className="space-y-2"><Label>Email</Label><Input type="email" defaultValue="john@example.com" /></div>
+                    <Button className="bg-gradient-primary hover:opacity-90">Save Changes</Button>
+                  </div>
+                </Card>
+                <Card className="p-6 bg-card border-border/50">
+                  <h2 className="text-xl font-semibold mb-6">Security</h2>
+                  <div className="space-y-4">
+                    <div className="p-4 bg-secondary/30 border border-border/50 rounded-lg"><p className="font-medium mb-2">Two-Factor Authentication</p><Button variant="outline">Enable 2FA</Button></div>
+                    <div className="space-y-2"><Label>Change Password</Label><Input type="password" placeholder="Current password" /><Input type="password" placeholder="New password" /><Button className="bg-gradient-primary hover:opacity-90">Update Password</Button></div>
+                  </div>
+                </Card>
                 <Card className="p-6 bg-card border-border/50">
                   <h2 className="text-xl font-semibold mb-6">Security Settings</h2>
                   <div className="space-y-4">
