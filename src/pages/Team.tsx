@@ -469,7 +469,7 @@ const PRCard = ({ number, title, author, status, comments, approvals, changes }:
   </div>
 );
 
-const ActivityFeedItemTechnical = ({ user, action, target, time }: any) => (
+const ActivityFeedItem = ({ user, action, target, time }: any) => (
   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-secondary/50 transition-colors">
     <Avatar className="w-8 h-8">
       <AvatarFallback className="bg-gradient-primary text-primary-foreground text-xs">
