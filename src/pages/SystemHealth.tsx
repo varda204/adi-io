@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Rocket, Server, AlertTriangle, Shield, Package, 
-  CheckCircle2, Zap, TrendingUp, Activity, Cloud 
+  CheckCircle2, Zap, TrendingUp, Activity, Cloud, Clock 
 } from "lucide-react";
 import { DeploymentPRCard, ScanResultCard } from "@/components/SystemHealthComponents";
 
@@ -79,152 +79,146 @@ const SystemHealth = () => {
               </Card>
             </div>
 
-            {/* Deployments Section */}
-            <Tabs defaultValue="deployments" className="w-full">
+            {/* Health Tabs */}
+            <Tabs defaultValue="tests" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="deployments">Deployments</TabsTrigger>
+                <TabsTrigger value="tests">Test Suite Health</TabsTrigger>
                 <TabsTrigger value="bugs">Bug Radar</TabsTrigger>
                 <TabsTrigger value="dependencies">Dependencies</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="deployments" className="space-y-6">
-                {/* Platform Configuration */}
-                <Card className="p-6 bg-card border-border/50">
-                  <h3 className="font-semibold mb-4">Platform Configuration</h3>
-                  <div className="flex gap-3 flex-wrap mb-6">
-                    <PlatformButton name="Vercel" active />
-                    <PlatformButton name="AWS" />
-                    <PlatformButton name="Netlify" />
-                    <PlatformButton name="Docker" />
-                    <PlatformButton name="GitHub Pages" />
-                    <PlatformButton name="Custom" />
-                  </div>
-                  <div className="grid gap-4">
-                    <div className="space-y-2">
-                      <Label>Build Command</Label>
-                      <Input value="npm run build" readOnly className="font-mono text-sm" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Environment Variables</Label>
-                      <div className="p-3 bg-secondary rounded-lg font-mono text-xs space-y-1">
-                        <div>NODE_ENV=production</div>
-                        <div>API_KEY=••••••••••••</div>
-                        <div>DATABASE_URL=••••••••••••</div>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Deployment-Linked PRs */}
-                <Card className="p-6 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
-                  <h3 className="font-semibold mb-4">Deployment-Ready PRs</h3>
-                  <div className="space-y-3">
-                    <DeploymentPRCard
-                      number={132}
-                      title="Add payment integration"
-                      confidence={94}
-                      tests="147/147"
-                      security="Safe"
-                      risk="Low"
-                    />
-                    <DeploymentPRCard
-                      number={131}
-                      title="Optimize database queries"
-                      confidence={91}
-                      tests="142/142"
-                      security="Safe"
-                      risk="Low"
-                    />
-                  </div>
-                </Card>
-
-                {/* Smart Deployment Widget */}
+              <TabsContent value="tests" className="space-y-6">
+                {/* Kordi's Voice Summary */}
                 <Card className="p-6 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/30">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Rocket className="w-6 h-6 text-primary" />
+                      <Zap className="w-6 h-6 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold mb-2">Kordi recommends deployment</h3>
+                      <h3 className="font-semibold mb-2">Kordi's System Assessment</h3>
                       <p className="text-sm text-muted-foreground mb-4">
-                        Build #142 is ready to deploy to staging. All checks passed, risk score: Low (12%)
+                        "Your system is 94% stable. 2 flaky tests detected. Safe to deploy."
                       </p>
                       <div className="flex items-center gap-3">
                         <Button className="bg-success hover:bg-success/90 text-success-foreground">
                           <CheckCircle2 className="w-4 h-4 mr-2" />
-                          Approve & Deploy
+                          Deploy Now
                         </Button>
-                        <Button variant="outline">Hold</Button>
-                        <Button variant="outline">Rollback to #141</Button>
+                        <Button variant="outline">View Details</Button>
                       </div>
                     </div>
                   </div>
                 </Card>
 
-                {/* Pipeline Visualization */}
-                <DeploymentPipeline />
+                {/* Test Suite Overview */}
+                <div className="grid md:grid-cols-4 gap-4">
+                  <Card className="p-4 bg-success/5 border-success/30">
+                    <div className="flex items-center gap-2 mb-2">
+                      <CheckCircle2 className="w-5 h-5 text-success" />
+                      <h3 className="font-semibold">Passing</h3>
+                    </div>
+                    <p className="text-3xl font-bold">145/147</p>
+                    <p className="text-xs text-muted-foreground mt-1">98.6% pass rate</p>
+                  </Card>
+                  <Card className="p-4 bg-warning/5 border-warning/30">
+                    <div className="flex items-center gap-2 mb-2">
+                      <AlertTriangle className="w-5 h-5 text-warning" />
+                      <h3 className="font-semibold">Flaky</h3>
+                    </div>
+                    <p className="text-3xl font-bold">2</p>
+                    <p className="text-xs text-muted-foreground mt-1">Need attention</p>
+                  </Card>
+                  <Card className="p-4 bg-primary/5 border-primary/30">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Activity className="w-5 h-5 text-primary" />
+                      <h3 className="font-semibold">Coverage</h3>
+                    </div>
+                    <p className="text-3xl font-bold">87%</p>
+                    <p className="text-xs text-muted-foreground mt-1">+8% this week</p>
+                  </Card>
+                  <Card className="p-4 bg-accent/5 border-accent/30">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Clock className="w-5 h-5 text-accent" />
+                      <h3 className="font-semibold">Runtime</h3>
+                    </div>
+                    <p className="text-3xl font-bold">2.4s</p>
+                    <p className="text-xs text-muted-foreground mt-1">Average time</p>
+                  </Card>
+                </div>
 
-                {/* Deployment History */}
+                {/* Recent Test Runs */}
                 <Card className="p-6 bg-card border-border/50">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-semibold">Recent Deployments</h3>
-                    <Button size="sm" variant="outline">
-                      <TrendingUp className="w-3 h-3 mr-1" />
-                      View Logs
-                    </Button>
-                  </div>
+                  <h3 className="font-semibold mb-4">Recent Test Runs</h3>
                   <div className="space-y-3">
-                    <DeploymentRow
-                      build={142}
-                      env="Staging"
-                      status="success"
-                      time="5m ago"
-                      version="v2.3.1"
+                    <TestRunCard
+                      time="5 minutes ago"
+                      status="passed"
+                      passed={147}
+                      failed={0}
+                      duration="2.3s"
                     />
-                    <DeploymentRow
-                      build={141}
-                      env="Production"
-                      status="success"
-                      time="2h ago"
-                      version="v2.3.0"
+                    <TestRunCard
+                      time="2 hours ago"
+                      status="warning"
+                      passed={145}
+                      failed={2}
+                      duration="2.5s"
                     />
-                    <DeploymentRow
-                      build={140}
-                      env="Staging"
-                      status="failed"
-                      time="5h ago"
-                      version="v2.2.9"
+                    <TestRunCard
+                      time="Yesterday"
+                      status="passed"
+                      passed={147}
+                      failed={0}
+                      duration="2.4s"
                     />
                   </div>
                 </Card>
 
-                {/* Live Deployment Logs */}
+                {/* Test Confidence Score per PR */}
                 <Card className="p-6 bg-card border-border/50">
-                  <h3 className="font-semibold mb-4">Live Deployment Logs - Build #142</h3>
-                  <div className="bg-background border border-border/50 rounded-lg p-4 font-mono text-xs space-y-1 h-48 overflow-auto">
-                    <div className="text-muted-foreground">
-                      <span className="text-success">[16:42:01]</span> Starting build process...
+                  <h3 className="font-semibold mb-4">Test Confidence Score per PR</h3>
+                  <div className="space-y-3">
+                    <div className="p-4 bg-secondary/30 rounded-lg border border-border/50">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium">PR #234 - Add authentication</span>
+                        <Badge variant="outline" className="bg-success/10 text-success border-success/20">
+                          94% confident
+                        </Badge>
+                      </div>
+                      <p className="text-xs text-muted-foreground">All tests passing • 12% auto-rollback risk</p>
                     </div>
-                    <div className="text-muted-foreground">
-                      <span className="text-success">[16:42:05]</span> Installing dependencies...
+                    <div className="p-4 bg-secondary/30 rounded-lg border border-border/50">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium">PR #233 - Fix memory leak</span>
+                        <Badge variant="outline" className="bg-success/10 text-success border-success/20">
+                          98% confident
+                        </Badge>
+                      </div>
+                      <p className="text-xs text-muted-foreground">All tests passing • 5% auto-rollback risk</p>
                     </div>
-                    <div className="text-muted-foreground">
-                      <span className="text-success">[16:42:23]</span> Running tests...
+                  </div>
+                </Card>
+
+                {/* Security Scan Summary */}
+                <Card className="p-6 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-semibold">Security Scan Summary</h3>
+                    <Badge variant="outline" className="bg-success/10 text-success border-success/20">
+                      Up to date
+                    </Badge>
+                  </div>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="p-3 bg-card rounded-lg">
+                      <p className="text-sm text-muted-foreground mb-1">Last Scan</p>
+                      <p className="font-semibold">5 minutes ago</p>
                     </div>
-                    <div className="text-muted-foreground">
-                      <span className="text-success">[16:42:45]</span> ✓ All tests passed (147/147)
+                    <div className="p-3 bg-card rounded-lg">
+                      <p className="text-sm text-muted-foreground mb-1">Patches Applied</p>
+                      <p className="font-semibold text-success">2 this week</p>
                     </div>
-                    <div className="text-muted-foreground">
-                      <span className="text-success">[16:42:48]</span> Building production bundle...
-                    </div>
-                    <div className="text-muted-foreground">
-                      <span className="text-success">[16:43:12]</span> ✓ Build completed successfully
-                    </div>
-                    <div className="text-muted-foreground">
-                      <span className="text-success">[16:43:15]</span> Deploying to staging...
-                    </div>
-                    <div className="text-success font-semibold animate-pulse">
-                      <span className="text-success">[16:43:20]</span> ✓ Deployment successful!
+                    <div className="p-3 bg-card rounded-lg">
+                      <p className="text-sm text-muted-foreground mb-1">Vulnerabilities</p>
+                      <p className="font-semibold text-success">0 critical</p>
                     </div>
                   </div>
                 </Card>
@@ -437,6 +431,31 @@ const ThreatCard = ({ severity, title, description, file }: any) => (
       </div>
     </div>
   </Card>
+);
+
+const TestRunCard = ({ time, status, passed, failed, duration }: any) => (
+  <div className="p-4 bg-secondary/30 rounded-lg border border-border/50">
+    <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center gap-3">
+        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+          status === 'passed' ? 'bg-success/10' : 'bg-warning/10'
+        }`}>
+          {status === 'passed' ? (
+            <CheckCircle2 className="w-5 h-5 text-success" />
+          ) : (
+            <AlertTriangle className="w-5 h-5 text-warning" />
+          )}
+        </div>
+        <div>
+          <p className="font-medium text-sm">{time}</p>
+          <p className="text-xs text-muted-foreground">
+            {passed} passed, {failed} failed • {duration}
+          </p>
+        </div>
+      </div>
+      <Button size="sm" variant="outline">View</Button>
+    </div>
+  </div>
 );
 
 const DependencyCard = ({ name, currentVersion, latestVersion, healthScore, critical }: any) => (

@@ -272,6 +272,64 @@ const Team = () => {
               </Tabs>
             </Card>
 
+            {/* Project Membership */}
+            <Card className="p-6 bg-card border-border/50">
+              <h2 className="text-xl font-semibold mb-6">Project Membership</h2>
+              <div className="space-y-4">
+                <ProjectMembershipItem
+                  project="Kordra Frontend"
+                  members={["Sarah J.", "Michael C.", "KORDI"]}
+                  role="Lead Developer"
+                  contributions="247 commits • 12 PRs"
+                />
+                <ProjectMembershipItem
+                  project="API Gateway"
+                  members={["Michael C.", "KORDI"]}
+                  role="Backend Engineer"
+                  contributions="89 commits • 5 PRs"
+                />
+                <ProjectMembershipItem
+                  project="Analytics Dashboard"
+                  members={["Emily D.", "Sarah J.", "KORDI"]}
+                  role="Frontend Developer"
+                  contributions="134 commits • 8 PRs"
+                />
+              </div>
+              <Button className="w-full mt-4" variant="outline">
+                <UserPlus className="w-4 h-4 mr-2" />
+                Assign Member to Project
+              </Button>
+            </Card>
+
+            {/* Team Heatmap */}
+            <Card className="p-6 bg-card border-border/50">
+              <h2 className="text-xl font-semibold mb-6">Team Activity Heatmap</h2>
+              <div className="space-y-3">
+                <div className="grid grid-cols-7 gap-2">
+                  {Array.from({ length: 35 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className={`h-10 rounded ${
+                        i % 3 === 0 ? 'bg-success/20' :
+                        i % 3 === 1 ? 'bg-primary/20' :
+                        'bg-secondary/20'
+                      } hover:opacity-80 cursor-pointer transition-opacity`}
+                      title={`${Math.floor(Math.random() * 50)} commits`}
+                    />
+                  ))}
+                </div>
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <span>Less active</span>
+                  <div className="flex gap-1">
+                    <div className="w-4 h-4 bg-secondary/20 rounded" />
+                    <div className="w-4 h-4 bg-primary/20 rounded" />
+                    <div className="w-4 h-4 bg-success/20 rounded" />
+                  </div>
+                  <span>More active</span>
+                </div>
+              </div>
+            </Card>
+
             {/* Pull Requests */}
             <Card className="p-6 bg-card border-border/50">
               <h2 className="text-xl font-semibold mb-6">Recent Pull Requests</h2>
@@ -381,8 +439,32 @@ const Team = () => {
   );
 };
 
+const ProjectMembershipItem = ({ project, members, role, contributions }: any) => (
+  <div className="p-4 bg-secondary/30 rounded-lg border border-border/50">
+    <div className="flex items-start justify-between mb-3">
+      <div>
+        <h3 className="font-semibold mb-1">{project}</h3>
+        <p className="text-sm text-muted-foreground">{role}</p>
+      </div>
+      <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
+        Active
+      </Badge>
+    </div>
+    <div className="flex items-center gap-2 mb-2">
+      {members.map((member: string, i: number) => (
+        <div key={i} className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center text-xs font-semibold">
+          {member.split(' ')[0][0]}
+        </div>
+      ))}
+    </div>
+    <p className="text-xs text-muted-foreground">{contributions}</p>
+  </div>
+);
+
 const TeamMember = ({ name, role, status, activity, commits, isKordi }: any) => {
   const initials = name.split(' ').map((n: string) => n[0]).join('');
+  const ideStatus = status === 'online' ? 'VS Code' : status === 'away' ? 'Cursor (Idle)' : 'Offline';
+  const emotionalCue = status === 'online' ? '🟢' : status === 'away' ? '🟡 Needs review' : '🔴 Blocked';
   
   return (
     <div className={`p-4 rounded-lg border transition-colors ${
@@ -413,12 +495,32 @@ const TeamMember = ({ name, role, status, activity, commits, isKordi }: any) => 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             <h3 className="font-semibold">{name}</h3>
-            <Badge variant={isKordi ? "default" : "outline"} className={isKordi ? "bg-primary/20 text-primary text-xs" : "text-xs"}>
+            <Badge variant="outline" className="text-xs">
               {role}
             </Badge>
+            {!isKordi && (
+              <span className="text-xs">{emotionalCue}</span>
+            )}
           </div>
-          <p className="text-sm text-muted-foreground mb-1">{activity}</p>
-          <p className="text-xs text-muted-foreground">{commits} {isKordi ? 'autonomous commits' : 'commits'} this week</p>
+          <p className="text-sm text-muted-foreground">{activity}</p>
+          <div className="flex items-center gap-3 mt-2">
+            <span className="text-xs text-muted-foreground flex items-center gap-1">
+              <GitCommit className="w-3 h-3" />
+              {commits} commits
+            </span>
+            {!isKordi && (
+              <>
+                <span className="text-xs text-muted-foreground flex items-center gap-1">
+                  <Code className="w-3 h-3" />
+                  {ideStatus}
+                </span>
+                <span className="text-xs text-muted-foreground flex items-center gap-1">
+                  <Mic className="w-3 h-3" />
+                  {status === 'online' ? 'Voice Active' : 'No voice'}
+                </span>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

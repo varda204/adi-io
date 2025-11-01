@@ -10,10 +10,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { 
   File, Folder, GitCommit, MessageSquare, Clock, 
-  Code, AlertCircle, CheckCircle2, Play, History, User,
-  GitBranch, Lightbulb, Sparkles, Zap, MessageCircle
+  Code, AlertCircle, CheckCircle2, Play, User,
+  GitBranch, Lightbulb, Sparkles, Zap, MessageCircle, Activity
 } from "lucide-react";
 import { KordiAvatar } from "@/components/KordiAvatar";
+import { ContextAwareWelcome } from "@/components/ContextAwareWelcome";
 
 const Workspace = () => {
   const [selectedFile, setSelectedFile] = useState("auth.ts");
@@ -107,6 +108,19 @@ const Workspace = () => {
 
           {/* CENTER - Code Editor */}
           <div className="flex-1 flex flex-col">
+            {/* Context-Aware Welcome */}
+            <div className="p-4 border-b border-border/50">
+              <ContextAwareWelcome
+                isNewProject={false}
+                projectName="Kordra Frontend"
+                recentActivity={{
+                  commits: 3,
+                  prs: 2,
+                  lastFile: "auth.ts",
+                }}
+              />
+            </div>
+
             <div className="h-14 border-b border-border/50 flex items-center justify-between px-6 bg-card/30">
               <div className="flex items-center gap-3">
                 <File className="w-4 h-4 text-accent" />
@@ -145,12 +159,12 @@ const Workspace = () => {
                   </Button>
                 </div>
                 <Button size="sm" variant="outline">
-                  <History className="w-3 h-3 mr-1" />
-                  Explain History
+                  <Play className="w-3 h-3 mr-1" />
+                  Run Tests
                 </Button>
                 <Button size="sm" className="bg-gradient-primary hover:opacity-90">
-                  <Play className="w-3 h-3 mr-1" />
-                  Run
+                  <Zap className="w-3 h-3 mr-1" />
+                  Deploy Now
                 </Button>
               </div>
             </div>

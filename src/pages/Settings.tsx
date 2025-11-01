@@ -60,22 +60,41 @@ const Settings = () => {
 
               <TabsContent value="integrations" className="space-y-6">
                 <Card className="p-6 bg-card border-border/50">
-                  <h2 className="text-xl font-semibold mb-6">Connected Services</h2>
+                  <h2 className="text-xl font-semibold mb-6">Version Control</h2>
                   <div className="space-y-4">
                     <IntegrationItem
                       name="GitHub"
                       description="Version control and repository management"
                       connected={true}
+                      lastSync="2 minutes ago"
                     />
+                    <IntegrationItem
+                      name="GitLab"
+                      description="DevOps platform with Git repository"
+                      connected={false}
+                    />
+                    <IntegrationItem
+                      name="Bitbucket"
+                      description="Git solution for teams"
+                      connected={false}
+                    />
+                  </div>
+                </Card>
+
+                <Card className="p-6 bg-card border-border/50">
+                  <h2 className="text-xl font-semibold mb-6">IDEs & Editors</h2>
+                  <div className="space-y-4">
                     <IntegrationItem
                       name="VS Code"
                       description="Code editor integration"
                       connected={true}
+                      lastSync="Active now"
                     />
                     <IntegrationItem
                       name="Cursor"
                       description="AI-powered code editor"
                       connected={true}
+                      lastSync="5 minutes ago"
                     />
                     <IntegrationItem
                       name="JetBrains"
@@ -83,23 +102,108 @@ const Settings = () => {
                       connected={false}
                     />
                     <IntegrationItem
+                      name="Windsurf"
+                      description="Modern code editor"
+                      connected={false}
+                    />
+                    <IntegrationItem
                       name="Zed"
                       description="High-performance editor"
                       connected={false}
                     />
+                  </div>
+                </Card>
+
+                <Card className="p-6 bg-card border-border/50">
+                  <h2 className="text-xl font-semibold mb-6">Deployment Platforms</h2>
+                  <div className="space-y-4">
+                    <IntegrationItem
+                      name="Vercel"
+                      description="Deployment platform"
+                      connected={true}
+                      lastSync="1 hour ago"
+                    />
+                    <IntegrationItem
+                      name="Netlify"
+                      description="Web hosting and automation"
+                      connected={false}
+                    />
+                    <IntegrationItem
+                      name="AWS"
+                      description="Cloud computing services"
+                      connected={false}
+                    />
+                    <IntegrationItem
+                      name="Railway"
+                      description="Infrastructure platform"
+                      connected={false}
+                    />
+                  </div>
+                </Card>
+
+                <Card className="p-6 bg-card border-border/50">
+                  <h2 className="text-xl font-semibold mb-6">Communication & Project Management</h2>
+                  <div className="space-y-4">
                     <IntegrationItem
                       name="Slack"
                       description="Team communication and notifications"
                       connected={false}
                     />
                     <IntegrationItem
-                      name="Vercel"
-                      description="Deployment platform"
-                      connected={true}
+                      name="Discord"
+                      description="Voice, video, and text chat"
+                      connected={false}
+                    />
+                    <IntegrationItem
+                      name="Notion"
+                      description="Documentation and collaboration"
+                      connected={false}
                     />
                     <IntegrationItem
                       name="Linear"
                       description="Issue tracking and project management"
+                      connected={false}
+                    />
+                  </div>
+                </Card>
+
+                <Card className="p-6 bg-card border-border/50">
+                  <h2 className="text-xl font-semibold mb-6">Monitoring & Analytics</h2>
+                  <div className="space-y-4">
+                    <IntegrationItem
+                      name="Sentry"
+                      description="Error tracking and performance monitoring"
+                      connected={false}
+                    />
+                    <IntegrationItem
+                      name="Datadog"
+                      description="Monitoring and analytics"
+                      connected={false}
+                    />
+                    <IntegrationItem
+                      name="LogRocket"
+                      description="Session replay and monitoring"
+                      connected={false}
+                    />
+                  </div>
+                </Card>
+
+                <Card className="p-6 bg-card border-border/50">
+                  <h2 className="text-xl font-semibold mb-6">Backend Services</h2>
+                  <div className="space-y-4">
+                    <IntegrationItem
+                      name="Stripe"
+                      description="Payment processing"
+                      connected={false}
+                    />
+                    <IntegrationItem
+                      name="Supabase"
+                      description="Open source Firebase alternative"
+                      connected={false}
+                    />
+                    <IntegrationItem
+                      name="Firebase"
+                      description="Backend-as-a-Service platform"
                       connected={false}
                     />
                   </div>
@@ -202,7 +306,7 @@ const Settings = () => {
                   </div>
                 </Card>
                 <Card className="p-6 bg-card border-border/50">
-                  <h2 className="text-xl font-semibold mb-6">Security Settings</h2>
+                  <h2 className="text-xl font-semibold mb-6">Security</h2>
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label>Two-Factor Authentication</Label>
@@ -236,6 +340,107 @@ const Settings = () => {
                               Active
                             </Badge>
                           </div>
+                        </div>
+                        <div className="p-4 bg-secondary/30 border border-border/50 rounded-lg">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="font-medium">iPhone • Safari</p>
+                              <p className="text-sm text-muted-foreground">New York, NY • 2 days ago</p>
+                            </div>
+                            <Button size="sm" variant="destructive">Revoke</Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Data Export</Label>
+                      <div className="p-4 bg-secondary/30 border border-border/50 rounded-lg">
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Download all your data in JSON format
+                        </p>
+                        <Button variant="outline" size="sm">Request Data Export</Button>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 bg-card border-border/50">
+                  <h2 className="text-xl font-semibold mb-6">Privacy & Defaults</h2>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label>Voice & Cognition Settings</Label>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
+                          <div>
+                            <p className="font-medium text-sm">Voice Activation</p>
+                            <p className="text-xs text-muted-foreground">"Hey Kordi" wake word</p>
+                          </div>
+                          <Switch defaultChecked={true} />
+                        </div>
+                        <div className="p-3 bg-secondary/30 rounded-lg">
+                          <Label className="text-sm mb-2 block">Language Model</Label>
+                          <select className="w-full p-2 bg-background border border-border rounded text-sm">
+                            <option>GPT-5 (Recommended)</option>
+                            <option>GPT-4</option>
+                            <option>Claude 3.5</option>
+                          </select>
+                        </div>
+                        <div className="p-3 bg-secondary/30 rounded-lg">
+                          <Label className="text-sm mb-2 block">Emotional UX Tone</Label>
+                          <select className="w-full p-2 bg-background border border-border rounded text-sm">
+                            <option>Professional</option>
+                            <option>Friendly</option>
+                            <option>Minimal</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Team & Project Defaults</Label>
+                      <div className="space-y-3">
+                        <div className="p-3 bg-secondary/30 rounded-lg">
+                          <Label className="text-sm mb-2 block">Default Role for New Members</Label>
+                          <select className="w-full p-2 bg-background border border-border rounded text-sm">
+                            <option>Developer</option>
+                            <option>Reviewer</option>
+                            <option>Viewer</option>
+                          </select>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
+                          <div>
+                            <p className="font-medium text-sm">Auto-assign PRs</p>
+                            <p className="text-xs text-muted-foreground">Automatically assign reviewers</p>
+                          </div>
+                          <Switch defaultChecked={true} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Kordi Behavior Settings</Label>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
+                          <div>
+                            <p className="font-medium text-sm">Auto-commit</p>
+                            <p className="text-xs text-muted-foreground">Commit changes automatically</p>
+                          </div>
+                          <Switch defaultChecked={true} />
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
+                          <div>
+                            <p className="font-medium text-sm">Ask before deploy</p>
+                            <p className="text-xs text-muted-foreground">Require confirmation before deploying</p>
+                          </div>
+                          <Switch defaultChecked={true} />
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
+                          <div>
+                            <p className="font-medium text-sm">Daily summary</p>
+                            <p className="text-xs text-muted-foreground">Receive daily activity summary</p>
+                          </div>
+                          <Switch defaultChecked={false} />
                         </div>
                       </div>
                     </div>
@@ -295,17 +500,27 @@ const SettingToggle = ({ label, description, defaultChecked }: any) => (
   </div>
 );
 
-const IntegrationItem = ({ name, description, connected }: any) => (
+const IntegrationItem = ({ name, description, connected, lastSync }: any) => (
   <div className="flex items-center justify-between p-4 bg-secondary/30 rounded-lg border border-border/50">
-    <div className="space-y-1">
-      <h3 className="font-medium">{name}</h3>
+    <div className="space-y-1 flex-1">
+      <div className="flex items-center gap-2">
+        <h3 className="font-medium">{name}</h3>
+        {connected && lastSync && (
+          <span className="text-xs text-muted-foreground">• {lastSync}</span>
+        )}
+      </div>
       <p className="text-sm text-muted-foreground">{description}</p>
     </div>
-    <Button variant={connected ? "outline" : "default"} className={
-      connected ? "" : "bg-gradient-primary hover:opacity-90"
-    }>
-      {connected ? "Disconnect" : "Connect"}
-    </Button>
+    <div className="flex gap-2">
+      {connected && (
+        <Button size="sm" variant="ghost">Configure</Button>
+      )}
+      <Button size="sm" variant={connected ? "outline" : "default"} className={
+        connected ? "" : "bg-gradient-primary hover:opacity-90"
+      }>
+        {connected ? "Disconnect" : "Connect"}
+      </Button>
+    </div>
   </div>
 );
 
