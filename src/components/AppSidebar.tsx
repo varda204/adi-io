@@ -8,7 +8,8 @@ import {
   FileCode,
   AlertTriangle,
   Package,
-  History
+  History,
+  FolderGit2
 } from "lucide-react";
 import { KordiAvatar } from "./KordiAvatar";
 import { NavLink } from "react-router-dom";
@@ -27,7 +28,9 @@ import {
 
 const navigation = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
+  { title: "Projects", url: "/dashboard/projects", icon: FolderGit2 },
   { title: "Workspace", url: "/dashboard/workspace", icon: Code2 },
+  { title: "Deployments", url: "/dashboard/deployments", icon: Rocket },
   { title: "System Health", url: "/dashboard/system-health", icon: Activity },
   { title: "Team", url: "/dashboard/team", icon: Users },
   { title: "Settings", url: "/dashboard/settings", icon: Settings },

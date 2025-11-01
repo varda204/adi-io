@@ -6,12 +6,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GlobalKordiAssistant } from "@/components/GlobalKordiAssistant";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
-
 import Dashboard from "./pages/Dashboard";
+import Projects from "./pages/Projects";
 import Workspace from "./pages/Workspace";
 import SystemHealth from "./pages/SystemHealth";
 import Team from "./pages/Team";
 import Settings from "./pages/Settings";
+import Deployments from "./pages/Deployments";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,7 +29,9 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/projects" element={<Projects />} />
           <Route path="/dashboard/workspace" element={<Workspace />} />
+          <Route path="/dashboard/deployments" element={<Deployments />} />
           <Route path="/dashboard/system-health" element={<SystemHealth />} />
           <Route path="/dashboard/team" element={<Team />} />
           <Route path="/dashboard/settings" element={<Settings />} />
