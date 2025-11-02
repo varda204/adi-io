@@ -22,6 +22,7 @@ import { LiveRepoSync } from "./LiveRepoSync";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { NewProjectModal } from "./NewProjectModal";
+import { ContextAwareKordiPanel } from "./ContextAwareKordiPanel";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const uptimeData = [
@@ -48,8 +49,9 @@ export const DashboardContent = () => {
   const [showNewProject, setShowNewProject] = useState(false);
 
   return (
-    <div className="p-8 space-y-8 animate-fade-in">
-      <NewProjectModal open={showNewProject} onOpenChange={setShowNewProject} />
+    <>
+      <div className="p-8 space-y-8 animate-fade-in">
+        <NewProjectModal open={showNewProject} onOpenChange={setShowNewProject} />
       
       {/* Header */}
       <div className="flex items-center justify-between">
@@ -328,6 +330,10 @@ export const DashboardContent = () => {
         </div>
       </div>
     </div>
+    
+    {/* Context-Aware Kordi Panel */}
+    <ContextAwareKordiPanel mode="solo" projectName="Dashboard" />
+  </>
   );
 };
 

@@ -5,18 +5,36 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sparkles, ArrowLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("signup");
 
-  const handleAuth = async (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     // Simulate auth
     setTimeout(() => {
       setIsLoading(false);
+      localStorage.setItem('isAuthenticated', 'true');
       navigate("/dashboard");
+    }, 1500);
+  };
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    // Simulate signup
+    setTimeout(() => {
+      setIsLoading(false);
+      toast({
+        title: "Account created successfully!",
+        description: "Please sign in to continue.",
+      });
+      setActiveTab("signin");
     }, 1500);
   };
 
@@ -40,14 +58,14 @@ const Auth = () => {
             </span>
           </div>
 
-          <Tabs defaultValue="signup" className="w-full">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-8">
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
               <TabsTrigger value="signin">Sign In</TabsTrigger>
             </TabsList>
 
             <TabsContent value="signup">
-              <form onSubmit={handleAuth} className="space-y-4">
+              <form onSubmit={handleSignUp} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
                   <Input id="name" placeholder="John Doe" required />
@@ -74,7 +92,7 @@ const Auth = () => {
             </TabsContent>
 
             <TabsContent value="signin">
-              <form onSubmit={handleAuth} className="space-y-4">
+              <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="signin-email">Email</Label>
                   <Input id="signin-email" type="email" placeholder="you@example.com" required />

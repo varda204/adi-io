@@ -30,10 +30,6 @@ export const TopNav = () => {
             <Link to="/dashboard" className="text-foreground/80 hover:text-primary transition-colors">
               Dashboard
             </Link>
-            <a href="https://docs.lovable.dev" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors flex items-center gap-2">
-              <FileText className="w-4 h-4" />
-              Docs
-            </a>
           </nav>
         </div>
 
