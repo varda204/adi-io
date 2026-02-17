@@ -45,6 +45,8 @@ All API responses follow this structure:
 }
 ```
 
+> **Note**: All timestamps in this documentation are examples showing the ISO 8601 format (`YYYY-MM-DDTHH:mm:ssZ`). Actual API responses will use real-time values.
+
 ### Error Format
 
 ```json
