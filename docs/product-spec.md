@@ -735,6 +735,1163 @@ Deploy Agent: Ships to production ✓
 
 ---
 
+## Detailed User Flows
+
+### 1. Landing Page Flow
+
+**Purpose**: First impression and demo experience for new users
+
+**Flow Diagram**:
+```
+User visits kordra.ai
+    │
+    ▼
+┌─────────────────────────────────────────────────────┐
+│         Hero Section - Animated Storytelling        │
+│                                                      │
+│  🎬 Auto-playing demo video:                        │
+│     "Watch Kordra build an entire auth system       │
+│      in 2 minutes"                                   │
+│                                                      │
+│  Tagline: "Your AI Development Partner"             │
+│  Subtitle: "From idea to deployment, autonomously"  │
+│                                                      │
+│  [Try Demo] [Watch Video] [Get Started]             │
+└─────────────────────────────────────────────────────┘
+    │
+    ▼
+Scroll down → Animated feature sections appear
+    │
+    ├─ Section 1: "Proactive Autonomy"
+    │  • Animation: AI suggesting next steps
+    │  • Micro-interaction: Hover to see examples
+    │
+    ├─ Section 2: "Multi-IDE Sync"
+    │  • Animation: Code syncing between VS Code ↔ JetBrains
+    │  • Interactive: Click to see in action
+    │
+    ├─ Section 3: "Zero-Config Deploy"
+    │  • Animation: Code → Build → Deploy flow
+    │  • Timer: "Deployed in 47 seconds"
+    │
+    ├─ Section 4: "Team Collaboration"
+    │  • Animation: Team timeline with AI + human actions
+    │  • Live telemetry mockup
+    │
+    └─ Section 5: "Voice Commands"
+       • Interactive: Click to hear "Hey Kordra, deploy to production"
+       • Visual: Waveform animation
+    │
+    ▼
+Call-to-Action Section
+    │
+    ├─ Entry Point 1: "Try Interactive Demo"
+    │  → Opens in-browser demo environment
+    │  → Pre-loaded sample project
+    │  → Guided walkthrough (5 minutes)
+    │
+    ├─ Entry Point 2: "Start Free Trial"
+    │  → Sign up with GitHub OAuth
+    │  → Immediate access to full platform
+    │
+    └─ Entry Point 3: "Schedule Demo"
+       → Calendar booking
+       → Personalized walkthrough with team
+```
+
+**User Interactions**:
+- **Scroll-triggered animations**: Features appear with smooth transitions
+- **Interactive code editor**: Try coding with Kordra assistance inline
+- **Video testimonials**: Auto-play on scroll into view
+- **Pricing calculator**: Adjust team size to see pricing
+
+---
+
+### 2. Workspace Flow
+
+**Purpose**: Primary development interface with real-time AI assistance
+
+**Flow Diagram**:
+```
+Developer opens Workspace
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│                     Workspace Layout                        │
+│  ┌─────────────┐  ┌────────────────────┐  ┌─────────────┐ │
+│  │ File Tree   │  │   Code Editor      │  │ Kordra Chat │ │
+│  │             │  │                    │  │             │ │
+│  │ src/        │  │ 1. import React... │  │ 💬 Hey!     │ │
+│  │  components/│  │ 2.                 │  │ How can I   │ │
+│  │  pages/     │  │ 3. function App()  │  │ help?       │ │
+│  │  utils/     │  │ 4.   return (      │  │             │ │
+│  │             │  │ 5.     <div>       │  │ [Voice 🎤]  │ │
+│  │             │  │                    │  │             │ │
+│  └─────────────┘  └────────────────────┘  └─────────────┘ │
+│                                                             │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │         Bottom Panel - AI Suggestions                 │  │
+│  │  ⚡ Suggested Tasks:                                  │  │
+│  │  • Add error boundary to UserProfile component       │  │
+│  │  • Generate tests for checkout flow (82% coverage)   │  │
+│  │  • Refactor duplicated code in auth utils            │  │
+│  └──────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+Developer types: "Add user settings page"
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│              Real-Time Code Suggestions                     │
+│                                                             │
+│  Kordra (typing indicator...):                             │
+│  "I'll create a settings page with these sections:         │
+│   • Profile information                                    │
+│   • Notification preferences                               │
+│   • Privacy settings                                       │
+│   • Integrations                                           │
+│                                                             │
+│  [Preview Plan] [Modify] [Start Implementation]            │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+Developer clicks [Preview Plan]
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│           Inline Refactor Preview (Diff View)              │
+│                                                             │
+│  📁 Files to be created:                                   │
+│  ✓ src/pages/Settings.tsx                                 │
+│  ✓ src/components/SettingsForm.tsx                        │
+│  ✓ src/components/ProfileSection.tsx                      │
+│  ✓ src/components/NotificationSection.tsx                 │
+│  ✓ tests/Settings.test.tsx                                │
+│                                                             │
+│  📝 Code Preview:                                          │
+│  ┌─────────────────────────────────────────────┐          │
+│  │ Settings.tsx                                │          │
+│  │ + import { useState } from 'react';         │  GREEN   │
+│  │ + import SettingsForm from './SettingsForm';│          │
+│  │ +                                            │          │
+│  │ + export default function Settings() {      │          │
+│  │ +   const [activeTab, setActiveTab] = ...  │          │
+│  │ +   return (                                 │          │
+│  │ +     <div className="settings-page">       │          │
+│  └─────────────────────────────────────────────┘          │
+│                                                             │
+│  📊 Impact Analysis:                                       │
+│  • Files added: 5                                          │
+│  • Lines of code: ~340                                     │
+│  • Estimated test coverage: 91%                            │
+│  • Security: No issues detected                            │
+│                                                             │
+│  [Accept All] [Accept Partially] [Modify] [Cancel]        │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+Developer clicks [Accept All]
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│              Implementation in Progress                     │
+│                                                             │
+│  Progress: [████████░░] 80%                                │
+│                                                             │
+│  ✓ Created Settings.tsx                                    │
+│  ✓ Created SettingsForm.tsx                                │
+│  ✓ Created ProfileSection.tsx                              │
+│  ✓ Created NotificationSection.tsx                         │
+│  ⏳ Generating tests...                                    │
+│                                                             │
+│  [View Changes] [Cancel]                                   │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+Implementation complete
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│              Test Summary (Inline Panel)                    │
+│                                                             │
+│  🧪 Test Results:                                          │
+│                                                             │
+│  ✓ Settings.test.tsx                                       │
+│    ✓ renders settings page                                 │
+│    ✓ switches between tabs                                 │
+│    ✓ saves profile changes                                 │
+│    ✓ handles form validation                               │
+│                                                             │
+│  📊 Coverage: 91% (target: 90%) ✓                          │
+│  ⏱️ Runtime: 1.2s                                          │
+│  ✅ All tests passed                                        │
+│                                                             │
+│  [View Details] [Run Again] [Commit Changes]               │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+Voice/Chat Panel Updates:
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│              Kordra Voice/Chat Panel                        │
+│                                                             │
+│  🎤 Voice Status: Ready                                    │
+│  💬 Chat History:                                          │
+│                                                             │
+│  You: "Add user settings page"                             │
+│                                                             │
+│  Kordra: "✓ Completed! I've created a settings page with   │
+│  profile, notifications, privacy, and integrations sections.│
+│  All tests passing with 91% coverage.                       │
+│                                                             │
+│  Next steps:                                                │
+│  • Add styling (I can help with Tailwind CSS)              │
+│  • Connect to backend API                                  │
+│  • Deploy to staging for preview"                          │
+│                                                             │
+│  Quick Actions:                                             │
+│  [Add Styling] [Connect API] [Deploy] [Ask Question]       │
+│                                                             │
+│  Voice Commands:                                            │
+│  Say "Hey Kordra" + command                                │
+│  Example: "Hey Kordra, deploy to staging"                  │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Key Workspace Features**:
+1. **Real-time suggestions**: AI proactively suggests improvements
+2. **Inline previews**: See changes before accepting
+3. **Integrated testing**: Test results shown inline
+4. **Voice + Chat**: Multiple interaction modes
+5. **Context awareness**: Kordra remembers project patterns
+
+---
+
+### 3. Deployment Screen Flow
+
+**Purpose**: Zero-config CI/CD with autonomy controls
+
+**Flow Diagram**:
+```
+Developer navigates to Deployments
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│                 Deployment Dashboard                        │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │  🚀 Quick Deploy                                     │  │
+│  │                                                       │  │
+│  │  Current Branch: main (a1b2c3d)                      │  │
+│  │  Target Environment: [Staging ▼]                     │  │
+│  │                                                       │  │
+│  │  Auto-detected:                                      │  │
+│  │  • Framework: React + Vite                           │  │
+│  │  • Platform: Vercel (recommended)                    │  │
+│  │  • Build: npm run build                              │  │
+│  │                                                       │  │
+│  │  Autonomy: [●○○] Manual [○●○] Assisted [○○●] Auto   │  │
+│  │                      ↑ Currently: ASSISTED            │  │
+│  │                                                       │  │
+│  │  [🚀 Deploy Now] [⚙️ Configure] [📋 View Logs]      │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Recent Deployments:                                        │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✅ v2.4.1 - Production - 2 hours ago - 99/100       │  │
+│  │ ✅ v2.4.0 - Staging - 5 hours ago - 98/100          │  │
+│  │ 🔄 v2.3.9 - Rolled back - 1 day ago - 45/100       │  │
+│  └─────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+Developer clicks [🚀 Deploy Now]
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│         Zero-Config Deployment Pipeline (Step 1/4)          │
+│                                                             │
+│  Step 1: Analysis ✓                                        │
+│  ├─ Detected framework: React + Vite                       │
+│  ├─ Build command: npm run build                           │
+│  ├─ Output directory: dist/                                │
+│  ├─ Environment variables: 8 configured                    │
+│  └─ Platform: Vercel                                       │
+│                                                             │
+│  Step 2: Pre-flight Checks 🔄                              │
+│  ├─ Running tests... 94/94 passed ✓                        │
+│  ├─ Security scan... No vulnerabilities ✓                  │
+│  ├─ Lint check... No errors ✓                              │
+│  └─ Build locally... Success ✓                             │
+│                                                             │
+│  Step 3: Deploy (Pending)                                  │
+│  Step 4: Health Check (Pending)                            │
+│                                                             │
+│  [⏸️ Pause] [❌ Cancel] [⏭️ Skip Checks]                  │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+All checks pass, proceeding to deploy
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│         Zero-Config Deployment Pipeline (Step 3/4)          │
+│                                                             │
+│  Step 3: Deploy 🔄                                         │
+│                                                             │
+│  Live Logs:                                                 │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ [12:34:01] Uploading files to Vercel...            │  │
+│  │ [12:34:03] ✓ Uploaded 234 files (12.4 MB)          │  │
+│  │ [12:34:04] Building production bundle...            │  │
+│  │ [12:34:15] ✓ Build completed (11.2s)                │  │
+│  │ [12:34:16] Deploying to edge network...             │  │
+│  │ [12:34:18] ✓ Deployed to 24 edge locations         │  │
+│  │ [12:34:19] Deployment URL:                           │  │
+│  │            https://app-git-main-abc123.vercel.app   │  │
+│  │ [12:34:20] ✅ Deployment successful!                │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  📊 Build Stats:                                           │
+│  • Bundle size: 342 KB (gzipped)                           │
+│  • Build time: 11.2 seconds                                │
+│  • Deploy time: 18 seconds                                 │
+│                                                             │
+│  [📋 Download Logs] [🔗 Open Preview]                     │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│         Zero-Config Deployment Pipeline (Step 4/4)          │
+│                                                             │
+│  Step 4: Health Check & Rollback Protection 🔄             │
+│                                                             │
+│  Monitoring deployment for 5 minutes...                    │
+│  Time elapsed: 2m 34s                                      │
+│                                                             │
+│  Health Metrics (Real-time):                               │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ Error Rate:      0.0% ✓                             │  │
+│  │ Response Time:   48ms (avg) ✓                       │  │
+│  │ Availability:    100% ✓                             │  │
+│  │ Throughput:      145 req/min ✓                      │  │
+│  │                                                      │  │
+│  │ Health Score: 98/100 🟢                             │  │
+│  │ Status: HEALTHY                                      │  │
+│  │                                                      │  │
+│  │ [Live Graph showing metrics over time]              │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Rollback Protection: ✓ Ready                              │
+│  • Will auto-rollback if health score < 70                 │
+│  • Previous version preserved: v2.4.0                      │
+│                                                             │
+│  [🔄 Manual Rollback] [⏭️ Promote to Production]          │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+Health check passes after 5 minutes
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│              Deployment Complete! 🎉                        │
+│                                                             │
+│  ✅ Deployment v2.4.1 successful                           │
+│  🌐 URL: https://staging.yourapp.com                       │
+│  📊 Health: 98/100                                         │
+│  ⏱️ Total time: 5m 52s                                    │
+│                                                             │
+│  Options:                                                   │
+│  [🌍 Open App] [📊 View Analytics] [📝 View Logs]         │
+│  [🚀 Promote to Production] [↩️ Rollback]                 │
+│                                                             │
+│  Notifications sent to:                                     │
+│  ✓ Slack: #deployments channel                            │
+│  ✓ Email: dev-team@company.com                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Autonomy Toggle Behavior**:
+- **Manual**: Show plan, wait for explicit approval at each step
+- **Assisted**: Auto-execute low-risk steps, ask for approval on critical steps
+- **Autonomous**: Execute entire pipeline, only notify on completion/failure
+
+---
+
+### 4. Team Mode Flow
+
+**Purpose**: Unified view of team activity with AI teammate
+
+**Flow Diagram**:
+```
+Developer opens Team dashboard
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│                     Team Activity Hub                       │
+│                                                             │
+│  👥 Team Members (Online now: 4/5)                         │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 👤 Alice Johnson      🟢 Active    [Message] [View] │  │
+│  │    Currently: Editing checkout.tsx                   │  │
+│  │                                                       │  │
+│  │ 👤 Bob Chen           🟢 Active    [Message] [View] │  │
+│  │    Currently: Reviewing PR #156                      │  │
+│  │                                                       │  │
+│  │ 👤 Carol Smith        🟢 Active    [Message] [View] │  │
+│  │    Currently: Deploying to staging                   │  │
+│  │                                                       │  │
+│  │ 👤 David Park         ⚫ Away      [Message] [View] │  │
+│  │    Last seen: 2 hours ago                            │  │
+│  │                                                       │  │
+│  │ 🤖 Kordra AI          🟢 Active    [Configure]      │  │
+│  │    Currently: Running tests for PR #157              │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  📊 Today's Activity (Real-time)                           │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 2 min ago - Kordra deployed feature/checkout ✓      │  │
+│  │             Health: 99/100 | URL: staging.app.com   │  │
+│  │                                                       │  │
+│  │ 5 min ago - Alice committed to feature/checkout      │  │
+│  │             "feat: add payment validation"           │  │
+│  │             3 files | +127, -34 lines                │  │
+│  │                                                       │  │
+│  │ 12 min ago - Bob reviewed PR #156                    │  │
+│  │              "Looks good, just one suggestion..."    │  │
+│  │                                                       │  │
+│  │ 18 min ago - Kordra generated tests for auth module  │  │
+│  │              Coverage: 92% | 15 tests created        │  │
+│  │                                                       │  │
+│  │ 23 min ago - Carol merged PR #155 to main           │  │
+│  │              Auto-deployed to production ✓           │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  [📅 View Timeline] [📊 Velocity Dashboard] [⚙️ Settings]│
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+Developer clicks [📊 Velocity Dashboard]
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│              Team Velocity & Telemetry                      │
+│                                                             │
+│  🗓️ Sprint Progress: Week 2 of 2                          │
+│  Progress: [████████████░░] 87% complete                   │
+│                                                             │
+│  📈 Velocity Metrics                                       │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ Today    This Week   Last Week   Trend               │  │
+│  │ ─────    ──────────  ──────────  ─────               │  │
+│  │ 23       142         128         ↗ +11%             │  │
+│  │ commits  commits     commits                         │  │
+│  │                                                       │  │
+│  │ 4 PRs    18 PRs      15 PRs      ↗ +20%             │  │
+│  │ opened   opened      opened                          │  │
+│  │                                                       │  │
+│  │ 4.2h     5.1h        6.3h        ↗ Faster            │  │
+│  │ cycle    avg cycle   avg cycle                       │  │
+│  │ time     time        time                            │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  📊 Quality Metrics                                        │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ Test Coverage:      89% ↗ (+2% from last week)      │  │
+│  │ Build Success:      95% ⚠️ (-3% - investigate)      │  │
+│  │ Security Issues:    0 ✓                              │  │
+│  │ Code Review Time:   1.8h avg                         │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  🤖 AI Activity Summary                                    │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ Autonomous actions: 12 today                         │  │
+│  │ Assisted actions:   8 today                          │  │
+│  │ Approval rate:      94%                              │  │
+│  │ Time saved:         ~6.4 hours today                 │  │
+│  │                                                       │  │
+│  │ Top AI contributions:                                │  │
+│  │ • Generated 47 tests (92% coverage)                  │  │
+│  │ • Deployed 4 times to staging                        │  │
+│  │ • Fixed 2 build errors automatically                 │  │
+│  │ • Refactored 3 components for performance            │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  🚨 Blockers & Alerts                                      │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ⚠️ Build success rate dropped 3%                    │  │
+│  │    Flaky test detected: analytics.test.ts            │  │
+│  │    Assigned to: Eve                                  │  │
+│  │    [View Details]                                    │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  [📥 Export Report] [🔔 Configure Alerts] [📅 History]   │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Team Presence Features**:
+- **Real-time status**: See who's online and what they're working on
+- **Live commits**: See commits as they happen
+- **PR activity**: Track reviews, comments, merges in real-time
+- **AI as teammate**: Kordra appears as team member with activity
+- **Velocity tracking**: Automated metrics without manual input
+
+---
+
+### 5. System Health Flow
+
+**Purpose**: Comprehensive system monitoring dashboard
+
+**Flow Diagram**:
+```
+Developer opens System Health
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│                  System Health Dashboard                    │
+│                                                             │
+│  🟢 Overall Status: HEALTHY                                │
+│  Last updated: 3 seconds ago                                │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 🎯 Uptime Tracking                                   │  │
+│  │                                                       │  │
+│  │  Current Uptime:   99.8%                             │  │
+│  │  This Month:       99.95%                            │  │
+│  │  Last Incident:    12 days ago (3m downtime)         │  │
+│  │  MTBF:            45.2 hours                         │  │
+│  │  MTTR:            2.3 minutes                        │  │
+│  │                                                       │  │
+│  │  Service Status:                                     │  │
+│  │  ✅ API Gateway           (99.99%)                   │  │
+│  │  ✅ Orchestration Layer   (99.98%)                   │  │
+│  │  ✅ Vector Database       (100%)                     │  │
+│  │  ⚠️ Build Service         (97.5%) - degraded        │  │
+│  │  ✅ Deployment Platform   (99.97%)                   │  │
+│  │  ✅ IDE Extensions        (99.9%)                    │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 📊 Performance Deltas (vs. last week)                │  │
+│  │                                                       │  │
+│  │  Response Time:    52ms  →  48ms  ↗ 8% faster       │  │
+│  │  Error Rate:       0.12% →  0.08% ↗ 33% better      │  │
+│  │  Throughput:       1.2K/s → 1.4K/s ↗ 17% higher     │  │
+│  │  CPU Usage:        45%   →  42%   ↗ 7% lower        │  │
+│  │  Memory Usage:     2.1GB →  2.3GB ↘ 10% higher      │  │
+│  │                                                       │  │
+│  │  [Live Graph showing trends over 7 days]             │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 🐛 Bug Detection Dashboard                          │  │
+│  │                                                       │  │
+│  │  Active Bugs:      8  (↓ -2 from yesterday)         │  │
+│  │  Critical:         0                                 │  │
+│  │  High:             2                                 │  │
+│  │  Medium:           4                                 │  │
+│  │  Low:              2                                 │  │
+│  │                                                       │  │
+│  │  Recent Detections:                                  │  │
+│  │  • Memory leak in IDE sync (4h ago) - HIGH           │  │
+│  │  • API timeout in /deploy endpoint (6h ago) - MED    │  │
+│  │  • UI rendering glitch in Safari (1d ago) - LOW      │  │
+│  │                                                       │  │
+│  │  [View All Bugs] [Create Issue] [Run Diagnostics]   │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 🚀 Deployment Pipeline Health                        │  │
+│  │                                                       │  │
+│  │  Today's Deployments: 12                             │  │
+│  │  Success Rate:        100% ✓                         │  │
+│  │  Avg Deploy Time:     3m 24s                         │  │
+│  │  Rollbacks:          0                               │  │
+│  │                                                       │  │
+│  │  [Timeline showing deployment flow]                  │  │
+│  │  Build → Test → Deploy → Health Check               │  │
+│  │   2m     45s    35s      5m                          │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 🏗️ Infrastructure Monitoring                        │  │
+│  │                                                       │  │
+│  │  Servers:         24 active                          │  │
+│  │  CPU Usage:       42% avg                            │  │
+│  │  Memory Usage:    2.3GB / 8GB                        │  │
+│  │  Disk Usage:      45%                                │  │
+│  │  Network In:      1.2 Gbps                           │  │
+│  │  Network Out:     0.8 Gbps                           │  │
+│  │                                                       │  │
+│  │  [View Infrastructure Map]                           │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 🎯 AI-Driven Risk Scores                            │  │
+│  │                                                       │  │
+│  │  Overall Risk:         LOW (Score: 23/100)           │  │
+│  │                                                       │  │
+│  │  Risk Factors:                                       │  │
+│  │  ⚠️ Build service degraded          +15 points      │  │
+│  │  ⚠️ Memory usage trending up         +8 points      │  │
+│  │  ✅ No security vulnerabilities       0 points       │  │
+│  │  ✅ All tests passing                 0 points       │  │
+│  │                                                       │  │
+│  │  Recommendations:                                    │  │
+│  │  1. Investigate build service issues                 │  │
+│  │  2. Monitor memory usage trend                       │  │
+│  │  3. Consider scaling if traffic increases >20%       │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 📈 Live Performance Graphs                           │  │
+│  │  [Interactive charts showing:                        │  │
+│  │   - Request rate over time                           │  │
+│  │   - Error rate by endpoint                           │  │
+│  │   - Response time percentiles (p50, p95, p99)        │  │
+│  │   - Resource utilization]                            │  │
+│  └─────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Anomaly Detection in Action**:
+When anomaly detected:
+```
+🚨 ALERT: Anomaly Detected
+─────────────────────────────
+Metric: Response Time
+Current: 124ms (p95)
+Expected: ~50ms
+Severity: WARNING
+
+Affected Endpoints:
+• /api/users (most impacted)
+• /api/auth
+
+Potential Causes:
+• Database query performance
+• Increased traffic
+• Memory pressure
+
+Actions Taken:
+✓ Alert sent to #ops channel
+✓ Created incident: INC-1234
+✓ Auto-scaling triggered (+2 servers)
+
+[View Details] [Dismiss] [Create Task]
+```
+
+---
+
+### 6. Settings Flow
+
+**Purpose**: Configure integrations, autonomy, and preferences
+
+**Flow Diagram**:
+```
+Developer opens Settings
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│                      Settings Panel                         │
+│                                                             │
+│  Sidebar Navigation:                                        │
+│  ─────────────────                                         │
+│  [⚙️ General]                                              │
+│  [🔌 Integrations]  ← Currently selected                   │
+│  [🎛️ Autonomy]                                             │
+│  [🎤 Voice]                                                 │
+│  [🔍 Auditability]                                          │
+│  [👥 Team]                                                  │
+│  [🔔 Notifications]                                         │
+│  [💳 Billing]                                               │
+│                                                             │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Integrations Tab**:
+```
+┌────────────────────────────────────────────────────────────┐
+│  🔌 Integrations                                           │
+│                                                             │
+│  ── Version Control ─────────────────────────────────────  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✅ GitHub                              [Connected]   │  │
+│  │    Account: @yourorg                                 │  │
+│  │    Repositories: 23 synced                           │  │
+│  │    Permissions: Read/Write to repos, PRs            │  │
+│  │    [Manage] [Disconnect]                            │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ⚪ GitLab                               [Connect]    │  │
+│  │    Connect your GitLab account for repository sync   │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ── Deployment Platforms ────────────────────────────────  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✅ Vercel                              [Connected]   │  │
+│  │    Account: company-team                             │  │
+│  │    Projects: 5 linked                                │  │
+│  │    [Manage] [Disconnect]                            │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ⚪ AWS                                  [Connect]    │  │
+│  │    Connect AWS for deployments to EC2, Lambda, S3    │  │
+│  │    [Configure IAM Role]                              │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ── Communication ───────────────────────────────────────  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✅ Slack                               [Connected]   │  │
+│  │    Workspace: Company Slack                          │  │
+│  │    Channels: #deployments, #dev-team                 │  │
+│  │    Notifications: Enabled                            │  │
+│  │    [Manage Channels] [Disconnect]                   │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ⚪ Microsoft Teams                      [Connect]    │  │
+│  │    Post updates to Teams channels                    │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ── Project Management ──────────────────────────────────  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✅ Linear                              [Connected]   │  │
+│  │    Workspace: Company                                │  │
+│  │    Auto-link commits and PRs to issues               │  │
+│  │    [Manage] [Disconnect]                            │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  [+ Add Integration]                                        │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Autonomy Levels Tab**:
+```
+┌────────────────────────────────────────────────────────────┐
+│  🎛️ Autonomy Control                                       │
+│                                                             │
+│  Global Autonomy Mode:                                      │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │  [●○○] Manual                                        │  │
+│  │  AI suggests actions, you approve each step          │  │
+│  │                                                       │  │
+│  │  [○●○] Assisted ← Current                            │  │
+│  │  AI executes low-risk actions automatically,         │  │
+│  │  requests approval for critical decisions            │  │
+│  │                                                       │  │
+│  │  [○○●] Autonomous                                    │  │
+│  │  AI operates independently, notifies on completion   │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Task-Specific Modes:                                       │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ Code Generation:    [Manual] [Assisted] [Autonomous]│  │
+│  │ Testing:            [Manual] [Assisted] [Autonomous]│  │
+│  │ Deployment:         [Manual] [Assisted] [Autonomous]│  │
+│  │ Refactoring:        [Manual] [Assisted] [Autonomous]│  │
+│  │ Dependency Updates: [Manual] [Assisted] [Autonomous]│  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Auto-Approval Thresholds (Assisted Mode):                  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ Minimum Confidence Score: [━━━━━━━●━━] 70%          │  │
+│  │ Maximum Files Affected:   [━━━━●━━━━━] 5 files      │  │
+│  │ Risk Level:               [Low only ▼]               │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Approval Workflows:                                        │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✓ Require approval for production deployments        │  │
+│  │ ✓ Require approval for code affecting >10 files      │  │
+│  │ ✓ Require approval for dependency major updates      │  │
+│  │ ✓ Require approval for security-related changes      │  │
+│  │                                                       │  │
+│  │ Approvers: @tech-lead, @senior-dev                   │  │
+│  │ Timeout: 1 hour (auto-reject after)                  │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  [Save Changes] [Reset to Defaults]                        │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Voice Behavior Tab**:
+```
+┌────────────────────────────────────────────────────────────┐
+│  🎤 Voice Interface Settings                                │
+│                                                             │
+│  Wake Word:                                                 │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ [Hey Kordra ▼]                                       │  │
+│  │ Options: "Hey Kordra", "OK Kordra", Custom           │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Voice Response:                                            │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✓ Enable voice responses                             │  │
+│  │ ✓ Use natural speech (vs. robotic)                   │  │
+│  │                                                       │  │
+│  │ Voice:        [Female ▼] [Male] [Custom]             │  │
+│  │ Speed:        [━━━━━●━━━━] Normal                    │  │
+│  │ Verbosity:    [Concise] [Normal] [Detailed]          │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Emotional Intelligence:                                    │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✓ Detect frustration and offer help                  │  │
+│  │ ✓ Adapt communication style to emotional state       │  │
+│  │ ✓ Proactive break suggestions (after 2 hours)        │  │
+│  │ ✓ Encouragement during long tasks                    │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Privacy:                                                   │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✓ Process voice locally when possible                │  │
+│  │ ✓ Delete voice recordings after 24 hours             │  │
+│  │ ⚪ Keep voice recordings for training (opt-in)        │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  [Test Voice] [Save Settings]                              │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Auditability Tab**:
+```
+┌────────────────────────────────────────────────────────────┐
+│  🔍 Auditability & Compliance                              │
+│                                                             │
+│  Activity Logging:                                          │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✓ Log all AI actions                                 │  │
+│  │ ✓ Log all user approvals/rejections                  │  │
+│  │ ✓ Log all code changes                               │  │
+│  │ ✓ Log all deployments                                │  │
+│  │                                                       │  │
+│  │ Retention Period: [90 days ▼]                        │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Audit Trail Access:                                        │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ Recent Actions (Last 24 hours):                      │  │
+│  │                                                       │  │
+│  │ 10:34 AM - Kordra deployed to staging (AUTO)         │  │
+│  │ 10:12 AM - You approved code generation (MANUAL)     │  │
+│  │ 09:45 AM - Kordra generated tests (AUTO)             │  │
+│  │ 09:23 AM - Alice merged PR #156 (MANUAL)             │  │
+│  │                                                       │  │
+│  │ [View Full Audit Log] [Export CSV] [Search]          │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Compliance:                                                │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ✓ GDPR compliant data handling                       │  │
+│  │ ✓ SOC 2 Type II certified                            │  │
+│  │ ✓ HIPAA ready (enterprise plan)                      │  │
+│  │                                                       │  │
+│  │ [Download Compliance Report]                         │  │
+│  └─────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 7. Documentation & Resources Flow
+
+**Purpose**: Onboarding, API docs, and learning resources
+
+**Flow Diagram**:
+```
+Developer opens Documentation
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│              Documentation & Resources                      │
+│                                                             │
+│  🔍 Search: [What are you looking for?________________]    │
+│     Popular: Quick Start | API Reference | Deployment      │
+│                                                             │
+│  ── Getting Started ─────────────────────────────────────  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 📘 Quick Start Guide (5 minutes)                     │  │
+│  │    Get up and running with your first project        │  │
+│  │    [Start Interactive Tutorial]                      │  │
+│  │                                                       │  │
+│  │ 📗 Installation                                       │  │
+│  │    • VS Code Extension                               │  │
+│  │    • JetBrains Plugin                                │  │
+│  │    • Cursor Extension                                │  │
+│  │    [View Installation Guides]                        │  │
+│  │                                                       │  │
+│  │ 📙 First Project Setup                               │  │
+│  │    Connect repository, configure settings            │  │
+│  │    [Watch Video] [Read Guide]                        │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ── API Reference ───────────────────────────────────────  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 🔧 REST API                                          │  │
+│  │    Complete API documentation                        │  │
+│  │    • Authentication                                  │  │
+│  │    • Projects                                        │  │
+│  │    • Deployments                                     │  │
+│  │    • Webhooks                                        │  │
+│  │    [View API Docs] [Try in Playground]              │  │
+│  │                                                       │  │
+│  │ 📊 GraphQL API                                       │  │
+│  │    Advanced queries and mutations                    │  │
+│  │    [View Schema] [GraphQL Playground]               │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ── Configuration ───────────────────────────────────────  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ⚙️ YAML Configuration Samples                        │  │
+│  │                                                       │  │
+│  │  📄 kordra.yml - Project configuration               │  │
+│  │  ```yaml                                             │  │
+│  │  version: 1.0                                        │  │
+│  │  project:                                            │  │
+│  │    name: my-app                                      │  │
+│  │    framework: react                                  │  │
+│  │                                                       │  │
+│  │  autonomy:                                           │  │
+│  │    mode: assisted                                    │  │
+│  │    tasks:                                            │  │
+│  │      code_generation: assisted                       │  │
+│  │      deployment: manual                              │  │
+│  │                                                       │  │
+│  │  integrations:                                       │  │
+│  │    github:                                           │  │
+│  │      enabled: true                                   │  │
+│  │      auto_pr: true                                   │  │
+│  │    vercel:                                           │  │
+│  │      enabled: true                                   │  │
+│  │      auto_deploy: staging                            │  │
+│  │  ```                                                 │  │
+│  │  [Copy] [Download] [View Full Schema]               │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ── Video Tutorials ─────────────────────────────────────  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 🎥 Video Library                                     │  │
+│  │                                                       │  │
+│  │  [▶] Getting Started (5:23)                          │  │
+│  │  [▶] Zero-Config Deployment (8:45)                   │  │
+│  │  [▶] Team Collaboration (6:12)                       │  │
+│  │  [▶] Voice Commands (4:30)                           │  │
+│  │  [▶] Multi-IDE Sync (7:55)                           │  │
+│  │                                                       │  │
+│  │  [View All Videos]                                   │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ── Community & Support ─────────────────────────────────  │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ 💬 Discord Community                                 │  │
+│  │    Join 5,000+ developers                            │  │
+│  │    [Join Discord]                                    │  │
+│  │                                                       │  │
+│  │ 📧 Email Support                                     │  │
+│  │    support@kordra.ai                                 │  │
+│  │    Response time: <4 hours                           │  │
+│  │                                                       │  │
+│  │ 📚 Knowledge Base                                    │  │
+│  │    Search 200+ articles                              │  │
+│  │    [Browse Articles]                                 │  │
+│  └─────────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## User Stories with Acceptance Criteria
+
+### Epic: Multi-IDE Synchronization
+
+#### Story 1: As a developer, I want Kordra to sync my work across VS Code and JetBrains so I don't lose context when switching IDEs
+
+**Acceptance Criteria**:
+- [ ] When I open a file in VS Code, it automatically opens in JetBrains if I switch
+- [ ] Cursor position syncs between IDEs (within 100ms)
+- [ ] Chat history is accessible from both IDEs
+- [ ] Code selections sync in real-time
+- [ ] Active tasks are visible in both IDEs
+- [ ] Edits made in one IDE appear in the other within 2 seconds
+- [ ] Conflicts are resolved automatically using operational transformation
+- [ ] Session state persists for 24 hours
+
+**Priority**: P0  
+**Estimated Points**: 13
+
+---
+
+#### Story 2: As a developer, I want Kordra to remember my conversation when I switch IDEs so I can continue where I left off
+
+**Acceptance Criteria**:
+- [ ] Chat history syncs automatically
+- [ ] Conversation context preserved for 7 days
+- [ ] Unread messages indicated in new IDE
+- [ ] Attachments (code snippets, files) accessible from both IDEs
+- [ ] Voice command history synced
+- [ ] Search works across entire conversation history
+
+**Priority**: P1  
+**Estimated Points**: 8
+
+---
+
+### Epic: Zero-Config Deployment
+
+#### Story 3: As a developer, I want Kordra to deploy my app without writing config files so I can ship faster
+
+**Acceptance Criteria**:
+- [ ] Framework auto-detected from package.json/requirements.txt
+- [ ] Build command inferred automatically
+- [ ] Output directory detected correctly
+- [ ] Environment variables prompted if missing
+- [ ] Platform recommended based on project type
+- [ ] Deployment config generated automatically
+- [ ] First deployment completes in <5 minutes
+- [ ] Configuration saved for future deployments
+
+**Priority**: P0  
+**Estimated Points**: 21
+
+---
+
+#### Story 4: As a developer, I want Kordra to automatically roll back failed deployments so my users aren't affected
+
+**Acceptance Criteria**:
+- [ ] Health monitoring starts immediately after deployment
+- [ ] Error rate tracked continuously for 5 minutes
+- [ ] Response time compared to previous deployment
+- [ ] Availability monitored with 10-second intervals
+- [ ] Rollback triggered if health score < 70
+- [ ] Rollback completes in <30 seconds
+- [ ] Notifications sent to Slack/Teams
+- [ ] Incident created in Linear/Jira automatically
+- [ ] Rollback reason logged in audit trail
+
+**Priority**: P0  
+**Estimated Points**: 13
+
+---
+
+### Epic: Team Collaboration
+
+#### Story 5: As a product manager, I want Kordra to integrate with Teams so engineering updates flow automatically to my channels
+
+**Acceptance Criteria**:
+- [ ] Deployment notifications posted to Teams channel
+- [ ] PR notifications with AI summaries
+- [ ] Daily team velocity summary
+- [ ] Sprint progress updates
+- [ ] Blocker alerts with severity indicators
+- [ ] Interactive buttons for approvals
+- [ ] @mentions for relevant team members
+- [ ] Configurable notification frequency
+
+**Priority**: P1  
+**Estimated Points**: 8
+
+---
+
+#### Story 6: As a team, we want a unified timeline showing all team activity so we can see who's working on what
+
+**Acceptance Criteria**:
+- [ ] Real-time updates (< 2 second latency)
+- [ ] Shows commits, PRs, deployments, comments
+- [ ] Includes AI actions (tests, refactorings, etc.)
+- [ ] Filterable by developer, repository, date range
+- [ ] Searchable by keywords
+- [ ] Exportable to CSV/JSON
+- [ ] Desktop notifications for important events
+- [ ] Mobile-responsive view
+
+**Priority**: P1  
+**Estimated Points**: 13
+
+---
+
+### Epic: System Health Monitoring
+
+#### Story 7: As a team, we want a health dashboard showing project status and dependencies so we can spot issues early
+
+**Acceptance Criteria**:
+- [ ] Overall health score displayed prominently
+- [ ] Service status for all components
+- [ ] Uptime percentage (current month + historical)
+- [ ] Performance deltas vs. previous week
+- [ ] Bug detection dashboard with severity levels
+- [ ] Deployment pipeline health metrics
+- [ ] Infrastructure monitoring (CPU, memory, disk)
+- [ ] AI-driven risk scores with recommendations
+- [ ] Live graphs updated every 10 seconds
+- [ ] Anomaly alerts with root cause analysis
+- [ ] Export reports for stakeholders
+
+**Priority**: P1  
+**Estimated Points**: 21
+
+---
+
+### Epic: Voice & Emotional Intelligence
+
+#### Story 8: As a developer, I want to control Kordra with voice commands so I can code hands-free
+
+**Acceptance Criteria**:
+- [ ] Wake word "Hey Kordra" recognized reliably (>95% accuracy)
+- [ ] Supports common commands (deploy, test, explain, refactor)
+- [ ] Voice response plays automatically
+- [ ] Commands execute with same accuracy as text (>90%)
+- [ ] Works offline for basic commands
+- [ ] Visual feedback shows when listening
+- [ ] Confirmation required for destructive actions
+- [ ] Voice history searchable
+
+**Priority**: P2  
+**Estimated Points**: 13
+
+---
+
+#### Story 9: As a developer, I want Kordra to detect when I'm frustrated and offer help so I don't waste time on blockers
+
+**Acceptance Criteria**:
+- [ ] Frustration detected from repeated errors (>3 in 5 minutes)
+- [ ] Rapid undo/redo patterns trigger help offer
+- [ ] Time spent on same issue tracked (>30 minutes)
+- [ ] Voice tone analyzed for stress (if using voice)
+- [ ] Help offered proactively with context-aware suggestions
+- [ ] Communication style adapted (more detailed explanations)
+- [ ] Option to hand off task to AI completely
+- [ ] Break suggestions after 2+ hours continuous coding
+
+**Priority**: P2  
+**Estimated Points**: 21
+
+---
+
+### Epic: Autonomy Control
+
+#### Story 10: As a tech lead, I want to configure autonomy levels per task type so I maintain control over critical operations
+
+**Acceptance Criteria**:
+- [ ] Global autonomy mode selectable (Manual, Assisted, Autonomous)
+- [ ] Task-specific modes configurable (code, test, deploy, refactor)
+- [ ] Auto-approval thresholds adjustable (confidence, risk, file count)
+- [ ] Approval workflows definable with rules
+- [ ] Approver roles assignable
+- [ ] Timeout configurable (auto-reject after N minutes)
+- [ ] Audit log of all autonomy decisions
+- [ ] Settings exportable/importable as YAML
+
+**Priority**: P0  
+**Estimated Points**: 13
+
+---
+
 ## Success Metrics
 
 ### User Metrics

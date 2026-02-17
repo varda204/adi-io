@@ -2,17 +2,18 @@
 
 ## Table of Contents
 1. [System Architecture](#system-architecture)
-2. [Frontend Architecture](#frontend-architecture)
-3. [Component Structure](#component-structure)
-4. [State Management](#state-management)
-5. [Data Flow](#data-flow)
-6. [API Integration](#api-integration)
-7. [Authentication & Security](#authentication--security)
-8. [Performance Optimization](#performance-optimization)
-9. [Build & Deployment](#build--deployment)
-10. [Testing Strategy](#testing-strategy)
-11. [Browser Compatibility](#browser-compatibility)
-12. [Accessibility Standards](#accessibility-standards)
+2. [Kordra Orchestration Layer](#kordra-orchestration-layer)
+3. [Frontend Architecture](#frontend-architecture)
+4. [Component Structure](#component-structure)
+5. [State Management](#state-management)
+6. [Data Flow](#data-flow)
+7. [API Integration](#api-integration)
+8. [Authentication & Security](#authentication--security)
+9. [Performance Optimization](#performance-optimization)
+10. [Build & Deployment](#build--deployment)
+11. [Testing Strategy](#testing-strategy)
+12. [Browser Compatibility](#browser-compatibility)
+13. [Accessibility Standards](#accessibility-standards)
 
 ---
 
@@ -82,6 +83,1417 @@ ADI-IO is a Single Page Application (SPA) built on a modern React-based architec
   - Nested routes support
   - Route-based code splitting
   - Protected routes for authentication
+
+---
+
+## Kordra Orchestration Layer
+
+### Overview
+The Kordra Orchestration Layer serves as the agentic AI brain that coordinates autonomous development workflows. It employs a layered architecture designed for proactive autonomy, seamless IDE integration, and intelligent decision-making.
+
+### Layered Architecture
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                    APPLICATION LAYER                            │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │ Developer Interfaces                                      │  │
+│  │  • Web UI  • VS Code  • Cursor  • JetBrains  • CLI      │  │
+│  └──────────────────────────────────────────────────────────┘  │
+└────────────────────────────────┬───────────────────────────────┘
+                                 │
+                                 ▼
+┌────────────────────────────────────────────────────────────────┐
+│                     BUILDER LAYER                               │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │ Feature Builders & Orchestration Tools                    │  │
+│  │  • Multi-IDE Sync  • Voice Interface  • Team Mode        │  │
+│  │  • Health Monitor  • Deploy Manager  • Context Manager   │  │
+│  └──────────────────────────────────────────────────────────┘  │
+└────────────────────────────────┬───────────────────────────────┘
+                                 │
+                                 ▼
+┌────────────────────────────────────────────────────────────────┐
+│                     PLATFORM LAYER                              │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │ Core Orchestration Engine                                 │  │
+│  │  • Agent Dispatcher  • Memory Manager  • Guardrails      │  │
+│  │  • Event Bus  • State Machine  • Tool Registry           │  │
+│  └──────────────────────────────────────────────────────────┘  │
+└────────────────────────────────┬───────────────────────────────┘
+                                 │
+                                 ▼
+        External Integrations & Services
+```
+
+### 1. Proactive Autonomy Features
+
+#### 1.1 Autonomous Decision Engine
+**Purpose**: Enable Kordra to act without constant user prompts
+
+**Capabilities**:
+- **Predictive Task Initiation**: Analyzes patterns and proactively suggests next steps
+  ```typescript
+  interface ProactiveTask {
+    type: 'code_optimization' | 'test_generation' | 'deployment' | 'refactoring';
+    confidence: number; // 0.0 to 1.0
+    reasoning: string;
+    estimatedImpact: 'low' | 'medium' | 'high';
+    autoExecute: boolean; // Based on autonomy level
+  }
+  ```
+
+- **Auto-completion of Workflows**: Detects incomplete workflows and offers to finish them
+  - Missing tests → Generates comprehensive test suite
+  - Uncommitted changes → Creates logical commit with message
+  - Broken builds → Diagnoses and attempts auto-fix
+
+- **Continuous Improvement**: Monitors codebase and suggests improvements
+  - Performance optimization opportunities
+  - Security vulnerability patches
+  - Dependency updates with compatibility checks
+  - Code smell detection and refactoring suggestions
+
+#### 1.2 Emotional Intelligence Layer
+**Purpose**: Understand developer emotional state and adapt behavior accordingly
+
+**Components**:
+- **Frustration Detection**
+  ```typescript
+  interface EmotionalContext {
+    frustrationLevel: number; // 0-100
+    indicators: {
+      repeatedErrors: number;
+      rapidRetries: number;
+      deleteUndoPatterns: number;
+      timeOnSameIssue: number; // minutes
+    };
+    suggestedIntervention: 'none' | 'offer_help' | 'simplify_task' | 'take_break';
+  }
+  ```
+
+- **Adaptive Communication Style**
+  - **High Frustration**: More detailed explanations, offer to take over task
+  - **Normal State**: Standard assistance level
+  - **Flow State**: Minimal interruptions, background assistance only
+
+- **Voice Tone Analysis** (when using voice commands)
+  - Detect stress through speech patterns
+  - Adjust response verbosity based on developer's urgency
+  - Proactive break suggestions during extended sessions
+
+**Implementation**:
+```typescript
+class EmotionalIntelligenceEngine {
+  private context: EmotionalContext;
+  
+  analyzePattern(events: DeveloperEvent[]): EmotionalContext {
+    // Analyze recent events for frustration indicators
+    const frustrationScore = this.calculateFrustration(events);
+    
+    if (frustrationScore > 70) {
+      return {
+        frustrationLevel: frustrationScore,
+        suggestedIntervention: 'offer_help',
+        message: "I notice you've been working on this for a while. Would you like me to take a look?"
+      };
+    }
+    // ... more logic
+  }
+  
+  adaptBehavior(context: EmotionalContext): BehaviorConfig {
+    return {
+      verbosity: context.frustrationLevel > 50 ? 'detailed' : 'concise',
+      proactiveHelp: context.frustrationLevel > 60,
+      autoExecute: context.frustrationLevel > 80, // Take over if very frustrated
+    };
+  }
+}
+```
+
+---
+
+### 2. Multi-IDE Synchronization
+
+#### 2.1 Cross-IDE State Management
+**Challenge**: Keep context synchronized across VS Code, Cursor, and JetBrains IDEs
+
+**Architecture**:
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  VS Code    │     │   Cursor    │     │  JetBrains  │
+│  Extension  │     │  Extension  │     │   Plugin    │
+└──────┬──────┘     └──────┬──────┘     └──────┬──────┘
+       │                   │                   │
+       └───────────────────┼───────────────────┘
+                           │
+                           ▼
+              ┌────────────────────────┐
+              │  Sync Coordination Hub │
+              │  (WebSocket Server)    │
+              └────────────────────────┘
+                           │
+                           ▼
+              ┌────────────────────────┐
+              │   Shared Context Store │
+              │   • Active file        │
+              │   • Cursor position    │
+              │   • Selected code      │
+              │   • Chat history       │
+              │   • Memory context     │
+              └────────────────────────┘
+```
+
+**Synchronization Protocol**:
+```typescript
+interface SyncEvent {
+  timestamp: number;
+  source: 'vscode' | 'cursor' | 'jetbrains';
+  type: 'file_open' | 'cursor_move' | 'selection' | 'edit' | 'chat_message';
+  data: {
+    filePath?: string;
+    position?: { line: number; column: number };
+    selection?: { start: Position; end: Position };
+    content?: string;
+  };
+  sessionId: string;
+}
+
+class IDESyncManager {
+  private wsServer: WebSocketServer;
+  private contextStore: SharedContextStore;
+  
+  async syncEvent(event: SyncEvent): Promise<void> {
+    // Broadcast to all connected IDEs except source
+    await this.wsServer.broadcast(event, event.source);
+    
+    // Update shared context
+    await this.contextStore.update(event);
+    
+    // Trigger Kordra context refresh
+    await this.refreshKordraContext(event.sessionId);
+  }
+  
+  async handleConflict(events: SyncEvent[]): Promise<SyncEvent> {
+    // Conflict resolution: Last-write-wins with timestamp
+    return events.sort((a, b) => b.timestamp - a.timestamp)[0];
+  }
+}
+```
+
+#### 2.2 IDE-Specific Adapters
+**Purpose**: Abstract IDE-specific APIs into unified interface
+
+**Adapter Pattern**:
+```typescript
+interface IDEAdapter {
+  // File operations
+  openFile(path: string): Promise<void>;
+  getCurrentFile(): Promise<string>;
+  getFileContent(path: string): Promise<string>;
+  
+  // Editor operations
+  getCursorPosition(): Promise<Position>;
+  getSelection(): Promise<Selection>;
+  insertText(text: string, position: Position): Promise<void>;
+  
+  // UI operations
+  showNotification(message: string, type: 'info' | 'warning' | 'error'): void;
+  createWebview(html: string): Promise<WebviewPanel>;
+}
+
+// VS Code implementation
+class VSCodeAdapter implements IDEAdapter {
+  async openFile(path: string): Promise<void> {
+    const document = await vscode.workspace.openTextDocument(path);
+    await vscode.window.showTextDocument(document);
+  }
+  // ... other methods
+}
+
+// JetBrains implementation
+class JetBrainsAdapter implements IDEAdapter {
+  async openFile(path: string): Promise<void> {
+    // Use IntelliJ Platform API
+    FileEditorManager.getInstance(project).openFile(virtualFile, true);
+  }
+  // ... other methods
+}
+```
+
+**Context Preservation**:
+- **Session Persistence**: Save and restore entire workspace state
+- **Conversation History**: Synchronized chat history across IDEs
+- **Code Context**: Maintain awareness of recently viewed/edited files
+- **Task State**: Resume interrupted tasks from any IDE
+
+---
+
+### 3. Zero-Config Deployment
+
+#### 3.1 Auto-Configuration Generation
+**Purpose**: Eliminate manual deployment configuration
+
+**Smart Detection**:
+```typescript
+interface ProjectAnalysis {
+  framework: 'react' | 'vue' | 'next' | 'nuxt' | 'express' | 'django' | 'rails';
+  buildCommand: string;
+  outputDirectory: string;
+  environmentVariables: EnvironmentVar[];
+  dependencies: Dependency[];
+  recommendedPlatform: 'vercel' | 'netlify' | 'aws' | 'railway';
+}
+
+class ConfigurationGenerator {
+  async analyzeProject(rootPath: string): Promise<ProjectAnalysis> {
+    // Detect framework from package.json, requirements.txt, Gemfile, etc.
+    const packageJson = await this.readPackageJson(rootPath);
+    const framework = this.detectFramework(packageJson);
+    
+    // Generate optimal build configuration
+    const buildConfig = this.generateBuildConfig(framework);
+    
+    // Detect required environment variables
+    const envVars = await this.scanForEnvVars(rootPath);
+    
+    // Recommend platform based on project characteristics
+    const platform = this.recommendPlatform(framework, packageJson);
+    
+    return { framework, ...buildConfig, environmentVariables: envVars, recommendedPlatform: platform };
+  }
+  
+  async generateDeploymentConfig(analysis: ProjectAnalysis): Promise<DeploymentConfig> {
+    // Generate platform-specific configuration
+    switch (analysis.recommendedPlatform) {
+      case 'vercel':
+        return this.generateVercelConfig(analysis);
+      case 'netlify':
+        return this.generateNetlifyConfig(analysis);
+      case 'aws':
+        return this.generateAWSConfig(analysis);
+      // ...
+    }
+  }
+}
+```
+
+**Auto-Generated Configs**:
+- **Vercel** (`vercel.json`)
+- **Netlify** (`netlify.toml`)
+- **GitHub Actions** (`.github/workflows/deploy.yml`)
+- **Docker** (`Dockerfile`, `docker-compose.yml`)
+- **AWS** (CloudFormation/CDK templates)
+
+#### 3.2 Rollback Protection
+**Purpose**: Safe deployments with automatic rollback on failure
+
+**Health Scoring System**:
+```typescript
+interface HealthMetrics {
+  errorRate: number; // Requests with 5xx errors / total requests
+  responseTime: number; // P95 response time in ms
+  availability: number; // Uptime percentage
+  throughput: number; // Requests per second
+  customMetrics: Record<string, number>;
+}
+
+interface DeploymentHealth {
+  score: number; // 0-100
+  status: 'healthy' | 'degraded' | 'unhealthy';
+  metrics: HealthMetrics;
+  comparison: {
+    previous: HealthMetrics;
+    delta: HealthMetrics; // Percentage change
+  };
+}
+
+class RollbackProtection {
+  async monitorDeployment(deploymentId: string, duration: number = 300000): Promise<DeploymentHealth> {
+    const startTime = Date.now();
+    const previousMetrics = await this.getPreviousDeploymentMetrics();
+    
+    // Monitor for specified duration (default 5 minutes)
+    while (Date.now() - startTime < duration) {
+      const currentMetrics = await this.collectMetrics(deploymentId);
+      const health = this.calculateHealthScore(currentMetrics, previousMetrics);
+      
+      if (health.score < 70) {
+        // Automatic rollback triggered
+        await this.rollback(deploymentId, 'Health score below threshold');
+        return health;
+      }
+      
+      await this.sleep(10000); // Check every 10 seconds
+    }
+    
+    return this.finalHealthCheck(deploymentId);
+  }
+  
+  private calculateHealthScore(current: HealthMetrics, previous: HealthMetrics): number {
+    let score = 100;
+    
+    // Penalize increased error rate
+    if (current.errorRate > previous.errorRate * 1.5) score -= 30;
+    
+    // Penalize slower response time
+    if (current.responseTime > previous.responseTime * 1.3) score -= 20;
+    
+    // Penalize decreased availability
+    if (current.availability < previous.availability * 0.95) score -= 40;
+    
+    return Math.max(0, score);
+  }
+}
+```
+
+**Rollback Mechanisms**:
+- **Instant Rollback**: Revert to previous deployment in <30 seconds
+- **Traffic Splitting**: Gradually shift traffic (10% → 50% → 100%)
+- **Canary Deployments**: Test with subset of users first
+- **Blue-Green Deployments**: Maintain two identical environments
+
+---
+
+### 4. Team Mode
+
+#### 4.1 Unified Development Timeline
+**Purpose**: Provide real-time visibility into team activity
+
+**Timeline Architecture**:
+```typescript
+interface TimelineEvent {
+  id: string;
+  timestamp: Date;
+  actor: {
+    type: 'human' | 'ai';
+    id: string;
+    name: string;
+    avatar?: string;
+  };
+  action: 'commit' | 'pr_opened' | 'pr_merged' | 'deployment' | 'comment' | 'ai_action';
+  details: {
+    repository?: string;
+    branch?: string;
+    files?: string[];
+    description: string;
+    impact: 'low' | 'medium' | 'high';
+  };
+  aiContext?: {
+    reasoning: string;
+    confidence: number;
+    requiresApproval: boolean;
+  };
+}
+
+class UnifiedTimeline {
+  private eventStore: EventStore;
+  private subscribers: Map<string, WebSocket>;
+  
+  async addEvent(event: TimelineEvent): Promise<void> {
+    // Store event
+    await this.eventStore.insert(event);
+    
+    // Real-time broadcast to all team members
+    this.broadcast(event);
+    
+    // Generate AI summary if needed
+    if (this.shouldGenerateSummary(event)) {
+      const summary = await this.generateAISummary(event);
+      this.broadcast({ ...event, aiSummary: summary });
+    }
+  }
+  
+  private shouldGenerateSummary(event: TimelineEvent): boolean {
+    // Generate summaries for complex or high-impact events
+    return event.details.impact === 'high' || 
+           event.action === 'pr_merged' ||
+           event.actor.type === 'ai';
+  }
+}
+```
+
+**Timeline Features**:
+- **Real-time Updates**: WebSocket-based instant notifications
+- **Filterable Views**: By developer, repository, action type, time range
+- **AI Summaries**: Automated summaries of complex changes
+- **Impact Indicators**: Visual indication of change magnitude
+- **Conflict Detection**: Highlight potential merge conflicts
+
+#### 4.2 Telemetry Streams
+**Purpose**: Continuous monitoring of team performance and project health
+
+**Metrics Collection**:
+```typescript
+interface TelemetryStream {
+  // Velocity Metrics
+  velocity: {
+    commitsPerDay: number;
+    linesChanged: number;
+    prsOpened: number;
+    prsMerged: number;
+    averagePRSize: number;
+    cycleTime: number; // Hours from PR open to merge
+  };
+  
+  // Quality Metrics
+  quality: {
+    testCoverage: number; // Percentage
+    buildSuccessRate: number; // Percentage
+    bugDensity: number; // Bugs per 1000 lines
+    codeReviewIterations: number; // Average iterations per PR
+    techDebtScore: number; // 0-100
+  };
+  
+  // Collaboration Metrics
+  collaboration: {
+    activeDevelopers: number;
+    codeReviewParticipation: number; // Percentage of team
+    knowledgeDistribution: number; // How spread out code knowledge is
+    pairProgrammingSessions: number;
+  };
+  
+  // AI Metrics
+  aiActivity: {
+    autonomousActions: number;
+    assistedActions: number;
+    approvalRate: number; // Percentage of AI suggestions approved
+    timeSaved: number; // Estimated hours
+  };
+}
+
+class TelemetryEngine {
+  async aggregateDailyMetrics(): Promise<TelemetryStream> {
+    const [velocityMetrics, qualityMetrics, collaborationMetrics, aiMetrics] = 
+      await Promise.all([
+        this.calculateVelocity(),
+        this.calculateQuality(),
+        this.calculateCollaboration(),
+        this.calculateAIImpact()
+      ]);
+    
+    return {
+      velocity: velocityMetrics,
+      quality: qualityMetrics,
+      collaboration: collaborationMetrics,
+      aiActivity: aiMetrics
+    };
+  }
+  
+  async detectAnomalies(metrics: TelemetryStream): Promise<Anomaly[]> {
+    const anomalies: Anomaly[] = [];
+    
+    // Detect unusual patterns
+    if (metrics.velocity.cycleTime > this.baseline.velocity.cycleTime * 2) {
+      anomalies.push({
+        type: 'velocity_drop',
+        severity: 'high',
+        message: 'PR cycle time has doubled',
+        recommendation: 'Review code review process and PR size'
+      });
+    }
+    
+    if (metrics.quality.buildSuccessRate < 0.8) {
+      anomalies.push({
+        type: 'build_failures',
+        severity: 'critical',
+        message: 'Build success rate below 80%',
+        recommendation: 'Focus on fixing flaky tests and build issues'
+      });
+    }
+    
+    return anomalies;
+  }
+}
+```
+
+**Telemetry Dashboard**:
+- **Real-time Graphs**: Live charts of key metrics
+- **Trend Analysis**: Historical data with trend lines
+- **Anomaly Alerts**: Automatic alerts for unusual patterns
+- **Comparative Views**: Compare with previous sprints/weeks
+- **Export Capabilities**: CSV/JSON export for external analysis
+
+---
+
+### 5. System Health Monitoring
+
+#### 5.1 Uptime Tracking
+**Purpose**: Monitor service availability and reliability
+
+**Monitoring Stack**:
+```typescript
+interface UptimeMetrics {
+  services: {
+    orchestrationLayer: ServiceHealth;
+    apiGateway: ServiceHealth;
+    database: ServiceHealth;
+    vectorDB: ServiceHealth;
+    messageQueue: ServiceHealth;
+    ideExtensions: Map<string, ServiceHealth>;
+  };
+  overall: {
+    uptime: number; // Percentage (e.g., 99.95)
+    mtbf: number; // Mean Time Between Failures (hours)
+    mttr: number; // Mean Time To Recovery (minutes)
+  };
+}
+
+interface ServiceHealth {
+  status: 'operational' | 'degraded' | 'down';
+  uptime: number; // Percentage
+  lastIncident?: Date;
+  responseTime: number; // Average in ms
+  errorRate: number; // Percentage
+}
+
+class UptimeMonitor {
+  private healthChecks: Map<string, HealthCheckConfig>;
+  
+  async performHealthChecks(): Promise<UptimeMetrics> {
+    const checks = Array.from(this.healthChecks.entries()).map(
+      async ([service, config]) => {
+        const health = await this.checkService(service, config);
+        return [service, health];
+      }
+    );
+    
+    const results = await Promise.all(checks);
+    const services = Object.fromEntries(results);
+    
+    return {
+      services,
+      overall: this.calculateOverallHealth(services)
+    };
+  }
+  
+  private async checkService(service: string, config: HealthCheckConfig): Promise<ServiceHealth> {
+    try {
+      const start = Date.now();
+      const response = await fetch(config.endpoint, { timeout: 5000 });
+      const responseTime = Date.now() - start;
+      
+      return {
+        status: response.ok ? 'operational' : 'degraded',
+        uptime: await this.getUptimePercentage(service),
+        responseTime,
+        errorRate: await this.getErrorRate(service)
+      };
+    } catch (error) {
+      return {
+        status: 'down',
+        uptime: await this.getUptimePercentage(service),
+        responseTime: 0,
+        errorRate: 100
+      };
+    }
+  }
+}
+```
+
+#### 5.2 Performance Delta Tracking
+**Purpose**: Track performance changes over time
+
+**Delta Calculation**:
+```typescript
+interface PerformanceDelta {
+  metric: string;
+  current: number;
+  previous: number;
+  delta: number; // Percentage change
+  direction: 'improving' | 'degrading' | 'stable';
+  threshold: 'within_bounds' | 'warning' | 'critical';
+}
+
+class PerformanceTracker {
+  async calculateDeltas(timeRange: TimeRange): Promise<PerformanceDelta[]> {
+    const metrics = ['responseTime', 'throughput', 'errorRate', 'cpuUsage', 'memoryUsage'];
+    const deltas: PerformanceDelta[] = [];
+    
+    for (const metric of metrics) {
+      const current = await this.getCurrentValue(metric);
+      const previous = await this.getPreviousValue(metric, timeRange);
+      const delta = ((current - previous) / previous) * 100;
+      
+      deltas.push({
+        metric,
+        current,
+        previous,
+        delta,
+        direction: this.determineDirection(metric, delta),
+        threshold: this.checkThreshold(metric, delta)
+      });
+    }
+    
+    return deltas;
+  }
+  
+  private determineDirection(metric: string, delta: number): 'improving' | 'degrading' | 'stable' {
+    const improvingMetrics = ['throughput', 'uptime'];
+    const degradingMetrics = ['responseTime', 'errorRate', 'cpuUsage', 'memoryUsage'];
+    
+    if (Math.abs(delta) < 5) return 'stable';
+    
+    if (improvingMetrics.includes(metric)) {
+      return delta > 0 ? 'improving' : 'degrading';
+    } else {
+      return delta < 0 ? 'improving' : 'degrading';
+    }
+  }
+}
+```
+
+#### 5.3 Anomaly Detection
+**Purpose**: Identify unusual patterns before they become critical
+
+**ML-Based Anomaly Detection**:
+```typescript
+interface AnomalyDetectionConfig {
+  algorithm: 'statistical' | 'ml' | 'hybrid';
+  sensitivity: 'low' | 'medium' | 'high';
+  metrics: string[];
+  windowSize: number; // Number of data points to consider
+}
+
+class AnomalyDetector {
+  private model: AnomalyDetectionModel;
+  
+  async detectAnomalies(metrics: TimeSeriesData): Promise<Anomaly[]> {
+    const anomalies: Anomaly[] = [];
+    
+    // Statistical approach: Z-score based detection
+    const zScores = this.calculateZScores(metrics);
+    for (const [metric, zScore] of Object.entries(zScores)) {
+      if (Math.abs(zScore) > 3) {
+        anomalies.push({
+          type: 'statistical',
+          metric,
+          severity: Math.abs(zScore) > 4 ? 'critical' : 'warning',
+          value: metrics[metric],
+          expectedRange: this.getExpectedRange(metric),
+          timestamp: new Date()
+        });
+      }
+    }
+    
+    // ML approach: Isolation Forest or AutoEncoder
+    const mlAnomalies = await this.model.predict(metrics);
+    anomalies.push(...mlAnomalies);
+    
+    return this.deduplicate(anomalies);
+  }
+  
+  async trainModel(historicalData: TimeSeriesData[]): Promise<void> {
+    // Train ML model on historical data
+    await this.model.fit(historicalData);
+  }
+}
+```
+
+**Anomaly Response Actions**:
+- **Automatic Scaling**: Increase resources when load anomaly detected
+- **Alert Notification**: Send alerts to team via Slack/Teams/email
+- **Self-Healing**: Attempt automatic remediation for known issues
+- **Incident Creation**: Create incident ticket for manual investigation
+
+---
+
+### 6. Voice & Emotional Intelligence Layer
+
+#### 6.1 Natural Speech Interface
+**Purpose**: Enable developers to interact with Kordra using voice
+
+**Speech Recognition Pipeline**:
+```typescript
+interface VoiceCommand {
+  rawText: string;
+  intent: string;
+  entities: Record<string, string>;
+  confidence: number;
+  context: {
+    previousCommands: string[];
+    currentFile?: string;
+    selectedCode?: string;
+  };
+}
+
+class VoiceInterface {
+  private speechRecognition: SpeechRecognition;
+  private nlpEngine: NLPEngine;
+  
+  async processVoiceInput(audio: AudioBuffer): Promise<VoiceCommand> {
+    // Step 1: Speech to Text
+    const transcript = await this.speechRecognition.transcribe(audio);
+    
+    // Step 2: Intent Recognition
+    const intent = await this.nlpEngine.classifyIntent(transcript);
+    
+    // Step 3: Entity Extraction
+    const entities = await this.nlpEngine.extractEntities(transcript);
+    
+    // Step 4: Context Enhancement
+    const context = await this.getRelevantContext();
+    
+    return {
+      rawText: transcript,
+      intent,
+      entities,
+      confidence: intent.confidence,
+      context
+    };
+  }
+  
+  async executeVoiceCommand(command: VoiceCommand): Promise<ActionResult> {
+    switch (command.intent) {
+      case 'create_component':
+        return await this.createComponent(command.entities);
+      case 'run_tests':
+        return await this.runTests(command.entities);
+      case 'deploy':
+        return await this.deploy(command.entities);
+      case 'explain_code':
+        return await this.explainCode(command.context.selectedCode);
+      default:
+        return await this.handleGenericCommand(command);
+    }
+  }
+}
+```
+
+**Supported Commands**:
+- "Create a new React component called UserProfile"
+- "Run the unit tests for authentication"
+- "Deploy to staging"
+- "Explain this code" (with code selected)
+- "Fix this bug" (with error selected)
+- "Optimize this function for performance"
+- "Generate tests for this component"
+
+#### 6.2 Emotion-Aware Responses
+**Purpose**: Adapt Kordra's behavior based on developer's emotional state
+
+**Emotional State Detection**:
+```typescript
+interface EmotionalState {
+  primary: 'calm' | 'frustrated' | 'focused' | 'confused' | 'excited';
+  intensity: number; // 0-100
+  indicators: {
+    voiceAnalysis?: {
+      pitch: number;
+      speed: number;
+      volume: number;
+      tone: 'neutral' | 'stressed' | 'relaxed';
+    };
+    behaviorAnalysis: {
+      errorFrequency: number;
+      commandRetries: number;
+      rapidChanges: boolean;
+      longPause: boolean;
+    };
+    textAnalysis?: {
+      sentiment: number; // -1 to 1
+      urgencyWords: string[];
+    };
+  };
+}
+
+class EmotionalIntelligence {
+  async analyzeEmotionalState(
+    voiceData?: AudioBuffer,
+    recentActions?: DeveloperAction[]
+  ): Promise<EmotionalState> {
+    const indicators: EmotionalState['indicators'] = {
+      behaviorAnalysis: this.analyzeBehavior(recentActions)
+    };
+    
+    if (voiceData) {
+      indicators.voiceAnalysis = await this.analyzeVoice(voiceData);
+    }
+    
+    // Determine primary emotional state
+    const primary = this.determinePrimaryEmotion(indicators);
+    const intensity = this.calculateIntensity(indicators);
+    
+    return { primary, intensity, indicators };
+  }
+  
+  async adaptResponse(
+    response: string,
+    emotionalState: EmotionalState
+  ): Promise<string> {
+    switch (emotionalState.primary) {
+      case 'frustrated':
+        // Offer more help, simplify explanations
+        return this.addEmpatheticTone(response) + 
+               "\n\nWould you like me to take over this task?";
+      
+      case 'confused':
+        // Provide step-by-step guidance
+        return this.breakIntoSteps(response);
+      
+      case 'focused':
+        // Minimal interruptions, concise responses
+        return this.makeConcise(response);
+      
+      case 'excited':
+        // Match enthusiasm, provide encouragement
+        return this.addPositiveTone(response);
+      
+      default:
+        return response;
+    }
+  }
+}
+```
+
+---
+
+### 7. Autonomy Control Center
+
+#### 7.1 Autonomy Modes
+**Purpose**: Give developers control over AI autonomy level
+
+**Mode Definitions**:
+```typescript
+enum AutonomyMode {
+  MANUAL = 'manual',       // AI suggests, developer executes
+  ASSISTED = 'assisted',   // AI executes with approval
+  AUTONOMOUS = 'autonomous' // AI executes automatically
+}
+
+interface AutonomyConfig {
+  globalMode: AutonomyMode;
+  taskSpecificModes: {
+    codeGeneration: AutonomyMode;
+    testing: AutonomyMode;
+    deployment: AutonomyMode;
+    refactoring: AutonomyMode;
+    dependencyUpdates: AutonomyMode;
+  };
+  approvalRules: ApprovalRule[];
+  autoApprovalThresholds: {
+    confidenceScore: number; // 0-1, require approval if below this
+    riskLevel: 'low' | 'medium' | 'high';
+    affectedFiles: number; // Require approval if more files affected
+  };
+}
+
+class AutonomyController {
+  private config: AutonomyConfig;
+  
+  async shouldAutoExecute(task: Task): Promise<boolean> {
+    // Check global mode
+    if (this.config.globalMode === AutonomyMode.MANUAL) {
+      return false;
+    }
+    
+    // Check task-specific mode
+    const taskMode = this.config.taskSpecificModes[task.type];
+    if (taskMode === AutonomyMode.MANUAL) {
+      return false;
+    }
+    
+    // Check thresholds for assisted mode
+    if (taskMode === AutonomyMode.ASSISTED) {
+      return this.meetsAutoApprovalThresholds(task);
+    }
+    
+    // Autonomous mode - check safety rules
+    return this.passesAutonomySafetyChecks(task);
+  }
+  
+  private meetsAutoApprovalThresholds(task: Task): boolean {
+    const thresholds = this.config.autoApprovalThresholds;
+    
+    return (
+      task.confidenceScore >= thresholds.confidenceScore &&
+      task.riskAssessment.level === 'low' &&
+      task.affectedFiles.length <= thresholds.affectedFiles
+    );
+  }
+}
+```
+
+**Control Center UI**:
+```typescript
+interface AutonomyControlPanel {
+  // Global toggle
+  autonomySlider: {
+    value: 0 | 1 | 2; // Manual, Assisted, Autonomous
+    label: string;
+  };
+  
+  // Task-specific controls
+  taskControls: {
+    codeGeneration: AutonomyToggle;
+    testing: AutonomyToggle;
+    deployment: AutonomyToggle;
+    refactoring: AutonomyToggle;
+  };
+  
+  // Safety settings
+  safetySettings: {
+    requireApprovalFor: string[]; // List of actions requiring approval
+    autoRollbackOn: string[]; // Conditions triggering auto-rollback
+    notificationPreferences: NotificationConfig;
+  };
+  
+  // Audit log
+  recentActions: {
+    timestamp: Date;
+    action: string;
+    mode: AutonomyMode;
+    approvedBy?: string;
+    outcome: 'success' | 'failure' | 'rolled_back';
+  }[];
+}
+```
+
+#### 7.2 Approval Workflows
+**Purpose**: Structured approval process for high-risk actions
+
+**Approval Rules**:
+```typescript
+interface ApprovalRule {
+  condition: {
+    taskType?: string[];
+    riskLevel?: 'low' | 'medium' | 'high';
+    affectedFiles?: { min?: number; max?: number };
+    environment?: 'development' | 'staging' | 'production';
+  };
+  requires: {
+    approvers: number; // Number of approvals needed
+    roles?: string[]; // Specific roles that can approve
+    timeout?: number; // Auto-reject after timeout (milliseconds)
+  };
+  notification: {
+    channels: ('email' | 'slack' | 'teams' | 'ui')[];
+    urgency: 'low' | 'medium' | 'high';
+  };
+}
+
+class ApprovalWorkflow {
+  async requestApproval(task: Task, rule: ApprovalRule): Promise<ApprovalResult> {
+    // Create approval request
+    const request = await this.createApprovalRequest(task, rule);
+    
+    // Notify approvers
+    await this.notifyApprovers(request, rule.notification);
+    
+    // Wait for approvals or timeout
+    const result = await this.waitForApprovals(request, rule.requires);
+    
+    // Log decision
+    await this.logApprovalDecision(request, result);
+    
+    return result;
+  }
+  
+  private async waitForApprovals(
+    request: ApprovalRequest,
+    requirements: ApprovalRule['requires']
+  ): Promise<ApprovalResult> {
+    const timeout = requirements.timeout || 3600000; // 1 hour default
+    const startTime = Date.now();
+    
+    while (Date.now() - startTime < timeout) {
+      const approvals = await this.getApprovals(request.id);
+      
+      if (approvals.approved >= requirements.approvers) {
+        return { status: 'approved', approvals };
+      }
+      
+      if (approvals.rejected > 0) {
+        return { status: 'rejected', approvals };
+      }
+      
+      await this.sleep(5000); // Check every 5 seconds
+    }
+    
+    return { status: 'timeout', approvals: await this.getApprovals(request.id) };
+  }
+}
+```
+
+---
+
+### 8. Integration Adapters
+
+#### 8.1 Version Control Integrations
+**GitHub, GitLab, Bitbucket**
+
+```typescript
+interface VCSAdapter {
+  // Repository operations
+  cloneRepository(url: string): Promise<Repository>;
+  createBranch(name: string): Promise<Branch>;
+  mergeBranch(source: string, target: string): Promise<MergeResult>;
+  
+  // PR/MR operations
+  createPullRequest(params: PRParams): Promise<PullRequest>;
+  reviewPullRequest(id: string, review: Review): Promise<void>;
+  mergePullRequest(id: string): Promise<MergeResult>;
+  
+  // Commit operations
+  commit(message: string, files: string[]): Promise<Commit>;
+  push(branch: string): Promise<void>;
+  
+  // Collaboration
+  requestReview(prId: string, reviewers: string[]): Promise<void>;
+  addComment(prId: string, comment: string): Promise<void>;
+}
+
+class GitHubAdapter implements VCSAdapter {
+  private octokit: Octokit;
+  
+  async createPullRequest(params: PRParams): Promise<PullRequest> {
+    const response = await this.octokit.pulls.create({
+      owner: params.owner,
+      repo: params.repo,
+      title: params.title,
+      body: params.description,
+      head: params.sourceBranch,
+      base: params.targetBranch
+    });
+    
+    return this.transformToPullRequest(response.data);
+  }
+  
+  async requestReview(prId: string, reviewers: string[]): Promise<void> {
+    await this.octokit.pulls.requestReviewers({
+      owner: this.owner,
+      repo: this.repo,
+      pull_number: parseInt(prId),
+      reviewers
+    });
+  }
+}
+```
+
+#### 8.2 Deployment Platform Integrations
+**Vercel, AWS, Netlify**
+
+```typescript
+interface DeploymentAdapter {
+  // Deployment operations
+  deploy(config: DeploymentConfig): Promise<Deployment>;
+  getDeploymentStatus(id: string): Promise<DeploymentStatus>;
+  rollback(deploymentId: string): Promise<void>;
+  
+  // Environment management
+  setEnvironmentVariable(key: string, value: string, env: string): Promise<void>;
+  getEnvironmentVariables(env: string): Promise<Record<string, string>>;
+  
+  // Domain management
+  addDomain(domain: string): Promise<void>;
+  configureDNS(domain: string, config: DNSConfig): Promise<void>;
+  
+  // Logs and metrics
+  streamLogs(deploymentId: string): AsyncIterable<LogEntry>;
+  getMetrics(deploymentId: string): Promise<DeploymentMetrics>;
+}
+
+class VercelAdapter implements DeploymentAdapter {
+  private client: VercelClient;
+  
+  async deploy(config: DeploymentConfig): Promise<Deployment> {
+    const deployment = await this.client.createDeployment({
+      name: config.projectName,
+      files: await this.prepareFiles(config.files),
+      env: config.environmentVariables,
+      buildCommand: config.buildCommand,
+      framework: config.framework
+    });
+    
+    return this.transformToDeployment(deployment);
+  }
+  
+  async* streamLogs(deploymentId: string): AsyncIterable<LogEntry> {
+    const stream = await this.client.getDeploymentLogs(deploymentId);
+    
+    for await (const log of stream) {
+      yield {
+        timestamp: log.timestamp,
+        message: log.text,
+        level: log.type
+      };
+    }
+  }
+}
+
+class AWSAdapter implements DeploymentAdapter {
+  private cloudformation: AWS.CloudFormation;
+  private s3: AWS.S3;
+  private cloudfront: AWS.CloudFront;
+  
+  async deploy(config: DeploymentConfig): Promise<Deployment> {
+    // Upload files to S3
+    await this.uploadToS3(config.files, config.s3Bucket);
+    
+    // Create or update CloudFormation stack
+    const stack = await this.deployStack(config);
+    
+    // Invalidate CloudFront cache
+    if (config.cloudfrontDistribution) {
+      await this.invalidateCache(config.cloudfrontDistribution);
+    }
+    
+    return this.transformToDeployment(stack);
+  }
+}
+```
+
+#### 8.3 Communication Platform Integrations
+**Slack, Microsoft Teams**
+
+```typescript
+interface CommunicationAdapter {
+  // Messaging
+  sendMessage(channel: string, message: string): Promise<void>;
+  sendDirectMessage(userId: string, message: string): Promise<void>;
+  
+  // Notifications
+  notifyDeployment(deployment: Deployment): Promise<void>;
+  notifyError(error: Error, context: Context): Promise<void>;
+  notifyApprovalRequired(approval: ApprovalRequest): Promise<void>;
+  
+  // Interactive messages
+  sendInteractiveMessage(channel: string, message: InteractiveMessage): Promise<void>;
+  handleInteraction(interaction: Interaction): Promise<void>;
+}
+
+class SlackAdapter implements CommunicationAdapter {
+  private client: WebClient;
+  
+  async notifyDeployment(deployment: Deployment): Promise<void> {
+    const blocks = [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `🚀 *Deployment ${deployment.status}*\n${deployment.projectName} to ${deployment.environment}`
+        }
+      },
+      {
+        type: 'section',
+        fields: [
+          {
+            type: 'mrkdwn',
+            text: `*Branch:*\n${deployment.branch}`
+          },
+          {
+            type: 'mrkdwn',
+            text: `*Commit:*\n${deployment.commitSha.substring(0, 7)}`
+          }
+        ]
+      }
+    ];
+    
+    if (deployment.status === 'success') {
+      blocks.push({
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `✅ URL: ${deployment.url}`
+        }
+      });
+    }
+    
+    await this.client.chat.postMessage({
+      channel: this.deploymentChannel,
+      blocks
+    });
+  }
+  
+  async notifyApprovalRequired(approval: ApprovalRequest): Promise<void> {
+    await this.client.chat.postMessage({
+      channel: this.approvalChannel,
+      text: `Approval required for: ${approval.task.description}`,
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `⏸️ *Approval Required*\n${approval.task.description}`
+          }
+        },
+        {
+          type: 'actions',
+          elements: [
+            {
+              type: 'button',
+              text: { type: 'plain_text', text: 'Approve' },
+              style: 'primary',
+              value: approval.id,
+              action_id: 'approve_action'
+            },
+            {
+              type: 'button',
+              text: { type: 'plain_text', text: 'Reject' },
+              style: 'danger',
+              value: approval.id,
+              action_id: 'reject_action'
+            }
+          ]
+        }
+      ]
+    });
+  }
+}
+```
+
+#### 8.4 Project Management Integrations
+**Linear, Jira, Notion**
+
+```typescript
+interface ProjectManagementAdapter {
+  // Issue management
+  createIssue(issue: Issue): Promise<string>;
+  updateIssue(id: string, updates: Partial<Issue>): Promise<void>;
+  getIssue(id: string): Promise<Issue>;
+  
+  // Linking
+  linkCommitToIssue(commitSha: string, issueId: string): Promise<void>;
+  linkPRToIssue(prId: string, issueId: string): Promise<void>;
+  
+  // Status updates
+  transitionIssue(id: string, newStatus: string): Promise<void>;
+  addComment(id: string, comment: string): Promise<void>;
+}
+
+class LinearAdapter implements ProjectManagementAdapter {
+  private client: LinearClient;
+  
+  async createIssue(issue: Issue): Promise<string> {
+    const created = await this.client.createIssue({
+      title: issue.title,
+      description: issue.description,
+      teamId: this.teamId,
+      priority: this.mapPriority(issue.priority),
+      assigneeId: issue.assignee
+    });
+    
+    return created.id;
+  }
+  
+  async linkCommitToIssue(commitSha: string, issueId: string): Promise<void> {
+    await this.client.attachmentCreate({
+      issueId,
+      title: `Commit: ${commitSha.substring(0, 7)}`,
+      url: this.getCommitUrl(commitSha),
+      type: 'commit'
+    });
+  }
+}
+```
+
+---
+
+### 9. Technical Challenges & Solutions
+
+#### 9.1 Cross-IDE State Synchronization
+**Challenge**: Maintaining consistent state across different IDE environments
+
+**Solutions**:
+- **Operational Transformation**: Handle concurrent edits
+  ```typescript
+  interface Operation {
+    type: 'insert' | 'delete' | 'replace';
+    position: number;
+    content: string;
+    timestamp: number;
+    clientId: string;
+  }
+  
+  class OperationalTransform {
+    transform(op1: Operation, op2: Operation): [Operation, Operation] {
+      // Transform operations to handle conflicts
+      if (op1.position < op2.position) {
+        return [op1, this.adjustPosition(op2, op1)];
+      } else {
+        return [this.adjustPosition(op1, op2), op2];
+      }
+    }
+  }
+  ```
+
+- **Conflict-free Replicated Data Types (CRDTs)**: For distributed state
+- **Vector Clocks**: Track causality of events
+- **Session Affinity**: Keep related requests on same connection
+
+#### 9.2 Context Drift Prevention
+**Challenge**: AI losing relevant context during long sessions
+
+**Solutions**:
+- **Hierarchical Memory**:
+  ```typescript
+  interface MemoryHierarchy {
+    immediate: Context; // Last 5 minutes
+    shortTerm: Context; // Last hour
+    longTerm: Context; // Entire session
+    persistent: Context; // Project knowledge base
+  }
+  
+  class ContextManager {
+    async getRelevantContext(query: string): Promise<Context> {
+      // Search across hierarchy levels
+      const contexts = await Promise.all([
+        this.searchImmediate(query),
+        this.searchShortTerm(query),
+        this.searchLongTerm(query),
+        this.searchPersistent(query)
+      ]);
+      
+      // Merge and rank by relevance
+      return this.mergeContexts(contexts);
+    }
+  }
+  ```
+
+- **Context Compression**: Summarize older context
+- **Relevance Scoring**: Prioritize most relevant information
+- **Periodic Context Refresh**: Re-index context every N operations
+
+#### 9.3 Latency Optimization
+**Challenge**: Minimize response time for AI operations
+
+**Solutions**:
+- **Predictive Prefetching**: Anticipate next likely requests
+  ```typescript
+  class PredictivePrefetcher {
+    async predictNext(history: Action[]): Promise<Action[]> {
+      const patterns = await this.analyzePatterns(history);
+      return this.generatePredictions(patterns);
+    }
+    
+    async prefetch(predictions: Action[]): Promise<void> {
+      // Pre-load context, warm caches
+      await Promise.all(
+        predictions.map(action => this.prepareForAction(action))
+      );
+    }
+  }
+  ```
+
+- **Response Streaming**: Stream responses as they're generated
+- **Caching Strategy**: Multi-layer cache (Redis + CDN)
+- **Edge Computing**: Deploy closer to users
+- **Model Optimization**: Use faster models for simple tasks
+
+#### 9.4 Security in Autonomous Mode
+**Challenge**: Ensure AI doesn't introduce vulnerabilities
+
+**Solutions**:
+- **Multi-Layer Scanning**:
+  1. Pre-execution: Static analysis before code generation
+  2. Post-generation: CodeQL scan on generated code
+  3. Pre-commit: Final security check
+  4. Post-deployment: Runtime monitoring
+
+- **Sandboxed Execution**: Run untrusted code in isolated environment
+- **Approval Thresholds**: Require human approval for high-risk actions
+- **Audit Logging**: Complete trail of all AI actions
+- **Rollback Capabilities**: Quick reversion if issues detected
 
 ---
 
