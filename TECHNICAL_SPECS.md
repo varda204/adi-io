@@ -165,7 +165,7 @@ The Kordra Orchestration Layer serves as the agentic AI brain that coordinates a
     indicators: {
       repeatedErrors: number;
       rapidRetries: number;
-      deleteUndo patterns: number;
+      deleteUndoPatterns: number;
       timeOnSameIssue: number; // minutes
     };
     suggestedIntervention: 'none' | 'offer_help' | 'simplify_task' | 'take_break';

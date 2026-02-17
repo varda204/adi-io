@@ -1761,7 +1761,7 @@ Developer opens Documentation
 
 ---
 
-####Story 4: As a developer, I want Kordra to automatically roll back failed deployments so my users aren't affected
+#### Story 4: As a developer, I want Kordra to automatically roll back failed deployments so my users aren't affected
 
 **Acceptance Criteria**:
 - [ ] Health monitoring starts immediately after deployment
