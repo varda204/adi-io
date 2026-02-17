@@ -373,10 +373,12 @@ Features may be added, removed, or rescheduled. We commit to transparent communi
 
 ## Contact
 
+**Note**: Contact information is provisional as the project is in the research phase.
+
 - **Feature Requests**: [GitHub Discussions](https://github.com/varda204/adi-io/discussions)
 - **Questions**: [GitHub Issues](https://github.com/varda204/adi-io/issues)
-- **General Inquiries**: hello@kordra.ai
-- **Enterprise**: enterprise@kordra.ai
+- **General Inquiries**: (coming soon)
+- **Enterprise**: (coming soon)
 
 ---
 

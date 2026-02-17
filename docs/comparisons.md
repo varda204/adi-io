@@ -20,9 +20,11 @@ This document provides an objective comparison between Kordra and popular AI cod
 | **Open Source** | 🟡 Planned | ❌ | ❌ | ❌ | ❌ |
 | **Self-Hosted Option** | 🟡 Planned | ❌ | ❌ | ❌ | ❌ |
 | **IDE Integration** | 🟡 Planned | ✅✅ | ✅✅ | ❌ | ❌ |
-| **Price (approx.)** | TBD | $10-20/mo | $20/mo | $500/mo | API costs |
+| **Price (approx.)** | TBD* | $10-20/mo | $20/mo | $500/mo | API costs |
 
 Legend: ✅✅ Excellent | ✅ Good | 🟡 Planned | ❌ Not Available
+
+**\*Note**: Kordra pricing not yet determined. Project is in research phase. Target market positioning is estimated to be <$100/month for competitive positioning against Devin.
 
 ---
 
